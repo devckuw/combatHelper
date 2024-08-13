@@ -57,6 +57,7 @@ namespace combatHelper.Fights
                 firsttpchosen = true;
                 mech2 += "Tp left, ";
             }
+            ImGui.SameLine();
             if (ImGui.Button("Tp Right"))
             {
                 isTpLeft = false;
@@ -123,6 +124,7 @@ namespace combatHelper.Fights
                 firsttpchosen = true;
                 mech1 += "Tp left, ";
             }
+            ImGui.SameLine();
             if (ImGui.Button("Tp Right"))
             {
                 isTpLeft = false;
@@ -135,6 +137,7 @@ namespace combatHelper.Fights
                 firstcleavechosen = true;
                 mech1 += "Cleave left, ";
             }
+            ImGui.SameLine();
             if (ImGui.Button("Cleave Right"))
             {
                 isCleaveLeft = false;
@@ -147,6 +150,7 @@ namespace combatHelper.Fights
                 firstIsA = true;
                 firstMech = !(firstcleavechosen && firsttpchosen);
             }
+            ImGui.SameLine();
             if (ImGui.Button("C"))
             {
                 firstIsA = false;
