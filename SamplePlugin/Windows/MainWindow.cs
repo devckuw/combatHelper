@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Media;
 using System.Numerics;
 using combatHelper.Fights;
 using Dalamud.Interface.Internal;
@@ -65,6 +66,14 @@ public class MainWindow : Window, IDisposable
         {
             case FightState.None:
                 ImGui.Text("Choose a fight.");
+                if (ImGui.Button("testsound"))
+                {
+                    var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, "sound.wav");
+                    using (var sound = new SoundPlayer(pathsound))
+                    {
+                        sound.Play();
+                    }
+                }
                 break;
             default:
                 ImGui.BeginChild("time line", new Vector2(350,200));
