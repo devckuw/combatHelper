@@ -10,19 +10,11 @@ using ImGuiNET;
 
 namespace combatHelper.Windows;
 
-public enum FightState : ushort
-{
-    None = 0,
-    M1S = 1,
-    M2S = 2,
-    M3S = 3,
-    M4S = 4
-}
-
 public class MainWindow : Window, IDisposable
 {
     private Plugin Plugin;
     private FightState fightState;
+    private NbPots nbPots;
     private Fight fight;
 
     // We give this window a hidden ID using ##
@@ -33,7 +25,7 @@ public class MainWindow : Window, IDisposable
     {
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new Vector2(375, 330),
+            MinimumSize = new Vector2(475, 225),
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
@@ -56,6 +48,14 @@ public class MainWindow : Window, IDisposable
                 if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(); }
                 ImGui.EndMenu();
             }
+            if (ImGui.BeginMenu("Pots"))
+            {
+                if (ImGui.MenuItem("None")) { nbPots = NbPots.None; }
+                if (ImGui.MenuItem("0/6")) { nbPots = NbPots.Two_Pots; }
+                if (ImGui.MenuItem("0/5/10")) { nbPots = NbPots.Three_Pots; }
+                if (ImGui.MenuItem("0/6/12")) { nbPots = NbPots.Three_twoPots; }
+                ImGui.EndMenu();
+            }
             ImGui.EndMenuBar();
         }
 
@@ -67,8 +67,13 @@ public class MainWindow : Window, IDisposable
                 ImGui.Text("Choose a fight.");
                 break;
             default:
+                ImGui.BeginChild("time line", new Vector2(250,200));
                 fight.Draw(3);
+                ImGui.EndChild();
+                ImGui.SameLine();
+                ImGui.BeginChild("mech helper");
                 fight.DrawHelper();
+                ImGui.EndChild();
                 break;
         }
     }

@@ -23,6 +23,23 @@ namespace combatHelper.Fights
         //rw_mech = Raid_Damage | Mechanics
     }
 
+    public enum FightState : ushort
+    {
+        None = 0,
+        M1S = 1,
+        M2S = 2,
+        M3S = 3,
+        M4S = 4
+    }
+
+    public enum NbPots
+    {
+        None,
+        Two_Pots,
+        Three_Pots,
+        Three_twoPots
+    }
+
     public class DataFrameManager
     {
         public static List<(int, int, string, DmgType)> ProccessDF(string path)
@@ -58,6 +75,7 @@ namespace combatHelper.Fights
 
         public void Draw(int currentTime)
         {
+            if (currentTime < 0) { return; } 
             foreach (var line in lines)
             {
                 if (currentTime <= line.Item1 && line.Item1 <= currentTime + 30)
