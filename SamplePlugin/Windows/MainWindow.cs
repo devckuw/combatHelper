@@ -25,7 +25,7 @@ public class MainWindow : Window, IDisposable
     {
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new Vector2(475, 225),
+            MinimumSize = new Vector2(575, 225),
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
@@ -67,7 +67,7 @@ public class MainWindow : Window, IDisposable
                 ImGui.Text("Choose a fight.");
                 break;
             default:
-                ImGui.BeginChild("time line", new Vector2(250,200));
+                ImGui.BeginChild("time line", new Vector2(350,200));
                 fight.Draw(3);
                 ImGui.EndChild();
                 ImGui.SameLine();

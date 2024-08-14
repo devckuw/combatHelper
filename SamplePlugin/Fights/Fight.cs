@@ -75,14 +75,34 @@ namespace combatHelper.Fights
 
         public void Draw(int currentTime)
         {
-            if (currentTime < 0) { return; } 
+            if (currentTime < 0) { return; }
+            ImGui.BeginTable("timelinetable", 4, ImGuiTableFlags.SizingStretchProp);
+            ImGui.TableNextRow();
+            ImGui.TableNextColumn();
+            ImGui.Text("Cast");
+            ImGui.TableNextColumn();
+            ImGui.Text("Effect");
+            ImGui.TableNextColumn();
+            ImGui.Text("Description");
+            ImGui.TableNextColumn();
+            ImGui.Text("Type");
             foreach (var line in lines)
             {
                 if (currentTime <= line.Item1 && line.Item1 <= currentTime + 30)
                 {
-                    ImGui.Text(line.Item1 + " " + line.Item2 + " " + line.Item3 + " " + line.Item4);
+                    ImGui.TableNextRow();
+                    ImGui.TableNextColumn();
+                    ImGui.Text(line.Item1.ToString());
+                    ImGui.TableNextColumn();
+                    ImGui.Text(line.Item2.ToString());
+                    ImGui.TableNextColumn();
+                    ImGui.Text(line.Item3);
+                    ImGui.TableNextColumn();
+                    ImGui.Text(line.Item4.ToString());
+                    //ImGui.Text(line.Item1 + " " + line.Item2 + " " + line.Item3 + " " + line.Item4);
                 }
             }
+            ImGui.EndTable();
         }
         public abstract void DrawHelper();
     }
