@@ -9,7 +9,7 @@ namespace combatHelper.Fights
 {
     public class M3S : Fight
     {
-        public override void Draw()
+        public override void DrawHelper()
         {
             ImGui.Text("M3S figth.");
         }

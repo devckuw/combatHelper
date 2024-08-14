@@ -1,0 +1,6 @@
+Cast,Effect,Description,Raid_Damage,Tank_Damage,Positioning_Required,Avoidable_AoE,Targeted_AoE,Mechanics
+6,11,Ultima,1,0,0,0,0,0
+18,23,Palladian Grasp #1,0,1,0,0,0,0
+18,27,Palladian Grasp #2,0,1,0,0,0,0
+33,40,Gaiaochos,0,0,1,0,0,0
+48,51,Summon Darkness,0,0,0,0,0,1

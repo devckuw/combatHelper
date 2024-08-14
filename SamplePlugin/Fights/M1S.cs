@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImGuiNET;
+using Microsoft.Data.Analysis;
 
 namespace combatHelper.Fights
 {
     public class M1S : Fight
     {
+        private string csv = "M1S.csv";
         private string resolveA = "";
         private string resolveC = "";
         private bool firstMech = true;
@@ -20,7 +22,12 @@ namespace combatHelper.Fights
         private bool firsttpchosen = false;
         private bool firstcleavechosen = false;
 
-        public override void Draw()
+        public M1S(string path) 
+        {
+            lines = DataFrameManager.ProccessDF(path);
+        }
+
+        public override void DrawHelper()
         {
             //ImGui.Text($"The random config bool is {Plugin.Configuration.SomePropertyToBeSavedAndWithADefault}");
             if (firstMech) { drawFirstMech(); }

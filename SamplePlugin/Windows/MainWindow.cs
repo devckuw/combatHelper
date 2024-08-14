@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Numerics;
 using combatHelper.Fights;
 using Dalamud.Interface.Internal;
@@ -43,11 +44,13 @@ public class MainWindow : Window, IDisposable
 
     public override void Draw()
     {
+        var path = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, "M1S.csv");
         if (ImGui.BeginMenuBar())
         {
             if (ImGui.BeginMenu("Fight"))
             {
-                if (ImGui.MenuItem("M1S")) { fightState = FightState.M1S; fight = new M1S(); }
+                if (ImGui.MenuItem("None")) { fightState = FightState.None; }
+                if (ImGui.MenuItem("M1S")) { fightState = FightState.M1S; fight = new M1S(path); }
                 if (ImGui.MenuItem("M2S")) { fightState = FightState.M2S; fight = new M2S(); }
                 if (ImGui.MenuItem("M3S")) { fightState = FightState.M3S; fight = new M3S(); }
                 if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(); }
@@ -64,7 +67,8 @@ public class MainWindow : Window, IDisposable
                 ImGui.Text("Choose a fight.");
                 break;
             default:
-                fight.Draw();
+                fight.Draw(3);
+                fight.DrawHelper();
                 break;
         }
     }
