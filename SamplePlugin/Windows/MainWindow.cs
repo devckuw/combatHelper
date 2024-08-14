@@ -57,6 +57,11 @@ public class MainWindow : Window, IDisposable
                 if (ImGui.MenuItem("0/6/12")) { nbPots = NbPots.Three_twoPots; }
                 ImGui.EndMenu();
             }
+            if (ImGui.BeginMenu("Settings"))
+            {
+                Plugin.ToggleConfigUI();
+                ImGui.EndMenu();
+            }
             ImGui.EndMenuBar();
         }
 
