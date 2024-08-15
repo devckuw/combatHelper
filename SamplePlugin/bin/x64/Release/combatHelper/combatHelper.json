@@ -1,4 +1,4 @@
-{
+[{
     "Author": "Loody",
     "Name": "combatHelper",
     "InternalName": "combatHelper",
@@ -25,4 +25,4 @@
     "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
     "DownloadLinkUpdate": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
     "DownloadLinkTesting": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
-}
+}]
