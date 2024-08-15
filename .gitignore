@@ -1,4 +1,15 @@
 .vs/
 obj/
-bin/
+/SamplePlugin/bin/x64/Debug/*
 *.user
+/SamplePlugin/bin/x64/Release/runtimes/win/lib/net8.0
+/SamplePlugin/bin/x64/Release/Apache.Arrow.dll
+/SamplePlugin/bin/x64/Release/combatHelper.deps.json
+/SamplePlugin/bin/x64/Release/combatHelper.dll
+/SamplePlugin/bin/x64/Release/combatHelper.json
+/SamplePlugin/bin/x64/Release/combatHelper.pdb
+/SamplePlugin/bin/x64/Release/M1S.csv
+/SamplePlugin/bin/x64/Release/Microsoft.Data.Analysis.dll
+/SamplePlugin/bin/x64/Release/Microsoft.ML.DataView.dll
+/SamplePlugin/bin/x64/Release/sound.wav
+/SamplePlugin/bin/x64/Release/System.Windows.Extensions.dll
