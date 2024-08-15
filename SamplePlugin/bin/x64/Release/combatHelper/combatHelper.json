@@ -5,7 +5,7 @@
     "AssemblyVersion": "0.0.0.1",
     "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
     "ApplicableVersion": "any",
-    "RepoUrl": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/",
+    "RepoUrl": "https://github.com/devckuw/combatHelper",
     "Tags": [
         "savage",
         "plugin",
