@@ -23,6 +23,9 @@ public class MainWindow : Window, IDisposable
     private DateTime startTimer;
     private bool isStarted = false;
     private bool inCombat = false;
+    private bool isPotTwoUsed = false; 
+    private bool isPotThreeUsed = false;
+    private SoundPlayer soundPlayer;
 
     // We give this window a hidden ID using ##
     // So that the user will see "My Amazing Window" as window title,
@@ -38,6 +41,9 @@ public class MainWindow : Window, IDisposable
 
         Plugin = plugin;
         Plugin.Framework.Update += OnUpdate;
+
+        var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, "sound.wav");
+        soundPlayer = new SoundPlayer(pathsound);
     }
 
     public void Dispose()
@@ -67,9 +73,28 @@ public class MainWindow : Window, IDisposable
                 isStarted = true;
                 startTimer = DateTime.Now;
             }
+            var combatDuration = (DateTime.Now - startTimer).Seconds;
+            switch (nbPots)
+            {
+                case NbPots.None:
+                    break;
+                case NbPots.Two_Pots:
+                    if (combatDuration >= 6 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    break;
+                case NbPots.Three_Pots:
+                    if (combatDuration >= 5 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 10 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    break;
+                case NbPots.Three_twoPots:
+                    if (combatDuration >= 6 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 12 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    break;
+            }
         }
         else
         {
+            isPotTwoUsed = false;
+            isPotThreeUsed = false;
             isStarted = false;
         }
     }
