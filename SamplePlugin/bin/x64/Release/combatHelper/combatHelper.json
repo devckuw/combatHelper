@@ -1,21 +1,22 @@
 {
-  "Author": "Loody",
-  "Name": "combatHelper",
-  "InternalName": "combatHelper",
-  "AssemblyVersion": "0.0.0.1",
-  "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
-  "ApplicableVersion": "any",
-  "RepoUrl": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/",
-  "Tags": [
-    "savage",
-    "plugin",
-    "helper"
-  ],
-  "DalamudApiLevel": 10,
-  "LoadRequiredState": 0,
-  "LoadSync": false,
-  "CanUnloadAsync": false,
-  "LoadPriority": 0,
-  "Punchline": "A short one-liner that shows up in /xlplugins.",
-  "AcceptsFeedback": true
+    "Author": "Loody",
+    "Name": "combatHelper",
+    "InternalName": "combatHelper",
+    "AssemblyVersion": "0.0.0.1",
+    "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/",
+    "Tags": [
+        "savage",
+        "plugin",
+        "helper"
+    ],
+    "DalamudApiLevel": 10,
+    "LoadRequiredState": 0,
+    "LoadSync": false,
+    "CanUnloadAsync": false,
+    "LoadPriority": 0,
+    "Punchline": "A short one-liner that shows up in /xlplugins.",
+    "AcceptsFeedback": true,
+    "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
 }
