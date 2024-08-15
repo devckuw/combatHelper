@@ -9,6 +9,7 @@ obj/
 /SamplePlugin/bin/x64/Release/combatHelper.json
 /SamplePlugin/bin/x64/Release/combatHelper.pdb
 /SamplePlugin/bin/x64/Release/M1S.csv
+/SamplePlugin/bin/x64/Release/M2S.csv
 /SamplePlugin/bin/x64/Release/Microsoft.Data.Analysis.dll
 /SamplePlugin/bin/x64/Release/Microsoft.ML.DataView.dll
 /SamplePlugin/bin/x64/Release/sound.wav
