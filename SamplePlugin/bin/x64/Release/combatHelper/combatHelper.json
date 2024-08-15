@@ -22,7 +22,7 @@
     "IsTestingExclusive": "False",
     "LastUpdated": 1719688392,
     "DownloadCount": 20,
-    "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
-    "DownloadLinkTesting": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
+    "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
+    "DownloadLinkTesting": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
 }
