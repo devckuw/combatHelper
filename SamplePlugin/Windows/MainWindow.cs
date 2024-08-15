@@ -26,6 +26,7 @@ public class MainWindow : Window, IDisposable
     private bool isPotTwoUsed = false; 
     private bool isPotThreeUsed = false;
     private SoundPlayer soundPlayer;
+    private String path = Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!;
 
     // We give this window a hidden ID using ##
     // So that the user will see "My Amazing Window" as window title,
@@ -101,14 +102,13 @@ public class MainWindow : Window, IDisposable
 
     public override void Draw()
     {
-        var path = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, "M1S.csv");
         if (ImGui.BeginMenuBar())
         {
             if (ImGui.BeginMenu("Fight"))
             {
                 if (ImGui.MenuItem("None")) { fightState = FightState.None; }
                 if (ImGui.MenuItem("M1S")) { fightState = FightState.M1S; fight = new M1S(path); }
-                if (ImGui.MenuItem("M2S")) { fightState = FightState.M2S; fight = new M2S(); }
+                if (ImGui.MenuItem("M2S")) { fightState = FightState.M2S; fight = new M2S(path); }
                 if (ImGui.MenuItem("M3S")) { fightState = FightState.M3S; fight = new M3S(); }
                 if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(); }
                 ImGui.EndMenu();

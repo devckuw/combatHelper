@@ -3,7 +3,7 @@
         "Author": "Loody",
         "Name": "combatHelper",
         "InternalName": "combatHelper",
-        "AssemblyVersion": "0.0.0.2",
+        "AssemblyVersion": "0.0.0.3",
         "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
         "ApplicableVersion": "any",
         "RepoUrl": "https://github.com/devckuw/combatHelper",

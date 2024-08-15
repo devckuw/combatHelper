@@ -11,7 +11,7 @@ namespace combatHelper.Fights
     {
         public override void DrawHelper()
         {
-            ImGui.Text("M4S figth.");
+            ImGui.Text("M4S fight.");
         }
     }
 }

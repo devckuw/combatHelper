@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace combatHelper.Fights
 
         public M1S(string path) 
         {
-            lines = DataFrameManager.ProccessDF(path);
+            lines = DataFrameManager.ProccessDF(Path.Combine(path,csv));
         }
 
         public override void DrawHelper()

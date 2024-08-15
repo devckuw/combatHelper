@@ -1,0 +1,75 @@
+Cast,Effect,Description,Raid_Damage,Tank_Damage,Positioning_Required,Avoidable_AoE,Targeted_AoE,Mechanics
+5,10,Call Me Honey,1,0,0,0,0,0
+12,17,Drop/Splash of Venom Cast,0,0,0,0,0,1
+23,28,Honey Beeline / Tempting Twist,0,0,0,1,0,0
+23,33,Splinter + Drop/Splash,0,0,0,1,1,0
+34,39,Splash/Drop of Venom Cast,0,0,0,0,0,1
+41,47,Tempting Twist / Honey Beeline,0,0,0,1,0,0
+41,52,Splinter + Splash/Drop,0,0,0,1,1,0
+55,59,Killer Sting / Stinging Slash,0,1,0,0,0,0
+70,72,Honey B. Live: 1st Beat Cast,0,0,0,0,0,1
+70,79,Honey B. Live: 1st Beat Damage,1,0,0,0,0,0
+82,88,Center/Outerstage Combo #1,0,0,0,1,0,0
+82,91,Cross AoE,0,0,0,1,0,0
+82,94,Outer/Centerstage Combo #2,0,0,0,1,0,0
+98,102,Love Me Tender,0,0,0,0,0,1
+98,132,Fracture (towers) x11,0,0,1,0,0,0
+133,136,Loveseeker,0,0,0,1,0,0
+146,150,Love Me Tender Dodging,0,0,0,0,0,1
+146,158,Heartsick,0,0,0,0,1,0
+163,169,Center/Outerstage Combo #1,0,0,0,1,0,0
+163,172,Cross AoE,0,0,0,1,0,0
+163,175,Outer/Centerstage Combo #2,0,0,0,1,0,0
+182,187,Honey B. Final,1,0,0,0,0,0
+197,201,Killer Sting / Stinging Slash,0,1,0,0,0,0
+206,209,Alarm Pheromones,0,0,0,0,0,1
+206,211,Binding Love Baited,0,0,0,1,0,0
+245,247,Honey B. Live: 2nd Beat Cast,0,0,0,0,0,1
+245,254,Honey B. Live: 2nd Beat Damage,1,0,0,0,0,0
+257,262,Drop of love / Spread Love Cast,0,0,0,0,0,1
+268,272,Love Me Tender Baits,0,0,0,0,0,1
+268,273,Heartsruck Starts,0,0,0,1,0,0
+268,280,Heartsick x2,0,0,0,0,1,0
+268,284,Heartsruck Ends,0,0,0,1,0,0
+268,286,Heartsore,0,0,0,0,1,0
+268,287,Fracture (towers) x2,0,0,1,0,0,0
+290,296,Honey Beeline / Tempting Twist,0,0,0,1,0,0
+290,301,Splinter + Drop/Spread Love,0,0,0,1,1,0
+305,310,Honey B. Final,1,0,0,0,0,0
+323,328,Drop/Splash of Venom Cast,0,0,0,0,0,1
+330,333,Alarm Pheromones,0,0,0,0,0,1
+336,341,Poison Sting Cast,0,0,0,0,0,1
+336,342,Binding Love + Poison Sting,0,0,0,1,1,0
+336,347,Binding Love + Poison Sting,0,0,0,1,1,0
+336,352,Binding Love + Poison Sting,0,0,0,1,1,0
+336,357,Binding Love + Poison Sting,0,0,0,1,1,0
+336,362,Binding Love,0,0,0,1,0,0
+336,367,Binding Love + Bee Sting,0,0,0,1,1,0
+371,376,Killer Sting / Stinging Slash,0,1,0,0,0,0
+382,388,Honey Beeline / Tempting Twist,0,0,0,1,0,0
+382,393,Splinter + Drop/Splash,0,0,0,1,1,0
+404,406,Honey B. Live: 3rd Beat Cast,0,0,0,0,0,1
+404,412,Honey B. Live: 3rd Beat Damage,1,0,0,0,0,0
+414,419,Drop of love / Spread Love Cast,0,0,0,0,0,1
+421,428,Center/Outerstage Combo #1,0,0,0,1,0,0
+421,431,Cross AoE,0,0,0,1,0,0
+421,434,Outer/Centerstage Combo #2,0,0,0,1,0,0
+421,438,Big Burst (explode) #1,0,0,0,0,1,0
+421,442,Fracture (towers)  x4,0,0,1,0,0,0
+441,447,Center/Outerstage Combo,0,0,0,1,0,0
+441,450,Cross AoE,0,0,0,1,0,0
+441,454,Outer/Centerstage Combo,0,0,0,1,0,0
+441,459,Big Burst (explode) #1,0,0,0,0,1,0
+441,462,Fracture (towers)  x4,0,0,1,0,0,0
+466,472,Honey Beeline / Tempting Twist,0,0,0,1,0,0
+466,476,Splinter + Drop/Splash,0,0,0,1,1,0
+479,484,Honey B. Final,1,0,0,0,0,0
+494,499,Killer Sting / Stinging Slash,0,1,0,0,0,0
+510,511,Rotten Heart Cast,0,0,0,0,0,1
+510,515,Rotten Heart Damage,1,0,0,0,0,0
+526,531,Call Me Honey,1,0,0,0,0,0
+544,549,Call Me Honey,1,0,0,0,0,0
+561,566,Call Me Honey,1,0,0,0,0,0
+578,583,Call Me Honey,1,0,0,0,0,0
+595,605,Sheer Heart Attack (Enrage),1,0,0,0,0,0
+595,608,Honey B. Final,1,0,0,0,0,0
