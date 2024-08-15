@@ -1,10 +1,10 @@
 [
     {
         "Author": "Loody",
-        "Name": "combatHelper",
+        "Name": "Combat Helper",
         "InternalName": "combatHelper",
         "AssemblyVersion": "0.0.0.3",
-        "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+        "Description": "/combatHelper to open the main menu.",
         "ApplicableVersion": "any",
         "RepoUrl": "https://github.com/devckuw/combatHelper",
         "Tags": [
