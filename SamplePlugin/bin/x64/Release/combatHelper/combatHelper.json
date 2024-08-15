@@ -18,5 +18,7 @@
     "LoadPriority": 0,
     "Punchline": "A short one-liner that shows up in /xlplugins.",
     "AcceptsFeedback": true,
-    "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
+    "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
+    "DownloadLinkTesting": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
 }
