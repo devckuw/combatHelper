@@ -1,12 +1,13 @@
 {
-  "Author": "your name here",
-  "Name": "combatHelper",
-  "Punchline": "A short one-liner that shows up in /xlplugins.",
-  "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
-  "ApplicableVersion": "any",
-  "Tags": [
-    "savage",
-    "plugin",
-    "helper"
-  ]
+    "Author": "Loody",
+    "Name": "combatHelper",
+    "Punchline": "A short one-liner that shows up in /xlplugins.",
+    "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+    "ApplicableVersion": "any",
+    "Tags": [
+        "savage",
+        "plugin",
+        "helper"
+    ],
+    "RepoUrl": "https://github.com/devckuw/combatHelper/SamplePlugin/bin/x64/Release/combatHelper/"
 }
