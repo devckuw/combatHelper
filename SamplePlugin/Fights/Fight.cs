@@ -88,13 +88,13 @@ namespace combatHelper.Fights
             ImGui.Text("Type");
             foreach (var line in lines)
             {
-                if (currentTime <= line.Item1 && line.Item1 <= currentTime + 30)
+                if ((currentTime <= line.Item1 && line.Item1 <= currentTime + 20) || (line.Item1 <= currentTime && currentTime <= line.Item2))
                 {
                     ImGui.TableNextRow();
                     ImGui.TableNextColumn();
-                    ImGui.Text(line.Item1.ToString());
+                    ImGui.Text((line.Item1 - currentTime).ToString());
                     ImGui.TableNextColumn();
-                    ImGui.Text(line.Item2.ToString());
+                    ImGui.Text((line.Item2 - currentTime).ToString());
                     ImGui.TableNextColumn();
                     ImGui.Text(line.Item3);
                     ImGui.TableNextColumn();

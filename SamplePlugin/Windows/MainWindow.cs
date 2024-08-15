@@ -3,6 +3,9 @@ using System.IO;
 using System.Media;
 using System.Numerics;
 using combatHelper.Fights;
+using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.ClientState.Objects.Enums;
+using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Windowing;
@@ -17,6 +20,9 @@ public class MainWindow : Window, IDisposable
     private FightState fightState;
     private NbPots nbPots;
     private Fight fight;
+    private DateTime startTimer;
+    private bool isStarted = false;
+    private bool inCombat = false;
 
     // We give this window a hidden ID using ##
     // So that the user will see "My Amazing Window" as window title,
@@ -31,9 +37,42 @@ public class MainWindow : Window, IDisposable
         };
 
         Plugin = plugin;
+        Plugin.Framework.Update += OnUpdate;
     }
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+        Plugin.Framework.Update -= OnUpdate;
+    }
+
+    private void OnUpdate(IFramework framework)
+    {
+        var inCombat = Plugin.Condition[ConditionFlag.InCombat];
+
+        if (!inCombat)
+        {
+            foreach (var actor in Plugin.PartyList)
+            {
+                if (actor.GameObject is not ICharacter character ||
+                        (character.StatusFlags & StatusFlags.InCombat) == 0) continue;
+                inCombat = true;
+                break;
+            }
+        }
+
+        if (inCombat)
+        {
+            if (!isStarted)
+            {
+                isStarted = true;
+                startTimer = DateTime.Now;
+            }
+        }
+        else
+        {
+            isStarted = false;
+        }
+    }
 
     public override void Draw()
     {
@@ -81,8 +120,14 @@ public class MainWindow : Window, IDisposable
                 }
                 break;
             default:
+                int seconds = 0;
+                if (isStarted)
+                {
+                    var combatDuration = DateTime.Now - startTimer;
+                    seconds = combatDuration.Seconds;
+                }
                 ImGui.BeginChild("time line", new Vector2(350,200));
-                fight.Draw(3);
+                fight.Draw(seconds);
                 ImGui.EndChild();
                 ImGui.SameLine();
                 ImGui.BeginChild("mech helper");
