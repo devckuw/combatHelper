@@ -1,28 +1,30 @@
-[{
-    "Author": "Loody",
-    "Name": "combatHelper",
-    "InternalName": "combatHelper",
-    "AssemblyVersion": "0.0.0.1",
-    "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
-    "ApplicableVersion": "any",
-    "RepoUrl": "https://github.com/devckuw/combatHelper",
-    "Tags": [
-        "savage",
-        "plugin",
-        "helper"
-    ],
-    "DalamudApiLevel": 10,
-    "LoadRequiredState": 0,
-    "LoadSync": false,
-    "CanUnloadAsync": false,
-    "LoadPriority": 0,
-    "Punchline": "A short one-liner that shows up in /xlplugins.",
-    "AcceptsFeedback": true,
-    "IsHide": "False",
-    "IsTestingExclusive": "False",
-    "LastUpdated": 1719688392,
-    "DownloadCount": 20,
-    "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
-    "DownloadLinkTesting": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
-}]
+[
+    {
+        "Author": "Loody",
+        "Name": "combatHelper",
+        "InternalName": "combatHelper",
+        "AssemblyVersion": "0.0.0.1",
+        "Description": "A description that shows up in /xlplugins. List any major slash-command(s).",
+        "ApplicableVersion": "any",
+        "RepoUrl": "https://github.com/devckuw/combatHelper",
+        "Tags": [
+            "savage",
+            "plugin",
+            "helper"
+        ],
+        "DalamudApiLevel": 10,
+        "LoadRequiredState": 0,
+        "LoadSync": false,
+        "CanUnloadAsync": false,
+        "LoadPriority": 0,
+        "Punchline": "A short one-liner that shows up in /xlplugins.",
+        "AcceptsFeedback": true,
+        "IsHide": "False",
+        "IsTestingExclusive": "False",
+        "LastUpdated": 1719688392,
+        "DownloadCount": 20,
+        "DownloadLinkInstall": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
+        "DownloadLinkUpdate": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip",
+        "DownloadLinkTesting": "https://github.com/devckuw/combatHelper/raw/master/SamplePlugin/bin/x64/Release/combatHelper/latest.zip"
+    }
+]
