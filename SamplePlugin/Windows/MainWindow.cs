@@ -109,8 +109,8 @@ public class MainWindow : Window, IDisposable
                 if (ImGui.MenuItem("None")) { fightState = FightState.None; }
                 if (ImGui.MenuItem("M1S")) { fightState = FightState.M1S; fight = new M1S(path); }
                 if (ImGui.MenuItem("M2S")) { fightState = FightState.M2S; fight = new M2S(path); }
-                if (ImGui.MenuItem("M3S")) { fightState = FightState.M3S; fight = new M3S(); }
-                if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(); }
+                if (ImGui.MenuItem("M3S")) { fightState = FightState.M3S; fight = new M3S(path); }
+                if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(path); }
                 ImGui.EndMenu();
             }
             if (ImGui.BeginMenu("Pots"))

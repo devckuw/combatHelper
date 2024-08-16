@@ -1,68 +1,68 @@
-Cast,Effect,Description,Raid_Damage,Tank_Damage,Positioning_Required,Avoidable_AoE,Targeted_AoE,Mechanics
-8,14,Quadruple Crossing #1,0,0,0,0,1,0
-8,17,Quadruple Crossing #2,0,0,0,0,1,0
-8,20,Quadruple Crossing #3,0,0,0,1,0,0
-8,23,Quadruple Crossing #4,0,0,0,1,0,0
-27,32,Biscuit Maker,0,1,0,0,0,0
-47,50,Nine Lives,0,0,0,0,0,1
-52,57,One-Two Paw #1,0,0,0,1,0,0
-52,61,One-Two Paw #2,0,0,0,1,0,0
-62,65,Soulshade,0,0,0,0,0,1
-76,79,Nine Lives,0,0,0,0,0,1
-76,82,One-Two Paw #1,0,0,0,1,0,0
-76,85,One-Two Paw #2,0,0,0,1,0,0
-83,88,Double/Quadruple Swipe,0,0,0,0,1,0
-90,93,Soulshade,0,0,0,0,0,1
-95,100,Leaping Quadruple Crossing,0,0,0,0,0,1
-95,102,Quadruple Crossing #1,0,0,0,0,1,0
-95,105,Quadruple Crossing #2,0,0,0,0,1,0
-95,108,Quadruple Crossing #3,0,0,0,1,0,0
-95,111,Quadruple Crossing #4,0,0,0,1,0,0
-107,112,Double/Quadruple Swipe,0,0,0,0,1,0
-117,122,Bloody Scratch,1,0,0,0,0,0
-136,146,Mouser,0,0,0,1,0,0
-164,167,Copycat,0,0,0,0,0,1
-171,176,Elevate and Eviscerate #1,0,0,0,0,1,0
-182,188,Elevate and Eviscerate #2,0,0,0,0,1,0
-193,199,Elevate and Eviscerate #3,0,0,0,0,1,0
-204,210,Elevate and Eviscerate #4,0,0,0,0,1,0
-218,223,Biscuit Maker,0,1,0,0,0,0
-230,236,Shockwave,0,0,1,0,0,0
-230,240,Grimalkin Gale,0,0,0,0,1,0
-253,256,Nine Lives,0,0,0,0,0,1
-258,263,Leaping One-Two Paw,0,0,0,0,0,1
-258,265,One-Two Paw #1,0,0,0,1,0,0
-258,267,One-Two Paw #2,0,0,0,1,0,0
-269,272,Soulshade,0,0,0,0,0,1
-274,277,Nine Lives,0,0,0,0,0,1
-279,284,Leaping Quadruple Crossing,0,0,0,0,0,1
-279,286,Quadruple Crossing #1,0,0,0,0,1,0
-279,289,Quadruple Crossing #2,0,0,0,0,1,0
-279,292,Quadruple Crossing #3,0,0,0,1,0,0
-279,295,Quadruple Crossing #4,0,0,0,1,0,0
-296,299,Soulshade,0,0,0,0,0,1
-310,335,First Shade,0,0,0,0,0,1
-342,359,Second Shade,0,0,0,0,0,1
-366,371,Bloody Scratch,1,0,0,0,0,0
-384,394,Mouser,0,0,0,1,0,0
-412,415,Copycat,0,0,0,0,0,1
-419,425,Elevate and Eviscerate #1,0,0,0,0,1,0
-423,428,Overshadow / Splintering Nails,0,0,0,0,1,0
-432,437,Elevate and Eviscerate #2,0,0,0,0,1,0
-436,441,Overshadow / Splintering Nails,0,0,0,0,1,0
-444,450,Elevate and Eviscerate #3,0,0,0,0,1,0
-448,453,Overshadow / Splintering Nails,0,0,0,0,1,0
-457,462,Elevate and Eviscerate #4,0,0,0,0,1,0
-461,466,Overshadow / Splintering Nails,0,0,0,0,1,0
-471,476,Biscuit Maker,0,1,0,0,0,0
-483,489,Shockwave,0,0,1,0,0,0
-483,494,Grimalkin Gale,0,0,0,0,1,0
-507,513,Raining Cats #1,0,0,0,0,1,0
-507,520,Raining Cats #2,0,0,0,0,1,0
-507,526,Raining Cats #3,0,0,0,0,1,0
-507,532,Raining Cats #4,0,0,0,0,1,0
-548,561,Predaceous Pounce,0,0,0,1,0,0
-562,567,One-Two Paw #1,0,0,0,1,0,0
-562,571,One-Two Paw #2,0,0,0,1,0,0
-585,593,Mouser starts,1,0,0,0,0,0
-585,602,Mouser ends Enrage,1,0,0,0,0,0
+Cast,Effect,Description,Raid_Damage,Tank_Damage,Positioning_Required,Avoidable_AoE,Targeted_AoE,Mechanics,Debuffs
+8,14,Quadruple Crossing #1,0,0,0,0,1,0,0
+8,17,Quadruple Crossing #2,0,0,0,0,1,0,0
+8,20,Quadruple Crossing #3,0,0,0,1,0,0,0
+8,23,Quadruple Crossing #4,0,0,0,1,0,0,0
+27,32,Biscuit Maker,0,1,0,0,0,0,0
+47,50,Nine Lives,0,0,0,0,0,1,0
+52,57,One-Two Paw #1,0,0,0,1,0,0,0
+52,61,One-Two Paw #2,0,0,0,1,0,0,0
+62,65,Soulshade,0,0,0,0,0,1,0
+76,79,Nine Lives,0,0,0,0,0,1,0
+76,82,One-Two Paw #1,0,0,0,1,0,0,0
+76,85,One-Two Paw #2,0,0,0,1,0,0,0
+83,88,Double/Quadruple Swipe,0,0,0,0,1,0,0
+90,93,Soulshade,0,0,0,0,0,1,0
+95,100,Leaping Quadruple Crossing,0,0,0,0,0,1,0
+95,102,Quadruple Crossing #1,0,0,0,0,1,0,0
+95,105,Quadruple Crossing #2,0,0,0,0,1,0,0
+95,108,Quadruple Crossing #3,0,0,0,1,0,0,0
+95,111,Quadruple Crossing #4,0,0,0,1,0,0,0
+107,112,Double/Quadruple Swipe,0,0,0,0,1,0,0
+117,122,Bloody Scratch,1,0,0,0,0,0,0
+136,146,Mouser,0,0,0,1,0,0,0
+164,167,Copycat,0,0,0,0,0,1,0
+171,176,Elevate and Eviscerate #1,0,0,0,0,1,0,0
+182,188,Elevate and Eviscerate #2,0,0,0,0,1,0,0
+193,199,Elevate and Eviscerate #3,0,0,0,0,1,0,0
+204,210,Elevate and Eviscerate #4,0,0,0,0,1,0,0
+218,223,Biscuit Maker,0,1,0,0,0,0,0
+230,236,Shockwave,0,0,1,0,0,0,0
+230,240,Grimalkin Gale,0,0,0,0,1,0,0
+253,256,Nine Lives,0,0,0,0,0,1,0
+258,263,Leaping One-Two Paw,0,0,0,0,0,1,0
+258,265,One-Two Paw #1,0,0,0,1,0,0,0
+258,267,One-Two Paw #2,0,0,0,1,0,0,0
+269,272,Soulshade,0,0,0,0,0,1,0
+274,277,Nine Lives,0,0,0,0,0,1,0
+279,284,Leaping Quadruple Crossing,0,0,0,0,0,1,0
+279,286,Quadruple Crossing #1,0,0,0,0,1,0,0
+279,289,Quadruple Crossing #2,0,0,0,0,1,0,0
+279,292,Quadruple Crossing #3,0,0,0,1,0,0,0
+279,295,Quadruple Crossing #4,0,0,0,1,0,0,0
+296,299,Soulshade,0,0,0,0,0,1,0
+310,335,First Shade,0,0,0,0,0,1,0
+342,359,Second Shade,0,0,0,0,0,1,0
+366,371,Bloody Scratch,1,0,0,0,0,0,0
+384,394,Mouser,0,0,0,1,0,0,0
+412,415,Copycat,0,0,0,0,0,1,0
+419,425,Elevate and Eviscerate #1,0,0,0,0,1,0,0
+423,428,Overshadow / Splintering Nails,0,0,0,0,1,0,0
+432,437,Elevate and Eviscerate #2,0,0,0,0,1,0,0
+436,441,Overshadow / Splintering Nails,0,0,0,0,1,0,0
+444,450,Elevate and Eviscerate #3,0,0,0,0,1,0,0
+448,453,Overshadow / Splintering Nails,0,0,0,0,1,0,0
+457,462,Elevate and Eviscerate #4,0,0,0,0,1,0,0
+461,466,Overshadow / Splintering Nails,0,0,0,0,1,0,0
+471,476,Biscuit Maker,0,1,0,0,0,0,0
+483,489,Shockwave,0,0,1,0,0,0,0
+483,494,Grimalkin Gale,0,0,0,0,1,0,0
+507,513,Raining Cats #1,0,0,0,0,1,0,0
+507,520,Raining Cats #2,0,0,0,0,1,0,0
+507,526,Raining Cats #3,0,0,0,0,1,0,0
+507,532,Raining Cats #4,0,0,0,0,1,0,0
+548,561,Predaceous Pounce,0,0,0,1,0,0,0
+562,567,One-Two Paw #1,0,0,0,1,0,0,0
+562,571,One-Two Paw #2,0,0,0,1,0,0,0
+585,593,Mouser starts,1,0,0,0,0,0,0
+585,602,Mouser ends Enrage,1,0,0,0,0,0,0

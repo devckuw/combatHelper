@@ -1,0 +1,68 @@
+Cast,Effect,Description,Raid_Damage,Tank_Damage,Positioning_Required,Avoidable_AoE,Targeted_AoE,Mechanics,Debuffs
+6,11,Brutal Impact x4,1,0,0,0,0,0,0
+16,21,Knuckle Sandwich x4,0,1,0,0,0,0,0
+31,38,Quadro/Octo Lariat Out,0,0,1,0,0,0,0
+41,49,Quadro/Octo Dive Prox.,0,0,1,0,0,0,0
+41,52,Diveboom,0,0,0,0,1,0,0
+55,60,Brutal Impact x4,1,0,0,0,0,0,0
+72,76,Barbarous Barrage Cast,0,0,0,0,0,1,0
+72,88,Barbarous Barrage 1st Set,0,0,1,0,0,0,0
+72,91,Barbarous Barrage 2nd Set,0,0,1,0,0,0,0
+72,94,Barbarous Barrage Final,0,0,1,0,0,0,0
+90,96,Murderous Mist,0,0,0,1,0,0,0
+105,109,Doping Draught,0,0,0,0,0,1,0
+137,144,Quadro/Octo Lariat In,0,0,1,0,0,0,0
+147,155,Quadro/Octo Dive Push,0,0,1,0,0,0,0
+147,158,Diveboom,0,0,0,0,1,0,0
+161,166,Brutal Impact x6,1,0,0,0,0,0,0
+172,177,Knuckle Sandwich x6,0,1,0,0,0,0,0
+192,196,Tag Team,0,0,0,0,0,1,0
+198,205,Chain Deathmatch,0,0,0,0,0,0,1
+208,214,Lariat Combo #1,0,0,0,1,0,0,0
+208,218,Lariat Combo #2,0,0,0,1,0,0,0
+220,227,Quadro/Octo Lariat,0,0,1,0,0,0,0
+229,234,Brutal Impact x6,1,0,0,0,0,0,0
+250,254,Final Fusedown,0,0,0,0,0,1,0
+250,266,Self Destruction + Explosion,0,0,0,1,1,0,0
+250,271,Self Destruction + Explosion,0,0,0,1,1,0,0
+271,279,Quadro/Octo Dive,0,0,1,0,0,0,0
+271,282,Diveboom,0,0,0,0,1,0,0
+294,298,Fusefield,0,0,0,0,0,1,0
+301,304,Bombarian Flame,0,0,1,0,0,0,0
+301,342,Mana Explosion Expires,1,0,0,0,0,0,0
+350,355,Knuckle Sandwich x6,0,1,0,0,0,0,0
+368,372,Doping Draught,0,0,0,0,0,1,0
+385,391,Bombarian Special x5,1,0,0,0,0,0,0
+385,401,Bombarian Special Out,0,0,0,1,0,0,0
+385,403,Bombarian Special In,0,0,0,1,0,0,0
+385,412,Bombarian Special Push,0,0,1,0,0,0,0
+385,415,Bombariaboom,0,0,0,0,1,0,0
+423,427,Fuses of Fury,0,0,0,0,0,1,0
+429,433,Tag Team,0,0,0,0,0,1,0
+436,443,Chain Deathmatch,0,0,0,0,0,0,1
+436,446,Self Destruction,0,0,0,1,0,0,0
+436,451,Self Destruction,0,0,0,1,0,0,0
+450,458,Murderous Mist + Lariat Combo,0,0,0,1,0,0,0
+450,462,Lariat Combo #2,0,0,0,1,0,0,0
+464,471,Quadro/Octo Dive,0,0,1,0,0,0,0
+464,475,Diveboom,0,0,0,0,1,0,0
+479,484,Brutal Impact x8,1,0,0,0,0,0,0
+493,498,Knuckle Sandwich x8,0,1,0,0,0,0,0
+513,517,Fuse or Foe,0,0,0,0,0,1,0
+513,526,AoEs Start,0,0,0,1,0,0,0
+513,538,Explosion,0,0,0,0,1,0,0
+513,543,Explosion,0,0,0,0,1,0,0
+541,548,Quadro/Octo Lariat,0,0,1,0,0,0,0
+551,556,Brutal Impact x8,1,0,0,0,0,0,0
+571,575,Barbarous Barrage Cast,0,0,0,0,0,1,0
+571,587,Barbarous Barrage 1st Set,0,0,1,0,0,0,0
+571,590,Barbarous Barrage 2nd Set,0,0,1,0,0,0,0
+571,593,Barbarous Barrage Final,0,0,1,0,0,0,0
+590,596,Lariat Combo #1,0,0,0,1,0,0,0
+590,600,Lariat Combo #2,0,0,0,1,0,0,0
+610,615,Knuckle Sandwich x8,0,1,0,0,0,0,0
+634,638,Doping Draught,0,0,0,0,0,1,0
+651,657,Special Bombarian Special x5,1,0,0,0,0,0,0
+651,667,Special Bombarian Special Out,0,0,0,1,0,0,0
+651,670,Special Bombarian Special In,0,0,0,1,0,0,0
+651,678,Special Bombarian Special Wipe,1,0,0,0,0,0,0

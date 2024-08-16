@@ -19,7 +19,8 @@ namespace combatHelper.Fights
         Avoidable_AoE = 0b_0000_1000,  // 8
         Targeted_AoE = 0b_0001_0000,  // 16
         Mechanics = 0b_0010_0000,  // 32
-        // = 0b_0100_0000,  // 64
+        Debuffs = 0b_0100_0000,  // 64
+        // = 0b_1000_0000,  // 128
         //rw_mech = Raid_Damage | Mechanics
     }
 
@@ -64,6 +65,7 @@ namespace combatHelper.Fights
             mechType += Int32.Parse(df["Avoidable_AoE"][row].ToString()) * 8;
             mechType += Int32.Parse(df["Targeted_AoE"][row].ToString()) * 16;
             mechType += Int32.Parse(df["Mechanics"][row].ToString()) * 32;
+            mechType += Int32.Parse(df["Debuffs"][row].ToString()) * 64;
             return mechType;
         }
     }
@@ -99,7 +101,6 @@ namespace combatHelper.Fights
                     ImGui.Text(line.Item3);
                     ImGui.TableNextColumn();
                     ImGui.Text(line.Item4.ToString());
-                    //ImGui.Text(line.Item1 + " " + line.Item2 + " " + line.Item3 + " " + line.Item4);
                 }
             }
             ImGui.EndTable();
