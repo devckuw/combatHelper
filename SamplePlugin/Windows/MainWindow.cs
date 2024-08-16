@@ -75,20 +75,21 @@ public class MainWindow : Window, IDisposable
                 startTimer = DateTime.Now;
             }
             var combatDuration = (DateTime.Now - startTimer).Seconds;
+            var offset = Plugin.Configuration.OffsetPots;
             switch (nbPots)
             {
                 case NbPots.None:
                     break;
                 case NbPots.Two_Pots:
-                    if (combatDuration >= 6 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
                     break;
                 case NbPots.Three_Pots:
-                    if (combatDuration >= 5 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 10 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 5 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 10 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_twoPots:
-                    if (combatDuration >= 6 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 12 * 60 - 10 && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 12 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
             }
         }

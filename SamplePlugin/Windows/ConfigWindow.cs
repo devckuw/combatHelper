@@ -17,7 +17,7 @@ public class ConfigWindow : Window, IDisposable
         Flags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
                 ImGuiWindowFlags.NoScrollWithMouse;
 
-        Size = new Vector2(232, 90);
+        Size = new Vector2(232, 135);
         SizeCondition = ImGuiCond.Always;
 
         Configuration = plugin.Configuration;
@@ -53,6 +53,15 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.Checkbox("Movable Config Window", ref movable))
         {
             Configuration.IsConfigWindowMovable = movable;
+            Configuration.Save();
+        }
+
+        var offsetPots = Configuration.OffsetPots;
+        if (ImGui.InputInt("Offset Pots", ref offsetPots, 1, 1))
+        {
+            if (offsetPots < -20) { offsetPots = -20; }
+            if (offsetPots > 20) { offsetPots = 20; }
+            Configuration.OffsetPots = offsetPots;
             Configuration.Save();
         }
     }

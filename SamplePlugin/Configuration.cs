@@ -11,6 +11,7 @@ public class Configuration : IPluginConfiguration
 
     public bool IsConfigWindowMovable { get; set; } = true;
     public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;
+    public int OffsetPots { get; set; } = -10;
 
     // the below exist just to make saving less cumbersome
     public void Save()
