@@ -138,7 +138,7 @@ public class MainWindow : Window, IDisposable
                 ImGui.Text("Choose a fight.");
                 if (ImGui.Button("testsound"))
                 {
-                    var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, "sound.wav");
+                    var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, Plugin.Configuration.Sound);
                     using (var sound = new SoundPlayer(pathsound))
                     {
                         sound.Play();

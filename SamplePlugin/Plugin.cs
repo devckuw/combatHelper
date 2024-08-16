@@ -19,6 +19,7 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IFramework Framework { get; private set; } = null!;
 
     private const string CommandName = "/combatHelper";
+    private const string CommandNameShort = "/ch";
 
     public Configuration Configuration { get; init; }
 
@@ -35,10 +36,16 @@ public sealed class Plugin : IDalamudPlugin
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
-
+        
+        CommandManager.AddHandler(CommandNameShort, new CommandInfo(OnCommand)
+        {
+            HelpMessage = "Opens the main menu" 
+        });
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
         {
-            HelpMessage = "A useful message to display in /xlhelp"
+            HelpMessage = "Opens the main menu\n" +
+            "/combatHelper kini → cursed sound\n" +
+            "/combatHelper resetsound | rs → reset sound\n"
         });
 
         PluginInterface.UiBuilder.Draw += DrawUI;
@@ -59,12 +66,32 @@ public sealed class Plugin : IDalamudPlugin
         MainWindow.Dispose();
 
         CommandManager.RemoveHandler(CommandName);
+        CommandManager.RemoveHandler(CommandNameShort);
     }
 
     private void OnCommand(string command, string args)
     {
-        // in response to the slash command, just toggle the display status of our main ui
-        ToggleMainUI();
+        if (string.IsNullOrEmpty(args))
+        {
+            ToggleMainUI();
+            return;
+        }
+
+        var subcommands = args.Split(' ');
+
+        var firstArg = subcommands[0];
+        if (firstArg.ToLower() == "kini")
+        {
+            Configuration.Sound = "kini.wav";
+            Configuration.Save();
+            return;
+        }
+        if (firstArg.ToLower() == "rs" || firstArg.ToLower() == "resetsound")
+        {
+            Configuration.Sound = "sound.wav";
+            Configuration.Save();
+            return;
+        }
     }
 
     private void DrawUI() => WindowSystem.Draw();
