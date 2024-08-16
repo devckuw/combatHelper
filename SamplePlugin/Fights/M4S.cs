@@ -10,7 +10,7 @@ namespace combatHelper.Fights
 {
     public class M4S : Fight
     {
-        private string csv = "M3S.csv";
+        private string csv = "M4S.csv";
 
         public M4S(string path)
         {

@@ -1,0 +1,98 @@
+Cast,Effect,Description,Raid_Damage,Tank_Damage,Positioning_Required,Avoidable_AoE,Targeted_AoE,Mechanics,Debuffs
+10,15,Wrath of Zeus,1,0,0,0,0,0,0
+32,39,Bewitchung Flight + Electray,0,0,0,1,0,0,0
+44,49,Electrifying Witch Hunt,0,0,0,0,1,0,0
+44,49,Burst + Electray,0,0,0,1,0,0,0
+52,58,Witch Hunt 4T,0,0,0,0,1,0,0
+52,58,Forket Lightning + Burst,0,0,0,1,1,0,0
+61,75,Narrowing/Widening Witch Hunt,0,0,0,0,0,1,0
+61,76,In/Out + Witch Hunt 2T,0,0,0,1,1,0,0
+61,79,Out/In + Witch Hunt 2T,0,0,0,1,1,0,0
+61,83,In/Out + Witch Hunt 2T,0,0,0,1,1,0,0
+61,87,Out/In + Witch Hunt 2T,0,0,0,1,1,0,0
+94,99,Wrath of Zeus,1,0,0,0,0,0,0
+107,110,Electrope Edge,0,0,0,0,0,1,0
+115,118,Witchgleam,0,0,0,1,0,0,0
+122,125,Symphony Fantastique,0,0,0,0,0,1,0
+129,136,Sidewise Spark,0,0,0,1,0,0,0
+129,136,Spart + Solo/Duo Star,0,0,0,1,1,0,0
+139,144,Wicked Jolt,0,1,0,0,0,0,0
+155,158,Electrope Edge,0,0,0,0,0,1,0
+162,165,Witchgleam,0,0,0,0,1,0,0
+171,174,Lightning Cage Cast,0,0,0,0,0,1,0
+171,182,Lightning Cage + Spark,0,0,0,1,1,0,0
+184,191,Sidewise Spark + Solo/Duo Star,0,0,0,1,1,0,0
+184,202,Lightning Cage + Spark,0,0,0,1,1,0,0
+204,208,Wicked Bolt,0,0,0,0,1,0,0
+217,220,Ion Cluster,0,0,0,0,0,0,1
+217,234,Stampeding Thunder,0,0,1,0,0,0,0
+217,241,Stampeding Thunder Final Hit,0,0,1,0,0,0,0
+246,252,Electron Stream,0,0,1,0,0,0,0
+246,257,-Debuff Expire-,0,0,1,0,0,0,0
+259,265,Electron Stream,0,0,1,0,0,0,0
+259,270,-Debuff Expire-,0,0,1,0,0,0,0
+272,278,Electron Stream,0,0,1,0,0,0,0
+272,283,-Debuff Expire-,0,0,1,0,0,0,0
+286,291,Wicked Jolt,0,1,0,0,0,0,0
+312,316,Electrope Transplant,0,0,0,0,0,1,0
+321,324,Fulminous Fields Starts,0,0,0,1,0,0,0
+321,336,Conduction Point,0,0,0,0,1,0,0
+321,339,Forked Fissures,0,0,0,0,1,0,0
+321,342,Fulminous Fields Ends,0,0,0,1,0,0,0
+347,350,Fulminous Fields Starts,0,0,0,1,0,0,0
+347,362,Conduction Point,0,0,0,0,1,0,0
+347,365,Forked Fissures,0,0,0,0,1,0,0
+347,368,Fulminous Fields Ends,0,0,0,1,0,0,0
+347,378,Soulshock,1,0,0,0,0,0,0
+347,382,Impact,1,0,0,0,0,0,0
+347,384,Impact,1,0,0,0,0,0,0
+347,387,Cannonbolt,0,0,1,0,0,0,0
+406,411,Cross Tail Switch,1,0,0,0,0,0,0
+422,429,Sabertail + Wicked Blaze,0,0,0,1,1,0,0
+435,441,Wicked Special,0,0,0,1,0,0,0
+448,456,Mustard Bomb + Kindling Cauldron,0,1,0,0,1,0,0
+448,466,Mustard Bomb,0,0,0,0,1,0,0
+467,474,Aetherial Conversion,0,0,0,0,0,1,0
+477,482,Tail Thrust #1,0,0,1,0,0,0,0
+477,486,Tail Thrust #2,0,0,1,0,0,0,0
+499,504,Azure Thunder,1,0,0,0,0,0,0
+508,511,Twilight Sabbath,0,0,0,0,0,1,0
+515,519,Wicked Fire Cast,0,0,0,0,0,1,0
+515,522,Sidewise Spark,0,0,0,1,0,0,0
+515,523,Wicked Fire Hit,0,0,0,1,0,0,0
+524,530,Sidewise Spark + Wicked Special,0,0,0,1,0,0,0
+537,540,Midnight Sabbath,0,0,0,0,0,1,0
+544,551,Concentrated/Scattered Burst,0,0,0,0,1,0,0
+544,551,Thundering/Wicked Cannon,0,0,0,1,0,0,0
+544,555,Wicked Spark/Flare,0,0,0,0,1,0,0
+544,555,Wicked Cannon/Thundering,0,0,0,1,0,0,0
+554,560,Wicked Special,0,0,0,1,0,0,0
+563,568,Wicked Thunder,1,0,0,0,0,0,0
+572,579,Aetherial Conversion,0,0,0,0,0,1,0
+582,588,Flame Slash,0,0,0,1,0,0,0
+591,594,Raining Swords,0,0,1,0,0,0,0
+598,614,Chain Lightning Telegraphs,0,0,0,0,0,1,0
+598,618,Chain Lightning Starts,0,0,0,1,0,0,0
+598,634,Chain Lightning Ends,0,0,0,1,0,0,0
+635,640,Tail Thrust #1,0,0,1,0,0,0,0
+635,644,Tail Thrust #2,0,0,1,0,0,0,0
+649,657,Mustard Bomb + Kindling Cauldron,0,1,0,0,1,0,0
+649,667,Mustard Bomb,0,0,0,0,1,0,0
+668,675,Aetherial Conversion,0,0,0,0,0,1,0
+678,683,Azure Thunder,1,0,0,0,0,0,0
+686,689,Ion Cluster,0,0,0,0,0,0,1
+692,695,Sunrise Sabbath,0,0,0,0,0,1,0
+705,708,Soaring Soulpress,0,0,1,0,0,0,0
+705,709,Positron/Negatron Stream,0,0,0,0,1,0,0
+710,716,Wicked Special,0,0,0,1,0,0,0
+722,725,Soaring Soulpress,0,0,1,0,0,0,0
+722,726,Positron/Negatron Stream,0,0,0,0,1,0,0
+726,731,Tail Thrust #1,0,0,1,0,0,0,0
+726,736,Tail Thrust #2,0,0,1,0,0,0,0
+743,748,Sword Quiver,1,0,0,0,0,0,0
+743,757,Burst + Laceration,0,0,0,1,1,0,0
+760,765,Sword Quiver,1,0,0,0,0,0,0
+760,774,Burst + Laceration,0,0,0,1,1,0,0
+777,782,Sword Quiver,1,0,0,0,0,0,0
+777,791,Burst + Laceration,0,0,0,1,1,0,0
+800,810,Wicked Thunder Enrage,1,0,0,0,0,0,0
