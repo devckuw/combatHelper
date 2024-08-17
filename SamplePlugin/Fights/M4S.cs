@@ -11,6 +11,7 @@ namespace combatHelper.Fights
     public class M4S : Fight
     {
         private string csv = "M4S.csv";
+        private string safeSide = String.Empty;
 
         public M4S(string path)
         {
@@ -18,7 +19,16 @@ namespace combatHelper.Fights
         }
         public override void DrawHelper()
         {
-            ImGui.Text("M4S fight.");
+            if (ImGui.Button("Left"))
+            {
+                safeSide = "LEFT,SAFE";
+            }
+            ImGui.SameLine();
+            if (ImGui.Button("Right"))
+            {
+                safeSide = "RIGHT SAFE";
+            }
+            ImGui.Text(safeSide);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace combatHelper.Fights
     public class M2S : Fight
     {
         private string csv = "M2S.csv";
+        private string spread_stack = String.Empty;
 
         public M2S(string path)
         {
@@ -19,7 +20,16 @@ namespace combatHelper.Fights
 
         public override void DrawHelper() 
         {
-            ImGui.Text("M2S fight.");
+            if (ImGui.Button("Spread"))
+            {
+                spread_stack = "SPREAD";
+            }
+            ImGui.SameLine();
+            if (ImGui.Button("Stack"))
+            {
+                spread_stack = "STACK";
+            }
+            ImGui.Text(spread_stack);
         }
     }
 }
