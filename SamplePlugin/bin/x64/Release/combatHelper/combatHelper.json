@@ -4,7 +4,7 @@
         "Name": "Combat Helper",
         "InternalName": "combatHelper",
         "AssemblyVersion": "0.0.0.7",
-        "Description": "/combatHelper to open the main menu.",
+        "Description": "Gives u a pot reminder, a timeline of fights, keep track of spread/stack ..",
         "ApplicableVersion": "any",
         "RepoUrl": "https://github.com/devckuw/combatHelper",
         "Tags": [
@@ -17,7 +17,7 @@
         "LoadSync": false,
         "CanUnloadAsync": false,
         "LoadPriority": 0,
-        "Punchline": "A short one-liner that shows up in /xlplugins.",
+        "Punchline": "Never forget to use pots again and maybe some more usefull tools",
         "AcceptsFeedback": true,
         "IsHide": "False",
         "IsTestingExclusive": "False",
