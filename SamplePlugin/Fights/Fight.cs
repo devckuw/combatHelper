@@ -37,6 +37,7 @@ namespace combatHelper.Fights
     {
         None,
         Two_Pots,
+        Two_Pots_Bard,
         Three_Pots,
         Three_twoPots
     }

@@ -43,13 +43,18 @@ public class MainWindow : Window, IDisposable
         Plugin = plugin;
         Plugin.Framework.Update += OnUpdate;
 
-        var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, "sound.wav");
-        soundPlayer = new SoundPlayer(pathsound);
+        UpdateSound();
     }
 
     public void Dispose()
     {
         Plugin.Framework.Update -= OnUpdate;
+    }
+
+    public void UpdateSound()
+    {
+        var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, Plugin.Configuration.Sound);
+        soundPlayer = new SoundPlayer(pathsound);
     }
 
     private void OnUpdate(IFramework framework)
@@ -82,6 +87,10 @@ public class MainWindow : Window, IDisposable
                     break;
                 case NbPots.Two_Pots:
                     if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    break;
+                case NbPots.Two_Pots_Bard:
+                    if (combatDuration >= 2 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 8 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_Pots:
                     if (combatDuration >= 5 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
@@ -118,6 +127,7 @@ public class MainWindow : Window, IDisposable
             {
                 if (ImGui.MenuItem("None")) { nbPots = NbPots.None; }
                 if (ImGui.MenuItem("0/6")) { nbPots = NbPots.Two_Pots; }
+                if (ImGui.MenuItem("2/8")) { nbPots = NbPots.Two_Pots_Bard; }
                 if (ImGui.MenuItem("0/5/10")) { nbPots = NbPots.Three_Pots; }
                 if (ImGui.MenuItem("0/6/12")) { nbPots = NbPots.Three_twoPots; }
                 ImGui.EndMenu();
@@ -138,11 +148,7 @@ public class MainWindow : Window, IDisposable
                 ImGui.Text("Choose a fight.");
                 if (ImGui.Button("testsound"))
                 {
-                    var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, Plugin.Configuration.Sound);
-                    using (var sound = new SoundPlayer(pathsound))
-                    {
-                        sound.Play();
-                    }
+                    soundPlayer.Play();
                 }
                 break;
             default:

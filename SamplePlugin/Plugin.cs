@@ -84,12 +84,14 @@ public sealed class Plugin : IDalamudPlugin
         {
             Configuration.Sound = "kini.wav";
             Configuration.Save();
+            MainWindow.UpdateSound();
             return;
         }
         if (firstArg.ToLower() == "rs" || firstArg.ToLower() == "resetsound")
         {
             Configuration.Sound = "sound.wav";
             Configuration.Save();
+            MainWindow.UpdateSound();
             return;
         }
     }
