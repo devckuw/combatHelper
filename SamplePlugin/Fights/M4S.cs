@@ -21,7 +21,7 @@ namespace combatHelper.Fights
         {
             if (ImGui.Button("Left"))
             {
-                safeSide = "LEFT,SAFE";
+                safeSide = "LEFT SAFE";
             }
             ImGui.SameLine();
             if (ImGui.Button("Right"))
