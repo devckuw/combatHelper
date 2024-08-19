@@ -30,6 +30,7 @@ public sealed class Plugin : IDalamudPlugin
     public Plugin()
     {
         Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+        Configuration.LoadColors();
 
         ConfigWindow = new ConfigWindow(this);
         MainWindow = new MainWindow(this);

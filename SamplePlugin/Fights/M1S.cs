@@ -25,7 +25,13 @@ namespace combatHelper.Fights
 
         public M1S(string path) 
         {
-            lines = DataFrameManager.ProccessDF(Path.Combine(path,csv));
+            csv = Path.Combine(path,csv);
+            GenerateLines();
+        }
+
+        public void GenerateLines()
+        {
+            lines = DataFrameManager.ProccessDF(csv);
         }
 
         public override void DrawHelper()
