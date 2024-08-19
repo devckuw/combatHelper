@@ -1,5 +1,6 @@
 using Microsoft.Data.Analysis;
 using System;
+using System.Numerics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,22 @@ using System.IO;
 
 namespace combatHelper.Fights
 {
+    public static class Extensions
+    {
+        public static List<(string, Vector4)> ToList(this DmgType type)
+        {
+            var list = new List<(string, Vector4)>();
+            if (type == DmgType.Raid_Damage) { list.Add(("Raid_Damage", Color.Red)); }
+            if (type == DmgType.Tank_Damage) { list.Add(("Tank_Damage", Color.Orange)); }
+            if (type == DmgType.Positioning_Required) { list.Add(("Positioning_Required", Color.Yellow)); }
+            if (type == DmgType.Avoidable_AoE) { list.Add(("Avoidable_AoE", Color.Green)); }
+            if (type == DmgType.Targeted_AoE) { list.Add(("Targeted_AoE", Color.Blue)); }
+            if (type == DmgType.Mechanics) { list.Add(("Mechanics", Color.Purple)); }
+            if (type == DmgType.Debuffs) { list.Add(("Debuffs", Color.Cyan)); }
+            return list;
+        }
+    }
+
     [Flags]
     public enum DmgType
     {
@@ -42,23 +59,34 @@ namespace combatHelper.Fights
         Three_twoPots
     }
 
+    public static class Color
+    {
+        public static readonly Vector4 Red = new Vector4(1, 0, 0, 1);
+        public static readonly Vector4 Orange = new Vector4(255f / 255f, 150f / 255f, 60f / 255f, 1);
+        public static readonly Vector4 Yellow = new Vector4(1, 1, 0, 1);
+        public static readonly Vector4 Green = new Vector4(0, 1, 0, 1);
+        public static readonly Vector4 Cyan = new Vector4(55f / 255f, 183f / 250f, 142f / 255f, 1);
+        public static readonly Vector4 Blue = new Vector4(94f / 255f, 163f / 255f, 254f / 255f, 1);
+        public static readonly Vector4 Purple = new Vector4(204f / 255f, 135f / 255f, 254f / 255f, 1);
+    }
+
     public class DataFrameManager
     {
-        public static List<(int, int, string, DmgType)> ProccessDF(string path)
+        public static List<(int, int, string, List<(string, Vector4)>)> ProccessDF(string path)
         {
             DataFrame df = DataFrame.LoadCsv(path);
 
-            var lines = new List<(int, int, string, DmgType)>();
+            var lines = new List<(int, int, string, List<(string, Vector4)>)>();
             var nbRows = df.Rows.Count;
             
             for ( int i = 0; i < nbRows; i++)
             {
-                lines.Add((Int32.Parse(df["Cast"][i].ToString()), Int32.Parse(df["Effect"][i].ToString()), df["Description"][i].ToString(), (DmgType)DmgFlags(df, i)));
+                lines.Add((Int32.Parse(df["Cast"][i].ToString()), Int32.Parse(df["Effect"][i].ToString()), df["Description"][i].ToString(), DmgFlags(df, i).ToList()));
             }
             return lines;
         }
 
-        public static int DmgFlags(DataFrame df, int row)
+        public static DmgType DmgFlags(DataFrame df, int row)
         {
             int mechType = Int32.Parse(df["Raid_Damage"][row].ToString()) * 1;
             mechType += Int32.Parse(df["Tank_Damage"][row].ToString()) * 2;
@@ -67,13 +95,13 @@ namespace combatHelper.Fights
             mechType += Int32.Parse(df["Targeted_AoE"][row].ToString()) * 16;
             mechType += Int32.Parse(df["Mechanics"][row].ToString()) * 32;
             mechType += Int32.Parse(df["Debuffs"][row].ToString()) * 64;
-            return mechType;
+            return (DmgType)mechType;
         }
     }
 
     public abstract class Fight
     {
-        protected List<(int, int, string, DmgType)> lines;
+        protected List<(int, int, string, List<(string, Vector4)>)> lines;
         public Fight() { }
 
         public void Draw(int currentTime)
@@ -101,7 +129,13 @@ namespace combatHelper.Fights
                     ImGui.TableNextColumn();
                     ImGui.Text(line.Item3);
                     ImGui.TableNextColumn();
-                    ImGui.Text(line.Item4.ToString());
+                    var list = line.Item4;
+                    var listLength = list.Count();
+                    for ( var i = 0; i < listLength; i++ )
+                    {
+                        ImGui.TextColored(list[i].Item2, list[i].Item1);
+                        if ( i < listLength - 1 ) { ImGui.SameLine(); }
+                    }
                 }
             }
             ImGui.EndTable();
