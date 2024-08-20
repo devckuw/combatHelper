@@ -1,6 +1,7 @@
 using Dalamud.Configuration;
 using Dalamud.Plugin;
 using System;
+using System.IO;
 using System.Numerics;
 
 namespace combatHelper;
@@ -13,8 +14,8 @@ public class Configuration : IPluginConfiguration
     public bool IsConfigWindowMovable { get; set; } = true;
     public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;
     public int OffsetPots { get; set; } = -10;
-    public string Sound { get; set; } = "sound.wav";
-
+    public string Sound { get; set; } = "azer";
+    public string AssemblyLocation {  get; set; } = "azer";
     // Colors
     public Vector4 Raid_Damage { get; set; } = new Vector4(1, 0, 0, 1);
     public Vector4 Tank_Damage { get; set; } = new Vector4(255f / 255f, 150f / 255f, 60f / 255f, 1);

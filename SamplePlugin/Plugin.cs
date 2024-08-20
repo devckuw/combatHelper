@@ -5,6 +5,7 @@ using System.IO;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
 using combatHelper.Windows;
+using static Lumina.Data.Files.ScdFile;
 
 namespace combatHelper;
 
@@ -29,7 +30,20 @@ public sealed class Plugin : IDalamudPlugin
 
     public Plugin()
     {
-        Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+        var isConf = PluginInterface.GetPluginConfig();
+        if (isConf == null)
+        {
+            Configuration = new Configuration();
+            Configuration.AssemblyLocation = Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!;
+            Configuration.Sound = Path.Combine(Configuration.AssemblyLocation, "sound.wav");
+            Configuration.Save();
+        }
+        else 
+        { 
+            Configuration = isConf as Configuration;
+            Configuration.AssemblyLocation = Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!;
+            Configuration.Save();
+        }
         Configuration.LoadColors();
 
         ConfigWindow = new ConfigWindow(this);
@@ -68,6 +82,11 @@ public sealed class Plugin : IDalamudPlugin
 
         CommandManager.RemoveHandler(CommandName);
         CommandManager.RemoveHandler(CommandNameShort);
+    }
+
+    public void UpdateSound()
+    {
+        MainWindow.UpdateSound();
     }
 
     private void OnCommand(string command, string args)

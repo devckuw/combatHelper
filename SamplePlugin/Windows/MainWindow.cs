@@ -53,8 +53,7 @@ public class MainWindow : Window, IDisposable
 
     public void UpdateSound()
     {
-        var pathsound = Path.Combine(Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!, Plugin.Configuration.Sound);
-        soundPlayer = new SoundPlayer(pathsound);
+        soundPlayer = new SoundPlayer(Plugin.Configuration.Sound);
     }
 
     private void OnUpdate(IFramework framework)

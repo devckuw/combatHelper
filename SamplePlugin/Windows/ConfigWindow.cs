@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using System.Numerics;
 using Dalamud.Interface.Windowing;
+using Dalamud.Interface.ImGuiFileDialog;
 using ImGuiNET;
 
 namespace combatHelper.Windows;
@@ -9,6 +11,10 @@ public class ConfigWindow : Window, IDisposable
 {
     private Configuration Configuration;
     private Vector4 testcolor = new Vector4(0f, 0f, 0f, 1f);
+    private string filePicked = "";
+    private bool isFileDialogOpen = false;
+    FileDialogManager manager = new FileDialogManager();
+    Plugin plugin;
 
     // We give this window a constant ID using ###
     // This allows for labels being dynamic, like "{FPS Counter}fps###XYZ counter window",
@@ -23,6 +29,7 @@ public class ConfigWindow : Window, IDisposable
         SizeCondition = ImGuiCond.Always;
 
         Configuration = plugin.Configuration;
+        this.plugin = plugin;
     }
 
     public void Dispose() { }
@@ -38,6 +45,20 @@ public class ConfigWindow : Window, IDisposable
         {
             Flags |= ImGuiWindowFlags.NoMove;
         }
+    }
+
+    public void callbackfile(bool b, string s)
+    {
+        filePicked = s;
+        Configuration.Sound = s;
+        Configuration.Save();
+        plugin.UpdateSound();
+        isFileDialogOpen = false;
+    }
+
+    public void CreateFileDiag()
+    {
+        manager.OpenFileDialog("test", ".*", callbackfile);
     }
 
     public override void Draw()
@@ -145,6 +166,29 @@ public class ConfigWindow : Window, IDisposable
             }
             
             ImGui.EndTabItem();
+        }
+        if (ImGui.BeginTabItem("Sound"))
+        {
+            if (ImGui.Button("Select Sound"))
+            {
+                if (!isFileDialogOpen)
+                {
+                    isFileDialogOpen = true;
+                    manager.OpenFileDialog("Sound Picker", "Sound .mp3 .wav{.mp3,.wav}", callbackfile);
+                }
+            }
+            if (isFileDialogOpen)
+            {
+                manager.Draw();
+            }
+            ImGui.Text(filePicked);
+            if (ImGui.Button("Reset Default"))
+            {
+                Configuration.Sound = Path.Combine(Configuration.AssemblyLocation, "sound.wav");
+                Configuration.Save();
+                plugin.UpdateSound();
+            }
+            ImGui.EndTabItem(); 
         }
         ImGui.EndTabBar();
     }
