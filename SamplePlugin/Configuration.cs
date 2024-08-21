@@ -1,5 +1,6 @@
 using Dalamud.Configuration;
 using Dalamud.Plugin;
+using Dalamud.Utility;
 using System;
 using System.IO;
 using System.Numerics;
@@ -40,5 +41,25 @@ public class Configuration : IPluginConfiguration
         Fights.Color.Debuffs = Debuffs;
         Fights.Color.Targeted_AoE = Targeted_AoE;
         Fights.Color.Mechanics = Mechanics;
+    }
+
+    public void SetSound(string name = null, bool requiresAssembly = false)
+    {
+        if (name.IsNullOrEmpty())
+        {
+            Sound = Path.Combine(AssemblyLocation, "sound.wav");
+        }
+        else
+        {
+            if (!requiresAssembly)
+            {
+                Sound = name;
+            }
+            else
+            {
+                Sound = Path.Combine(AssemblyLocation, name);
+            }
+        }
+        Save();
     }
 }

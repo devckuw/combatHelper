@@ -50,8 +50,7 @@ public class ConfigWindow : Window, IDisposable
     public void callbackfile(bool b, string s)
     {
         filePicked = s;
-        Configuration.Sound = s;
-        Configuration.Save();
+        Configuration.SetSound(s);
         plugin.UpdateSound();
         isFileDialogOpen = false;
     }
@@ -184,8 +183,7 @@ public class ConfigWindow : Window, IDisposable
             ImGui.Text(filePicked);
             if (ImGui.Button("Reset Default"))
             {
-                Configuration.Sound = Path.Combine(Configuration.AssemblyLocation, "sound.wav");
-                Configuration.Save();
+                Configuration.SetSound();
                 plugin.UpdateSound();
             }
             ImGui.EndTabItem(); 

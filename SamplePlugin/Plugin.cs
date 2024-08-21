@@ -102,15 +102,13 @@ public sealed class Plugin : IDalamudPlugin
         var firstArg = subcommands[0];
         if (firstArg.ToLower() == "kini")
         {
-            Configuration.Sound = "kini.wav";
-            Configuration.Save();
+            Configuration.SetSound("kini.wav", true);
             MainWindow.UpdateSound();
             return;
         }
         if (firstArg.ToLower() == "rs" || firstArg.ToLower() == "resetsound")
         {
-            Configuration.Sound = "sound.wav";
-            Configuration.Save();
+            Configuration.SetSound();
             MainWindow.UpdateSound();
             return;
         }
