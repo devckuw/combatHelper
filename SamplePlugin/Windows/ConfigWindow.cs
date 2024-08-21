@@ -1,4 +1,5 @@
 using System;
+using System.Media;
 using System.IO;
 using System.Numerics;
 using Dalamud.Interface.Windowing;
@@ -202,6 +203,11 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.SetSound();
                 plugin.UpdateSound();
+            }
+            if (ImGui.Button("Test Sound"))
+            {
+                var sound = new SoundPlayer(Configuration.Sound);
+                sound.Play();
             }
             ImGui.EndTabItem(); 
         }
