@@ -36,7 +36,8 @@ public class MainWindow : Window, IDisposable
     {
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new Vector2(575, 225),
+            //MinimumSize = new Vector2(575, 225),
+            MinimumSize = new Vector2(300, 225),
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
@@ -109,6 +110,19 @@ public class MainWindow : Window, IDisposable
         }
     }
 
+    public override void PreDraw()
+    {
+        // Flags must be added or removed before Draw() is being called, or they won't apply
+        if (Plugin.Configuration.IsMainWindowMovable)
+        {
+            Flags &= ~ImGuiWindowFlags.NoMove;
+        }
+        else
+        {
+            Flags |= ImGuiWindowFlags.NoMove;
+        }
+    }
+
     public override void Draw()
     {
         if (ImGui.BeginMenuBar())
@@ -151,19 +165,28 @@ public class MainWindow : Window, IDisposable
                 }
                 break;
             default:
-                int seconds = 0;
-                if (isStarted)
+                bool needSameLine = false;
+                if (Plugin.Configuration.ShowTimeLine)
                 {
-                    var combatDuration = DateTime.Now - startTimer;
-                    seconds = combatDuration.Seconds;
+                    int seconds = 0;
+                    if (isStarted)
+                    {
+                        var combatDuration = DateTime.Now - startTimer;
+                        seconds = combatDuration.Seconds;
+                    }
+                    ImGui.BeginChild("time line", new Vector2(350, 200));
+                    fight.Draw(seconds);
+                    ImGui.EndChild();
+                    ImGui.SameLine();
+                    needSameLine = true;
                 }
-                ImGui.BeginChild("time line", new Vector2(350,200));
-                fight.Draw(seconds);
-                ImGui.EndChild();
-                ImGui.SameLine();
-                ImGui.BeginChild("mech helper");
-                fight.DrawHelper();
-                ImGui.EndChild();
+                if (Plugin.Configuration.ShowHelper)
+                {
+                    if (needSameLine) { ImGui.SameLine(); }
+                    ImGui.BeginChild("mech helper");
+                    fight.DrawHelper();
+                    ImGui.EndChild();
+                }
                 break;
         }
     }

@@ -25,7 +25,12 @@ public class ConfigWindow : Window, IDisposable
                 ImGuiWindowFlags.NoScrollWithMouse;
 
         //Size = new Vector2(232, 135);
-        Size = new Vector2(300, 300);
+        //Size = new Vector2(300, 300);
+        SizeConstraints = new WindowSizeConstraints
+        {
+            MinimumSize = new Vector2(230, 300),
+            MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
+        };
         SizeCondition = ImGuiCond.Always;
 
         Configuration = plugin.Configuration;
@@ -66,15 +71,27 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.BeginTabItem("General"))
         {
             // can't ref a property, so use a local copy
-            var configValue = Configuration.SomePropertyToBeSavedAndWithADefault;
-            if (ImGui.Checkbox("Random Config Bool", ref configValue))
+            var configValue = Configuration.ShowTimeLine;
+            if (ImGui.Checkbox("Show Time Line", ref configValue))
             {
-                Configuration.SomePropertyToBeSavedAndWithADefault = configValue;
+                Configuration.ShowTimeLine = configValue;
                 // can save immediately on change, if you don't want to provide a "Save and Close" button
                 Configuration.Save();
             }
-
-            var movable = Configuration.IsConfigWindowMovable;
+            configValue = Configuration.ShowHelper;
+            if (ImGui.Checkbox("Show Helper", ref configValue))
+            {
+                Configuration.ShowHelper = configValue;
+                // can save immediately on change, if you don't want to provide a "Save and Close" button
+                Configuration.Save();
+            }
+            var movable = Configuration.IsMainWindowMovable;
+            if (ImGui.Checkbox("Movable Main Window", ref movable))
+            {
+                Configuration.IsMainWindowMovable = movable;
+                Configuration.Save();
+            }
+            movable = Configuration.IsConfigWindowMovable;
             if (ImGui.Checkbox("Movable Config Window", ref movable))
             {
                 Configuration.IsConfigWindowMovable = movable;

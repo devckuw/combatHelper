@@ -13,7 +13,9 @@ public class Configuration : IPluginConfiguration
     public int Version { get; set; } = 0;
 
     public bool IsConfigWindowMovable { get; set; } = true;
-    public bool SomePropertyToBeSavedAndWithADefault { get; set; } = true;
+    public bool IsMainWindowMovable { get; set; } = true;
+    public bool ShowTimeLine { get; set; } = true;
+    public bool ShowHelper { get; set; } = true;
     public int OffsetPots { get; set; } = -10;
     public string Sound { get; set; } = "azer";
     public string AssemblyLocation {  get; set; } = "azer";
