@@ -6,6 +6,8 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
 using combatHelper.Windows;
 using static Lumina.Data.Files.ScdFile;
+using Dalamud.Game;
+using combatHelper.Utils;
 
 namespace combatHelper;
 
@@ -18,6 +20,8 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IPartyList PartyList { get; private set; } = null!;
     [PluginService] public static ICondition Condition { get; private set; } = null!;
     [PluginService] public static IFramework Framework { get; private set; } = null!;
+    [PluginService] public static IGameGui GameGui { get; private set; } = null!;
+    [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
 
     private const string CommandName = "/combatHelper";
     private const string CommandNameShort = "/ch";
@@ -59,9 +63,12 @@ public sealed class Plugin : IDalamudPlugin
         CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
         {
             HelpMessage = "Opens the main menu\n" +
-            "/combatHelper kini → cursed sound\n" +
-            "/combatHelper resetsound | rs → reset sound\n"
+            //"/combatHelper kini → cursed sound\n" +
+            "/combatHelper resetsound | rs → reset sound\n" +
+            "/combatHelper config | cfg → reset sound\n"
         });
+
+        ChatHelper.Initialize();
 
         PluginInterface.UiBuilder.Draw += DrawUI;
 
@@ -75,6 +82,7 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        ChatHelper.Instance?.Dispose();
         WindowSystem.RemoveAllWindows();
 
         ConfigWindow.Dispose();
@@ -110,6 +118,11 @@ public sealed class Plugin : IDalamudPlugin
         {
             Configuration.SetSound();
             MainWindow.UpdateSound();
+            return;
+        }
+        if (firstArg.ToLower() == "cfg" || firstArg.ToLower() == "config")
+        {
+            ToggleConfigUI();
             return;
         }
     }

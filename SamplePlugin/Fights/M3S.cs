@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using combatHelper.Utils;
 using ImGuiNET;
 
 namespace combatHelper.Fights
@@ -26,6 +27,10 @@ namespace combatHelper.Fights
         public override void DrawHelper()
         {
             ImGui.Text("M3S fight.");
+            /*if (ImGui.Button("sendmsg"))
+            {
+                ChatHelper.SendChatMessage("/p hello");
+            }*/
         }
     }
 }
