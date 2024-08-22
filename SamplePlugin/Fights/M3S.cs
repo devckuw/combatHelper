@@ -13,9 +13,9 @@ namespace combatHelper.Fights
     {
         private string csv = "M3S.csv";
 
-        public M3S(string path)
+        public M3S()
         {
-            csv = Path.Combine(path, csv);
+            csv = Path.Combine(InfoManager.Configuration.AssemblyLocation, csv);
             GenerateLines();
         }
 
@@ -27,10 +27,6 @@ namespace combatHelper.Fights
         public override void DrawHelper()
         {
             ImGui.Text("M3S fight.");
-            /*if (ImGui.Button("sendmsg"))
-            {
-                ChatHelper.SendChatMessage("/p hello");
-            }*/
         }
     }
 }

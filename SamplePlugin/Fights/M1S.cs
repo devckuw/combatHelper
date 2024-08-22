@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using combatHelper.Utils;
 using ImGuiNET;
 using Microsoft.Data.Analysis;
 
@@ -23,9 +24,9 @@ namespace combatHelper.Fights
         private bool firsttpchosen = false;
         private bool firstcleavechosen = false;
 
-        public M1S(string path) 
+        public M1S() 
         {
-            csv = Path.Combine(path,csv);
+            csv = Path.Combine(InfoManager.Configuration.AssemblyLocation, csv);
             GenerateLines();
         }
 
@@ -43,6 +44,11 @@ namespace combatHelper.Fights
             {
                 ImGui.Text(resolveA + "\n");
                 ImGui.Text(resolveC);
+                if (ImGui.Button("Send"))
+                {
+                    ChatHelper.Send(InfoManager.Configuration.ChatMode, resolveA);
+                    ChatHelper.Send(InfoManager.Configuration.ChatMode, resolveC);
+                }
             }
             ImGui.Text(mech1);
             ImGui.Text(mech2);

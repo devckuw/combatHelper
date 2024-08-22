@@ -1,3 +1,4 @@
+using combatHelper.Utils;
 using Dalamud.Configuration;
 using Dalamud.Plugin;
 using Dalamud.Utility;
@@ -27,6 +28,9 @@ public class Configuration : IPluginConfiguration
     public Vector4 Debuffs { get; set; } = new Vector4(55f / 255f, 183f / 250f, 142f / 255f, 1);
     public Vector4 Targeted_AoE { get; set; } = new Vector4(94f / 255f, 163f / 255f, 254f / 255f, 1);
     public Vector4 Mechanics { get; set; } = new Vector4(204f / 255f, 135f / 255f, 254f / 255f, 1);
+    // chat msg
+    public ChatMode ChatMode { get; set; } = ChatMode.None;
+
 
     // the below exist just to make saving less cumbersome
     public void Save()

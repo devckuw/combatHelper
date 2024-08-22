@@ -3,6 +3,7 @@ using System.IO;
 using System.Media;
 using System.Numerics;
 using combatHelper.Fights;
+using combatHelper.Utils;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.Types;
@@ -25,8 +26,6 @@ public class MainWindow : Window, IDisposable
     private bool inCombat = false;
     private bool isPotTwoUsed = false; 
     private bool isPotThreeUsed = false;
-    private SoundPlayer soundPlayer;
-    private String path = Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!;
 
     // We give this window a hidden ID using ##
     // So that the user will see "My Amazing Window" as window title,
@@ -43,18 +42,11 @@ public class MainWindow : Window, IDisposable
 
         Plugin = plugin;
         Plugin.Framework.Update += OnUpdate;
-
-        UpdateSound();
     }
 
     public void Dispose()
     {
         Plugin.Framework.Update -= OnUpdate;
-    }
-
-    public void UpdateSound()
-    {
-        soundPlayer = new SoundPlayer(Plugin.Configuration.Sound);
     }
 
     private void OnUpdate(IFramework framework)
@@ -80,25 +72,25 @@ public class MainWindow : Window, IDisposable
                 startTimer = DateTime.Now;
             }
             var combatDuration = (DateTime.Now - startTimer).Seconds;
-            var offset = Plugin.Configuration.OffsetPots;
+            var offset = InfoManager.Configuration.OffsetPots;
             switch (nbPots)
             {
                 case NbPots.None:
                     break;
                 case NbPots.Two_Pots:
-                    if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
                     break;
                 case NbPots.Two_Pots_Bard:
-                    if (combatDuration >= 2 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 8 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 2 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 8 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_Pots:
-                    if (combatDuration >= 5 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 10 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 5 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 10 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_twoPots:
-                    if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 12 * 60 + offset && !isPotTwoUsed) { soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 12 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
             }
         }
@@ -113,7 +105,7 @@ public class MainWindow : Window, IDisposable
     public override void PreDraw()
     {
         // Flags must be added or removed before Draw() is being called, or they won't apply
-        if (Plugin.Configuration.IsMainWindowMovable)
+        if (InfoManager.Configuration.IsMainWindowMovable)
         {
             Flags &= ~ImGuiWindowFlags.NoMove;
         }
@@ -130,10 +122,10 @@ public class MainWindow : Window, IDisposable
             if (ImGui.BeginMenu("Fight"))
             {
                 if (ImGui.MenuItem("None")) { fightState = FightState.None; }
-                if (ImGui.MenuItem("M1S")) { fightState = FightState.M1S; fight = new M1S(path); }
-                if (ImGui.MenuItem("M2S")) { fightState = FightState.M2S; fight = new M2S(path); }
-                if (ImGui.MenuItem("M3S")) { fightState = FightState.M3S; fight = new M3S(path); }
-                if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(path); }
+                if (ImGui.MenuItem("M1S")) { fightState = FightState.M1S; fight = new M1S(); }
+                if (ImGui.MenuItem("M2S")) { fightState = FightState.M2S; fight = new M2S(); }
+                if (ImGui.MenuItem("M3S")) { fightState = FightState.M3S; fight = new M3S(); }
+                if (ImGui.MenuItem("M4S")) { fightState = FightState.M4S; fight = new M4S(); }
                 ImGui.EndMenu();
             }
             if (ImGui.BeginMenu("Pots"))
@@ -161,12 +153,12 @@ public class MainWindow : Window, IDisposable
                 ImGui.Text("Choose a fight.");
                 if (ImGui.Button("testsound"))
                 {
-                    soundPlayer.Play();
+                    InfoManager.soundPlayer.Play();
                 }
                 break;
             default:
                 bool needSameLine = false;
-                if (Plugin.Configuration.ShowTimeLine)
+                if (InfoManager.Configuration.ShowTimeLine)
                 {
                     int seconds = 0;
                     if (isStarted)
@@ -180,7 +172,7 @@ public class MainWindow : Window, IDisposable
                     ImGui.SameLine();
                     needSameLine = true;
                 }
-                if (Plugin.Configuration.ShowHelper)
+                if (InfoManager.Configuration.ShowHelper)
                 {
                     if (needSameLine) { ImGui.SameLine(); }
                     ImGui.BeginChild("mech helper");

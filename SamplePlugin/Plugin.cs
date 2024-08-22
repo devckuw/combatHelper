@@ -8,6 +8,7 @@ using combatHelper.Windows;
 using static Lumina.Data.Files.ScdFile;
 using Dalamud.Game;
 using combatHelper.Utils;
+using System.Media;
 
 namespace combatHelper;
 
@@ -68,6 +69,9 @@ public sealed class Plugin : IDalamudPlugin
             "/combatHelper config | cfg → reset sound\n"
         });
 
+        InfoManager.Configuration = Configuration;
+        InfoManager.soundPlayer = new SoundPlayer(Configuration.Sound);
+
         ChatHelper.Initialize();
 
         PluginInterface.UiBuilder.Draw += DrawUI;
@@ -92,11 +96,6 @@ public sealed class Plugin : IDalamudPlugin
         CommandManager.RemoveHandler(CommandNameShort);
     }
 
-    public void UpdateSound()
-    {
-        MainWindow.UpdateSound();
-    }
-
     private void OnCommand(string command, string args)
     {
         if (string.IsNullOrEmpty(args))
@@ -111,13 +110,13 @@ public sealed class Plugin : IDalamudPlugin
         if (firstArg.ToLower() == "kini")
         {
             Configuration.SetSound("kini.wav", true);
-            MainWindow.UpdateSound();
+            InfoManager.UpdateSound();
             return;
         }
         if (firstArg.ToLower() == "rs" || firstArg.ToLower() == "resetsound")
         {
             Configuration.SetSound();
-            MainWindow.UpdateSound();
+            InfoManager.UpdateSound();
             return;
         }
         if (firstArg.ToLower() == "cfg" || firstArg.ToLower() == "config")

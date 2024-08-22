@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using combatHelper.Utils;
 using ImGuiNET;
 
 namespace combatHelper.Fights
@@ -13,9 +14,9 @@ namespace combatHelper.Fights
         private string csv = "M2S.csv";
         private string spread_stack = String.Empty;
 
-        public M2S(string path)
+        public M2S()
         {
-            csv = Path.Combine(path, csv);
+            csv = Path.Combine(InfoManager.Configuration.AssemblyLocation, csv);
             GenerateLines();
         }
 
@@ -29,11 +30,13 @@ namespace combatHelper.Fights
             if (ImGui.Button("Spread"))
             {
                 spread_stack = "SPREAD";
+                ChatHelper.Send(InfoManager.Configuration.ChatMode, "Spread");
             }
             ImGui.SameLine();
             if (ImGui.Button("Stack"))
             {
                 spread_stack = "STACK";
+                ChatHelper.Send(InfoManager.Configuration.ChatMode, "Stack");
             }
             ImGui.Text(spread_stack);
         }

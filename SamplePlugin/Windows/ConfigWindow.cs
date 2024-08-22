@@ -5,16 +5,19 @@ using System.Numerics;
 using Dalamud.Interface.Windowing;
 using Dalamud.Interface.ImGuiFileDialog;
 using ImGuiNET;
+using combatHelper.Utils;
 
 namespace combatHelper.Windows;
 
 public class ConfigWindow : Window, IDisposable
 {
     private Configuration Configuration;
-    private Vector4 testcolor = new Vector4(0f, 0f, 0f, 1f);
+
+    //sound part
     private string filePicked = "";
     private bool isFileDialogOpen = false;
     FileDialogManager manager = new FileDialogManager();
+
     Plugin plugin;
 
     // We give this window a constant ID using ###
@@ -57,7 +60,7 @@ public class ConfigWindow : Window, IDisposable
     {
         filePicked = s;
         Configuration.SetSound(s);
-        plugin.UpdateSound();
+        InfoManager.UpdateSound();
         isFileDialogOpen = false;
     }
 
@@ -202,7 +205,7 @@ public class ConfigWindow : Window, IDisposable
             if (ImGui.Button("Reset Default"))
             {
                 Configuration.SetSound();
-                plugin.UpdateSound();
+                InfoManager.UpdateSound();
             }
             if (ImGui.Button("Test Sound"))
             {
@@ -210,6 +213,33 @@ public class ConfigWindow : Window, IDisposable
                 sound.Play();
             }
             ImGui.EndTabItem(); 
+        }
+        if (ImGui.BeginTabItem("Chat Msg"))
+        {
+            if (ImGui.BeginCombo("Chat mode", Configuration.ChatMode.ToString()))
+            {
+                if (ImGui.Selectable("None"))
+                {
+                    Configuration.ChatMode = Utils.ChatMode.None;
+                    Configuration.Save();
+                }
+                if (ImGui.Selectable("Echo"))
+                {
+                    Configuration.ChatMode = Utils.ChatMode.Echo;
+                    Configuration.Save();
+                }
+                if (ImGui.Selectable("Party"))
+                {
+                    Configuration.ChatMode = Utils.ChatMode.Party;
+                    Configuration.Save();
+                }
+                if (ImGui.Selectable("Alliance"))
+                {
+                    Configuration.ChatMode = Utils.ChatMode.Alliance;
+                    Configuration.Save();
+                }
+            }
+            ImGui.EndTabItem();
         }
         ImGui.EndTabBar();
     }

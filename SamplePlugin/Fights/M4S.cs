@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using combatHelper.Utils;
 using ImGuiNET;
 
 namespace combatHelper.Fights
@@ -13,9 +14,9 @@ namespace combatHelper.Fights
         private string csv = "M4S.csv";
         private string safeSide = String.Empty;
 
-        public M4S(string path)
+        public M4S()
         {
-            csv = Path.Combine(path, csv);
+            csv = Path.Combine(InfoManager.Configuration.AssemblyLocation, csv);
             GenerateLines();
         }
 
@@ -28,11 +29,13 @@ namespace combatHelper.Fights
             if (ImGui.Button("Left"))
             {
                 safeSide = "LEFT SAFE";
+                ChatHelper.Send(InfoManager.Configuration.ChatMode, "Left Safe First");
             }
             ImGui.SameLine();
             if (ImGui.Button("Right"))
             {
                 safeSide = "RIGHT SAFE";
+                ChatHelper.Send(InfoManager.Configuration.ChatMode, "Right Safe First");
             }
             ImGui.Text(safeSide);
         }

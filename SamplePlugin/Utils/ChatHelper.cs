@@ -6,6 +6,15 @@ using System.Text;
 
 namespace combatHelper.Utils
 {
+    public enum ChatMode
+    {
+        None = 0,
+        Echo = 1,
+        Party = 2,
+        Alliance = 3
+
+    }
+
     internal unsafe class ChatHelper : IDisposable
     {
         #region Singleton
@@ -54,6 +63,21 @@ namespace combatHelper.Utils
             if (atkModule == null) { return false; }
 
             return atkModule->AtkModule.IsTextInputActive();
+        }
+
+        public static void Send(ChatMode mode, string msg)
+        {
+            if (Instance == null)
+            {
+                return;
+            }
+            if (mode == ChatMode.None)
+            {
+                SendChatMessage("/e No Chat mode selected. /ch cfg to select one.");
+                return;
+            }
+            msg = "/" + mode.ToString().ToLower() + " " + msg;
+            SendChatMessage(msg);
         }
 
         public static void SendChatMessage(string message)
