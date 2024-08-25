@@ -13,10 +13,7 @@ public class ConfigWindow : Window, IDisposable
 {
     private Configuration Configuration;
 
-    //sound part
-    private string filePicked = "";
-    private bool isFileDialogOpen = false;
-    FileDialogManager manager = new FileDialogManager();
+    private FileDialogService fileDialogService = new FileDialogService();
 
     Plugin plugin;
 
@@ -28,8 +25,6 @@ public class ConfigWindow : Window, IDisposable
         Flags = ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
                 ImGuiWindowFlags.NoScrollWithMouse;
 
-        //Size = new Vector2(232, 135);
-        //Size = new Vector2(300, 300);
         SizeConstraints = new WindowSizeConstraints
         {
             MinimumSize = new Vector2(230, 300),
@@ -54,19 +49,6 @@ public class ConfigWindow : Window, IDisposable
         {
             Flags |= ImGuiWindowFlags.NoMove;
         }
-    }
-
-    public void callbackfile(bool b, string s)
-    {
-        filePicked = s;
-        Configuration.SetSound(s);
-        InfoManager.UpdateSound();
-        isFileDialogOpen = false;
-    }
-
-    public void CreateFileDiag()
-    {
-        manager.OpenFileDialog("test", ".*", callbackfile);
     }
 
     public override void Draw()
@@ -119,7 +101,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Raid_Damage = raid;
                 Configuration.Save();
-                Fights.Color.Raid_Damage = raid;
+                Color.Raid_Damage = raid;
             }
             
 
@@ -128,7 +110,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Tank_Damage = tank;
                 Configuration.Save();
-                Fights.Color.Tank_Damage = tank;
+                Color.Tank_Damage = tank;
             }
             
 
@@ -137,7 +119,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Positioning_Required = pos;
                 Configuration.Save();
-                Fights.Color.Positioning_Required = pos;
+                Color.Positioning_Required = pos;
             }
 
             var avoid = Configuration.Avoidable_AoE;
@@ -145,7 +127,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Avoidable_AoE = avoid;
                 Configuration.Save();
-                Fights.Color.Avoidable_AoE = avoid;
+                Color.Avoidable_AoE = avoid;
             }
 
             var debuff = Configuration.Debuffs;
@@ -153,7 +135,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Debuffs = debuff;
                 Configuration.Save();
-                Fights.Color.Debuffs = debuff;
+                Color.Debuffs = debuff;
             }
 
             var target = Configuration.Targeted_AoE;
@@ -161,7 +143,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Targeted_AoE = target;
                 Configuration.Save();
-                Fights.Color.Targeted_AoE = target;
+                Color.Targeted_AoE = target;
             }
 
             var mech = Configuration.Mechanics;
@@ -169,18 +151,18 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.Mechanics = mech;
                 Configuration.Save();
-                Fights.Color.Mechanics = mech;
+                Color.Mechanics = mech;
             }
 
             if (ImGui.Button("Reset Colors"))
             {
-                Configuration.Raid_Damage = Fights.Color.Red;
-                Configuration.Tank_Damage = Fights.Color.Orange;
-                Configuration.Positioning_Required = Fights.Color.Yellow;
-                Configuration.Avoidable_AoE = Fights.Color.Green;
-                Configuration.Debuffs = Fights.Color.Cyan;
-                Configuration.Targeted_AoE = Fights.Color.Blue;
-                Configuration.Mechanics = Fights.Color.Purple;
+                Configuration.Raid_Damage = Color.Red;
+                Configuration.Tank_Damage = Color.Orange;
+                Configuration.Positioning_Required = Color.Yellow;
+                Configuration.Avoidable_AoE = Color.Green;
+                Configuration.Debuffs = Color.Cyan;
+                Configuration.Targeted_AoE = Color.Blue;
+                Configuration.Mechanics = Color.Purple;
                 Configuration.Save();
                 Configuration.LoadColors();
             }
@@ -191,26 +173,26 @@ public class ConfigWindow : Window, IDisposable
         {
             if (ImGui.Button("Select Sound"))
             {
-                if (!isFileDialogOpen)
+                if (!fileDialogService.isOpen)
                 {
-                    isFileDialogOpen = true;
-                    manager.OpenFileDialog("Sound Picker", "Sound .mp3 .wav{.mp3,.wav}", callbackfile);
+                    fileDialogService.isOpen = true;
+                    fileDialogService.manager.OpenFileDialog("Sound Picker", "Sound .mp3 .wav{.mp3,.wav}", fileDialogService.callbackfile);
                 }
             }
-            if (isFileDialogOpen)
+            if (fileDialogService.isOpen)
             {
-                manager.Draw();
+                fileDialogService.manager.Draw();
             }
-            ImGui.Text(filePicked);
+            ImGui.Text(fileDialogService.filePicked);
             if (ImGui.Button("Reset Default"))
             {
+                fileDialogService.filePicked = "Reseted to default";
                 Configuration.SetSound();
                 InfoManager.UpdateSound();
             }
             if (ImGui.Button("Test Sound"))
             {
-                var sound = new SoundPlayer(Configuration.Sound);
-                sound.Play();
+                InfoManager.soundPlayer.Play();
             }
             ImGui.EndTabItem(); 
         }

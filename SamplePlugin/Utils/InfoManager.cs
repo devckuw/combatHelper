@@ -11,6 +11,7 @@ namespace combatHelper.Utils
     {
         public static Configuration Configuration =  null;
         public static SoundPlayer soundPlayer;
+        public static FightState fight;
 
         public static void UpdateSound()
         {

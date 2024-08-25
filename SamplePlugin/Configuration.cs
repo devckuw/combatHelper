@@ -5,6 +5,7 @@ using Dalamud.Utility;
 using System;
 using System.IO;
 using System.Numerics;
+using combatHelper.Utils;
 
 namespace combatHelper;
 
@@ -40,13 +41,13 @@ public class Configuration : IPluginConfiguration
 
     public void LoadColors()
     {
-        Fights.Color.Raid_Damage = Raid_Damage;
-        Fights.Color.Tank_Damage = Tank_Damage;
-        Fights.Color.Positioning_Required = Positioning_Required;
-        Fights.Color.Avoidable_AoE = Avoidable_AoE;
-        Fights.Color.Debuffs = Debuffs;
-        Fights.Color.Targeted_AoE = Targeted_AoE;
-        Fights.Color.Mechanics = Mechanics;
+        Color.Raid_Damage = Raid_Damage;
+        Color.Tank_Damage = Tank_Damage;
+        Color.Positioning_Required = Positioning_Required;
+        Color.Avoidable_AoE = Avoidable_AoE;
+        Color.Debuffs = Debuffs;
+        Color.Targeted_AoE = Targeted_AoE;
+        Color.Mechanics = Mechanics;
     }
 
     public void SetSound(string name = null, bool requiresAssembly = false)
