@@ -49,16 +49,14 @@ namespace combatHelper.Fights
         public void Draw(int currentTime)
         {
             if (currentTime < 0) { return; }
-            ImGui.BeginTable("timelinetable", 4, ImGuiTableFlags.SizingStretchProp);
+            ImGuiTableFlags flag = ImGuiTableFlags.Hideable | ImGuiTableFlags.Reorderable | ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingStretchProp;
+            ImGui.BeginTable("timelinetable", 4, flag);
+            ImGui.TableSetupColumn("Cast");
+            ImGui.TableSetupColumn("Effect");
+            ImGui.TableSetupColumn("Description");
+            ImGui.TableSetupColumn("Type");
+            ImGui.TableHeadersRow();
             ImGui.TableNextRow();
-            ImGui.TableNextColumn();
-            ImGui.Text("Cast");
-            ImGui.TableNextColumn();
-            ImGui.Text("Effect");
-            ImGui.TableNextColumn();
-            ImGui.Text("Description");
-            ImGui.TableNextColumn();
-            ImGui.Text("Type");
             foreach (var line in lines)
             {
                 if ((currentTime <= line.Item1 && line.Item1 <= currentTime + 20) || (line.Item1 <= currentTime && currentTime <= line.Item2))
