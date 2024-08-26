@@ -24,6 +24,7 @@ namespace combatHelper.Windows
         public override void Draw()
         {
             DrawCommon.MenuBar();
+            if (InfoManager.fightState == FightState.None) { return; }
             InfoManager.fight.DrawHelper();
         }
     }
