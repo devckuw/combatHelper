@@ -35,7 +35,7 @@ namespace combatHelper.Windows
                 }
                 if (ImGui.BeginMenu("Settings"))
                 {
-                    //InfoManager.ToggleConfig();
+                    InfoManager.plugin.ToggleConfigUI();
                     ImGui.EndMenu();
                 }
                 ImGui.EndMenuBar();

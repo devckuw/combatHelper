@@ -71,6 +71,7 @@ public sealed class Plugin : IDalamudPlugin
 
         InfoManager.Configuration = Configuration;
         InfoManager.soundPlayer = new SoundPlayer(Configuration.Sound);
+        InfoManager.plugin = this;
 
         ChatHelper.Initialize();
 

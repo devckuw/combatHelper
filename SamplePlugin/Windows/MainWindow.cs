@@ -117,7 +117,7 @@ public class MainWindow : Window, IDisposable
 
     public override void Draw()
     {
-        if (ImGui.BeginMenuBar())
+        /*if (ImGui.BeginMenuBar())
         {
             if (ImGui.BeginMenu("Fight"))
             {
@@ -143,7 +143,8 @@ public class MainWindow : Window, IDisposable
                 ImGui.EndMenu();
             }
             ImGui.EndMenuBar();
-        }
+        }*/
+        DrawCommon.MenuBar();
 
         switch (InfoManager.fightState)
         {
