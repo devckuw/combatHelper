@@ -16,10 +16,39 @@ namespace combatHelper.Utils
         public static Fight fight = null;
         public static NbPots nbPots = NbPots.None;
         public static Plugin plugin;
+        public static bool isSplitEnable = false;
+        public static bool isSplitOpen = false;
 
         public static void UpdateSound()
         {
             soundPlayer = new SoundPlayer(Configuration.Sound);
+        }
+
+        public static void UpdateSplitToggle(bool setup = false)
+        {
+            // split & show both
+            if (Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && Configuration.ShowTimeLine)
+            {
+                if (!isSplitOpen && !setup)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isSplitEnable = true;
+                    isSplitOpen = true;
+                }
+                else
+                {
+                    isSplitEnable = true;
+                }
+            }
+            else
+            {
+                if (isSplitOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isSplitOpen = false;
+                    isSplitEnable = false;
+                }
+            }
         }
 
     }

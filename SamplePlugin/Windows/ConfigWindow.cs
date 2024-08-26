@@ -15,12 +15,10 @@ public class ConfigWindow : Window, IDisposable
 
     private FileDialogService fileDialogService = new FileDialogService();
 
-    Plugin plugin;
-
     // We give this window a constant ID using ###
     // This allows for labels being dynamic, like "{FPS Counter}fps###XYZ counter window",
     // and the window ID will always be "###XYZ counter window" for ImGui
-    public ConfigWindow(Plugin plugin) : base("A Wonderful Configuration Window###With a constant ID")
+    public ConfigWindow() : base("A Wonderful Configuration Window###With a constant ID")
     {
         Flags = ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
                 ImGuiWindowFlags.NoScrollWithMouse;
@@ -32,8 +30,7 @@ public class ConfigWindow : Window, IDisposable
         };
         SizeCondition = ImGuiCond.Always;
 
-        Configuration = plugin.Configuration;
-        this.plugin = plugin;
+        Configuration = InfoManager.Configuration;
     }
 
     public void Dispose() { }
@@ -61,15 +58,22 @@ public class ConfigWindow : Window, IDisposable
             if (ImGui.Checkbox("Show Time Line", ref configValue))
             {
                 Configuration.ShowTimeLine = configValue;
-                // can save immediately on change, if you don't want to provide a "Save and Close" button
                 Configuration.Save();
+                InfoManager.UpdateSplitToggle();
             }
             configValue = Configuration.ShowHelper;
             if (ImGui.Checkbox("Show Helper", ref configValue))
             {
                 Configuration.ShowHelper = configValue;
-                // can save immediately on change, if you don't want to provide a "Save and Close" button
                 Configuration.Save();
+                InfoManager.UpdateSplitToggle();
+            }
+            configValue = Configuration.SplitTimeLineAndHelper;
+            if (ImGui.Checkbox("Split Helper & TimeLine", ref configValue))
+            {
+                Configuration.SplitTimeLineAndHelper = configValue;
+                Configuration.Save();
+                InfoManager.UpdateSplitToggle();
             }
             var movable = Configuration.IsMainWindowMovable;
             if (ImGui.Checkbox("Movable Main Window", ref movable))
@@ -81,6 +85,12 @@ public class ConfigWindow : Window, IDisposable
             if (ImGui.Checkbox("Movable Config Window", ref movable))
             {
                 Configuration.IsConfigWindowMovable = movable;
+                Configuration.Save();
+            }
+            movable = Configuration.IsHelperWIndowMovable;
+            if (ImGui.Checkbox("Movable Split Helper Window", ref movable))
+            {
+                Configuration.IsHelperWIndowMovable = movable;
                 Configuration.Save();
             }
 

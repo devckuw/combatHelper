@@ -30,7 +30,7 @@ public class MainWindow : Window, IDisposable
     // We give this window a hidden ID using ##
     // So that the user will see "My Amazing Window" as window title,
     // but for ImGui the ID is "My Amazing Window##With a hidden ID"
-    public MainWindow(Plugin plugin)
+    public MainWindow()
         : base("Savage Helper##With a hidden ID", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.MenuBar)
     {
         SizeConstraints = new WindowSizeConstraints
@@ -40,7 +40,6 @@ public class MainWindow : Window, IDisposable
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
-        Plugin = plugin;
         Plugin.Framework.Update += OnUpdate;
     }
 
@@ -117,33 +116,6 @@ public class MainWindow : Window, IDisposable
 
     public override void Draw()
     {
-        /*if (ImGui.BeginMenuBar())
-        {
-            if (ImGui.BeginMenu("Fight"))
-            {
-                if (ImGui.MenuItem("None")) { InfoManager.fightState = FightState.None; }
-                if (ImGui.MenuItem("M1S")) { InfoManager.fightState = FightState.M1S; InfoManager.fight = new M1S(); }
-                if (ImGui.MenuItem("M2S")) { InfoManager.fightState = FightState.M2S; InfoManager.fight = new M2S(); }
-                if (ImGui.MenuItem("M3S")) { InfoManager.fightState = FightState.M3S; InfoManager.fight = new M3S(); }
-                if (ImGui.MenuItem("M4S")) { InfoManager.fightState = FightState.M4S; InfoManager.fight = new M4S(); }
-                ImGui.EndMenu();
-            }
-            if (ImGui.BeginMenu("Pots"))
-            {
-                if (ImGui.MenuItem("None")) { InfoManager.nbPots = NbPots.None; }
-                if (ImGui.MenuItem("0/6")) { InfoManager.nbPots = NbPots.Two_Pots; }
-                if (ImGui.MenuItem("2/8")) { InfoManager.nbPots = NbPots.Two_Pots_Bard; }
-                if (ImGui.MenuItem("0/5/10")) { InfoManager.nbPots = NbPots.Three_Pots; }
-                if (ImGui.MenuItem("0/6/12")) { InfoManager.nbPots = NbPots.Three_twoPots; }
-                ImGui.EndMenu();
-            }
-            if (ImGui.BeginMenu("Settings"))
-            {
-                Plugin.ToggleConfigUI();
-                ImGui.EndMenu();
-            }
-            ImGui.EndMenuBar();
-        }*/
         DrawCommon.MenuBar();
 
         switch (InfoManager.fightState)
@@ -171,7 +143,7 @@ public class MainWindow : Window, IDisposable
                     ImGui.SameLine();
                     needSameLine = true;
                 }
-                if (InfoManager.Configuration.ShowHelper)
+                if (InfoManager.Configuration.ShowHelper && !InfoManager.isSplitEnable)
                 {
                     if (needSameLine) { ImGui.SameLine(); }
                     ImGui.BeginChild("mech helper");
@@ -179,6 +151,14 @@ public class MainWindow : Window, IDisposable
                     ImGui.EndChild();
                 }
                 break;
+        }
+    }
+
+    public override void OnClose()
+    {
+        if (InfoManager.isSplitOpen)
+        {
+            InfoManager.plugin.ToggleSplitHelperUI();
         }
     }
 }

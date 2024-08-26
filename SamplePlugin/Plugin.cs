@@ -32,6 +32,7 @@ public sealed class Plugin : IDalamudPlugin
     public readonly WindowSystem WindowSystem = new("combatHelper");
     private ConfigWindow ConfigWindow { get; init; }
     private MainWindow MainWindow { get; init; }
+    private SplitHelperWindow SplitHelperWindow { get; init; }
 
     public Plugin()
     {
@@ -51,11 +52,17 @@ public sealed class Plugin : IDalamudPlugin
         }
         Configuration.LoadColors();
 
-        ConfigWindow = new ConfigWindow(this);
-        MainWindow = new MainWindow(this);
+        InfoManager.Configuration = Configuration;
+        InfoManager.soundPlayer = new SoundPlayer(Configuration.Sound);
+        InfoManager.plugin = this;
+
+        ConfigWindow = new ConfigWindow();
+        MainWindow = new MainWindow();
+        SplitHelperWindow = new SplitHelperWindow();
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
+        WindowSystem.AddWindow(SplitHelperWindow);
         
         CommandManager.AddHandler(CommandNameShort, new CommandInfo(OnCommand)
         {
@@ -69,10 +76,6 @@ public sealed class Plugin : IDalamudPlugin
             "/combatHelper config | cfg → reset sound\n"
         });
 
-        InfoManager.Configuration = Configuration;
-        InfoManager.soundPlayer = new SoundPlayer(Configuration.Sound);
-        InfoManager.plugin = this;
-
         ChatHelper.Initialize();
 
         PluginInterface.UiBuilder.Draw += DrawUI;
@@ -83,6 +86,7 @@ public sealed class Plugin : IDalamudPlugin
 
         // Adds another button that is doing the same but for the main ui of the plugin
         PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
+        InfoManager.UpdateSplitToggle(true);
     }
 
     public void Dispose()
@@ -92,6 +96,7 @@ public sealed class Plugin : IDalamudPlugin
 
         ConfigWindow.Dispose();
         MainWindow.Dispose();
+        SplitHelperWindow.Dispose();
 
         CommandManager.RemoveHandler(CommandName);
         CommandManager.RemoveHandler(CommandNameShort);
@@ -130,5 +135,19 @@ public sealed class Plugin : IDalamudPlugin
     private void DrawUI() => WindowSystem.Draw();
 
     public void ToggleConfigUI() => ConfigWindow.Toggle();
-    public void ToggleMainUI() => MainWindow.Toggle();
+    //public void ToggleMainUI() => MainWindow.Toggle();
+    public void ToggleMainUI()
+    {
+        MainWindow.Toggle();
+        if (InfoManager.isSplitEnable)
+        {
+            if (MainWindow.IsOpen != SplitHelperWindow.IsOpen)
+            {
+                SplitHelperWindow.Toggle();
+                InfoManager.isSplitOpen = SplitHelperWindow.IsOpen;
+            }
+
+        }
+    }
+    public void ToggleSplitHelperUI() => SplitHelperWindow.Toggle();
 }
