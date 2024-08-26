@@ -42,13 +42,13 @@ namespace combatHelper.Fights
 
     public abstract class Fight
     {
-        protected List<(int, int, string, List<(string, Vector4)>)> lines;
+        public List<(int, int, string, List<(string, Vector4)>)> lines = null;
         protected Configuration configuration;
         public Fight() { }
 
         public void Draw(int currentTime)
         {
-            if (currentTime < 0) { return; }
+            if (currentTime < 0 || lines == null) { return; }
             ImGuiTableFlags flag = ImGuiTableFlags.Hideable | ImGuiTableFlags.Reorderable | ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingStretchProp;
             ImGui.BeginTable("timelinetable", 4, flag);
             ImGui.TableSetupColumn("Cast");

@@ -129,7 +129,7 @@ public class MainWindow : Window, IDisposable
                 break;
             default:
                 bool needSameLine = false;
-                if (InfoManager.Configuration.ShowTimeLine)
+                if (InfoManager.Configuration.ShowTimeLine && InfoManager.fight.lines != null)
                 {
                     int seconds = 0;
                     if (isStarted)
@@ -140,7 +140,7 @@ public class MainWindow : Window, IDisposable
                     ImGui.BeginChild("time line", new Vector2(350, 200));
                     InfoManager.fight.Draw(seconds);
                     ImGui.EndChild();
-                    ImGui.SameLine();
+                    //ImGui.SameLine();
                     needSameLine = true;
                 }
                 if (InfoManager.Configuration.ShowHelper && !InfoManager.isSplitEnable)
