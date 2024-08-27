@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Numerics;
 using combatHelper.Utils;
+using System.Collections.Generic;
 
 namespace combatHelper;
 
@@ -33,6 +34,8 @@ public class Configuration : IPluginConfiguration
     public Vector4 Mechanics { get; set; } = new Vector4(204f / 255f, 135f / 255f, 254f / 255f, 1);
     // chat msg
     public ChatMode ChatMode { get; set; } = ChatMode.None;
+    //custom
+    public Dictionary<string, List<(ChatMode, string, bool, int)>> CustomHelper { get; set; } = new Dictionary<string, List<(ChatMode, string, bool, int)>>();
 
 
     // the below exist just to make saving less cumbersome
