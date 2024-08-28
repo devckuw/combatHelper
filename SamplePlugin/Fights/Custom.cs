@@ -34,7 +34,7 @@ namespace combatHelper.Fights
 
         public override void DrawHelper()
         {
-
+            // edit mode
             if (isInEditMode)
             {
                 if (ImGui.Button("Save & Quit"))
@@ -48,56 +48,56 @@ namespace combatHelper.Fights
                 if (ImGui.Button("Undo & Quit")) { isInEditMode = false; }
                 DrawEdit();
                 DrawResult();
+                return;
             }
-            else
+
+            // normal mode
+            if (isListSelected)
             {
-                if (isListSelected)
+                if (ImGui.Button("Edit")) { isInEditMode = true; listComsEdit = new List<(ChatMode, string, bool, int)>(listComs); }
+                ImGui.SameLine();
+                if (ImGui.Button("Delete"))
                 {
-                    if (ImGui.Button("Edit")) { isInEditMode = true; listComsEdit = new List<(ChatMode, string, bool, int)>(listComs); }
-                    ImGui.SameLine();
-                    if (ImGui.Button("Delete"))
-                    {
-                        dicListCom.Remove(listSelected);
-                        isListSelected = false;
-                        listSelected = "Select..";
-                        SaveToConfig();
-                    }
-                    ImGui.SameLine();
-                }
-                ImGui.SetNextItemWidth(120f);
-                if (ImGui.BeginCombo("", listSelected))
-                {
-                    foreach (var key in dicListCom.Keys)
-                    {
-                        if (ImGui.Selectable(key))
-                        {
-                            listSelected = key;
-                            listComs = new List<(ChatMode, string, bool, int)>(dicListCom[key]);
-                            isListSelected = true;
-                            counter = listComs.Count;
-                        }
-                    }
-                    ImGui.EndCombo();
+                    dicListCom.Remove(listSelected);
+                    isListSelected = false;
+                    listSelected = "Select..";
+                    SaveToConfig();
                 }
                 ImGui.SameLine();
-                if (ImGui.Button("Add New"))
-                {
-                    var name = Encoding.UTF8.GetString(bufferNewComs);
-                    if (!dicListCom.ContainsKey(name))
-                    {
-                        listSelected = name;
-                        dicListCom[name] = new List<(ChatMode, string, bool, int)>();
-                        listComs = new List<(ChatMode, string, bool, int)>();
-                        isListSelected = true;
-                        bufferNewComs = new byte[128];
-                        counter = 0;
-                    }
-                }
-                ImGui.SameLine();
-                ImGui.SetNextItemWidth(150f);
-                ImGui.InputText(" ", bufferNewComs, 128);
-                if (isListSelected) { DrawResult(); }
             }
+            ImGui.SetNextItemWidth(120f);
+            if (ImGui.BeginCombo("", listSelected))
+            {
+                foreach (var key in dicListCom.Keys)
+                {
+                    if (ImGui.Selectable(key))
+                    {
+                        listSelected = key;
+                        listComs = new List<(ChatMode, string, bool, int)>(dicListCom[key]);
+                        isListSelected = true;
+                        counter = listComs.Count;
+                    }
+                }
+                ImGui.EndCombo();
+            }
+            ImGui.SameLine();
+            if (ImGui.Button("Add New"))
+            {
+                var name = Encoding.UTF8.GetString(bufferNewComs);
+                if (!dicListCom.ContainsKey(name))
+                {
+                    listSelected = name;
+                    dicListCom[name] = new List<(ChatMode, string, bool, int)>();
+                    listComs = new List<(ChatMode, string, bool, int)>();
+                    isListSelected = true;
+                    bufferNewComs = new byte[128];
+                    counter = 0;
+                }
+            }
+            ImGui.SameLine();
+            ImGui.SetNextItemWidth(150f);
+            ImGui.InputText(" ", bufferNewComs, 128);
+            if (isListSelected) { DrawResult(); }
         }
 
         public void SaveToConfig()
@@ -120,30 +120,46 @@ namespace combatHelper.Fights
 
         public void DrawResult()
         {
+            bool start = true;
+
+            // edit mode
             if (isInEditMode)
             {
-                bool start = true;
-                foreach (var item in listComsEdit)
+                for (int i = 0;i < listComsEdit.Count;i++)
                 {
-                    if (!start && item.Item3) { ImGui.SameLine(); }
-                    start = false;
-                    if (ImGui.Button(item.Item2 + "##" + item.Item4.ToString()))
+                    if (i != 0 && listComsEdit[i].Item3) { ImGui.SameLine(); }
+                    if (ImGui.Button(listComsEdit[i].Item2 + "##" + listComsEdit[i].Item4.ToString()))
                     {
-                        ChatHelper.Send(item.Item1, item.Item2);
+                        ChatHelper.Send(listComsEdit[i].Item1, listComsEdit[i].Item2);
+                    }
+                    if (i != 0)
+                    {
+                        ImGui.SameLine();
+                        var tmp = listComsEdit[i].Item3;
+                        if (ImGui.Checkbox("##" + listComsEdit[i].Item4.ToString(), ref tmp))
+                        {
+                            var newItem = (listComsEdit[i].Item1, listComsEdit[i].Item2, tmp, listComsEdit[i].Item4);
+                            listComsEdit.RemoveAt(i);
+                            listComsEdit.Insert(i, newItem);
+                        }
+                    }
+                    ImGui.SameLine();
+                    if (ImGui.Button("Del##" + listComsEdit[i].Item4.ToString()))
+                    {
+                        listComsEdit.RemoveAt(i);
                     }
                 }
+                return;
             }
-            else
+
+            // normal mode
+            for (int i = 0; i < listComs.Count; i++)
             {
-                bool start = true;
-                foreach (var item in listComs)
+                if (!start && listComs[i].Item3) { ImGui.SameLine(); }
+                start = false;
+                if (ImGui.Button(listComs[i].Item2 + "##" + listComs[i].Item4.ToString()))
                 {
-                    if (!start && item.Item3) { ImGui.SameLine(); }
-                    start = false;
-                    if (ImGui.Button(item.Item2 + "##" + item.Item4.ToString()))
-                    {
-                        ChatHelper.Send(item.Item1, item.Item2);
-                    }
+                    ChatHelper.Send(listComs[i].Item1, listComs[i].Item2);
                 }
             }
         }
