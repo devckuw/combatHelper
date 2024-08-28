@@ -118,47 +118,46 @@ public class MainWindow : Window, IDisposable
     {
         DrawCommon.MenuBar();
 
-        switch (InfoManager.fightState)
+        if (InfoManager.fightState == FightState.None)
         {
-            case FightState.None:
-                ImGui.Text("Choose a fight.");
-                if (ImGui.Button("testsound"))
-                {
-                    InfoManager.soundPlayer.Play();
-                }
-                break;
-            default:
-                bool needSameLine = false;
-                if (InfoManager.Configuration.ShowTimeLine && InfoManager.fight.lines != null)
-                {
-                    int seconds = 0;
-                    if (isStarted)
-                    {
-                        var combatDuration = DateTime.Now - startTimer;
-                        seconds = combatDuration.Seconds;
-                    }
-                    ImGui.BeginChild("time line", new Vector2(350, 200));
-                    InfoManager.fight.Draw(seconds);
-                    ImGui.EndChild();
-                    //ImGui.SameLine();
-                    needSameLine = true;
-                }
-                if (InfoManager.Configuration.ShowHelper && !InfoManager.isSplitEnable)
-                {
-                    if (needSameLine) { ImGui.SameLine(); }
-                    ImGui.BeginChild("mech helper");
-                    InfoManager.fight.DrawHelper();
-                    ImGui.EndChild();
-                }
-                break;
+            ImGui.Text("Choose a fight.");
+            if (ImGui.Button("testsound"))
+            {
+                InfoManager.soundPlayer.Play();
+            }
+            return;
+        }
+        bool needSameLine = false;
+        if (InfoManager.Configuration.ShowTimeLine && InfoManager.fight.lines != null)
+        {
+            int seconds = 0;
+            if (isStarted)
+            {
+                var combatDuration = DateTime.Now - startTimer;
+                seconds = combatDuration.Seconds;
+            }
+            ImGui.BeginChild("time line", new Vector2(350, 200));
+            InfoManager.fight.Draw(seconds);
+            ImGui.EndChild();
+            needSameLine = true;
+        }
+        if (InfoManager.Configuration.ShowHelper && !InfoManager.Configuration.SplitTimeLineAndHelper)
+        {
+            if (needSameLine) { ImGui.SameLine(); }
+            ImGui.BeginChild("mech helper");
+            InfoManager.fight.DrawHelper();
+            ImGui.EndChild();
         }
     }
 
     public override void OnClose()
     {
-        if (InfoManager.isSplitOpen)
+        InfoManager.isMainOpen = false;
+        /*if (InfoManager.isHelperOpen)
         {
+            InfoManager.isHelperOpen = false;
             InfoManager.plugin.ToggleSplitHelperUI();
-        }
+        }*/
+        //base.OnClose();
     }
 }

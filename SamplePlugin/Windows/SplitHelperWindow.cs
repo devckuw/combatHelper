@@ -11,7 +11,7 @@ namespace combatHelper.Windows
 {
     internal class SplitHelperWindow : Window, IDisposable
     {
-        public SplitHelperWindow() : base("Split", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoTitleBar)
+        public SplitHelperWindow() : base("Split", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.MenuBar)
         {
 
         }
@@ -26,6 +26,17 @@ namespace combatHelper.Windows
             DrawCommon.MenuBar();
             if (InfoManager.fightState == FightState.None) { return; }
             InfoManager.fight.DrawHelper();
+        }
+
+        public override void OnClose()
+        {
+            InfoManager.isHelperOpen = false;
+            /*if (InfoManager.isMainOpen && InfoManager.Configuration.SplitTimeLineAndHelper && !InfoManager.Configuration.ShowTimeLine)
+            {
+                InfoManager.isMainOpen = false;
+                InfoManager.plugin.ToggleMainUI();
+            }*/
+            //base.OnClose();
         }
     }
 }

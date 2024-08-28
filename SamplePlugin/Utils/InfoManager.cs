@@ -16,39 +16,173 @@ namespace combatHelper.Utils
         public static Fight fight = null;
         public static NbPots nbPots = NbPots.None;
         public static Plugin plugin;
-        public static bool isSplitEnable = false;
-        public static bool isSplitOpen = false;
+        public static bool isHelperOpen = false;
+        public static bool isMainOpen = false;
+        //public static bool isSplitEnable = false;
 
         public static void UpdateSound()
         {
             soundPlayer = new SoundPlayer(Configuration.Sound);
         }
 
-        public static void UpdateSplitToggle(bool setup = false)
+        public static void UpdateSplitToggle()
         {
+            //isSplitEnable = Configuration.SplitTimeLineAndHelper;
             // split & show both
+            if (!Configuration.SplitTimeLineAndHelper)
+            {
+                if (isHelperOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = false;
+                }
+                return;
+            }
+            if (Configuration.ShowHelper && Configuration.ShowTimeLine)
+            {
+                if (isMainOpen == isHelperOpen)
+                {
+                    return;
+                }
+                if (isMainOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = true;
+                    return;
+                }
+                plugin.ToggleMainUI();
+                isMainOpen = true;
+                return;
+            }
+            if (!Configuration.ShowHelper && !Configuration.ShowTimeLine)
+            {
+                if (isHelperOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = false;
+                }
+                if (isMainOpen)
+                {
+                    plugin.ToggleMainUI();
+                    isMainOpen = false;
+                }
+                return;
+            }
+            if (!Configuration.ShowHelper && Configuration.ShowTimeLine)
+            {
+                if (isHelperOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = false;
+                }
+                return;
+            }
+            if (Configuration.ShowHelper && !Configuration.ShowTimeLine)
+            {
+                if (isMainOpen)
+                {
+                    plugin.ToggleMainUI();
+                    isMainOpen = false;
+                }
+                return;
+            }
+            /*
             if (Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && Configuration.ShowTimeLine)
             {
-                if (!isSplitOpen && !setup)
+                if (isMainOpen == isHelperOpen)
                 {
+                    return;
+                }
+                if (isMainOpen)
+                { 
                     plugin.ToggleSplitHelperUI();
-                    isSplitEnable = true;
-                    isSplitOpen = true;
+                    isHelperOpen = true;
+                    return; 
                 }
-                else
-                {
-                    isSplitEnable = true;
-                }
+                plugin.ToggleMainUI();
+                isMainOpen = true;
+                return;
             }
-            else
+            if (!Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && Configuration.ShowTimeLine)
             {
-                if (isSplitOpen)
+                if (isHelperOpen)
                 {
                     plugin.ToggleSplitHelperUI();
-                    isSplitOpen = false;
-                    isSplitEnable = false;
+                    isHelperOpen = false;
                 }
+                return;
             }
+            if (Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && !Configuration.ShowTimeLine)
+            {
+                if (isHelperOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = false;
+                }
+                return;
+            }
+            if (Configuration.SplitTimeLineAndHelper && !Configuration.ShowHelper && Configuration.ShowTimeLine)
+            {
+                if (isMainOpen)
+                {
+                    plugin.ToggleMainUI();
+                    isMainOpen = false;
+                }
+                return;
+            }*/
+        }
+
+        public static void ProcessToggle()
+        {
+            if (!Configuration.SplitTimeLineAndHelper)
+            {
+                plugin.ToggleMainUI();
+                isMainOpen = !isMainOpen;
+                if (isHelperOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = false;
+                }
+                return;
+            }
+            if (Configuration.ShowHelper && Configuration.ShowTimeLine)
+            {
+                if (isMainOpen == isHelperOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = !isHelperOpen;
+                    plugin.ToggleMainUI();
+                    isMainOpen = !isMainOpen;
+                    return;
+                }
+                if (isMainOpen)
+                {
+                    plugin.ToggleSplitHelperUI();
+                    isHelperOpen = true;
+                    return;
+                }
+                plugin.ToggleMainUI();
+                isMainOpen = true;
+                return;
+            }
+            if (Configuration.ShowHelper)
+            {
+                //plugin.ToggleMainUI();
+                //isMainOpen = !isMainOpen;
+                plugin.ToggleSplitHelperUI();
+                isHelperOpen = !isHelperOpen;
+                return;
+            }
+            if (Configuration.ShowTimeLine)
+            {
+                plugin.ToggleMainUI();
+                isMainOpen = !isMainOpen;
+                //plugin.ToggleSplitHelperUI();
+                //isHelperOpen = !isHelperOpen;
+                return;
+            }
+            plugin.ToggleMainUI();
+            isMainOpen = !isMainOpen;
         }
 
     }

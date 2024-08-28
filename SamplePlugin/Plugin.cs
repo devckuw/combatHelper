@@ -86,7 +86,7 @@ public sealed class Plugin : IDalamudPlugin
 
         // Adds another button that is doing the same but for the main ui of the plugin
         PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
-        InfoManager.UpdateSplitToggle(true);
+        InfoManager.UpdateSplitToggle();
     }
 
     public void Dispose()
@@ -106,7 +106,8 @@ public sealed class Plugin : IDalamudPlugin
     {
         if (string.IsNullOrEmpty(args))
         {
-            ToggleMainUI();
+            //ToggleMainUI();
+            InfoManager.ProcessToggle();
             return;
         }
 
@@ -135,19 +136,6 @@ public sealed class Plugin : IDalamudPlugin
     private void DrawUI() => WindowSystem.Draw();
 
     public void ToggleConfigUI() => ConfigWindow.Toggle();
-    //public void ToggleMainUI() => MainWindow.Toggle();
-    public void ToggleMainUI()
-    {
-        MainWindow.Toggle();
-        if (InfoManager.isSplitEnable)
-        {
-            if (MainWindow.IsOpen != SplitHelperWindow.IsOpen)
-            {
-                SplitHelperWindow.Toggle();
-                InfoManager.isSplitOpen = SplitHelperWindow.IsOpen;
-            }
-
-        }
-    }
+    public void ToggleMainUI() => MainWindow.Toggle();
     public void ToggleSplitHelperUI() => SplitHelperWindow.Toggle();
 }
