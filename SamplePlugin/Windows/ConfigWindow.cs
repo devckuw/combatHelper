@@ -95,10 +95,8 @@ public class ConfigWindow : Window, IDisposable
             }
 
             var offsetPots = Configuration.OffsetPots;
-            if (ImGui.InputInt("Offset Pots", ref offsetPots, 1, 1))
+            if (ImGui.SliderInt("Offset Pots", ref offsetPots, -25, 10))
             {
-                if (offsetPots < -20) { offsetPots = -20; }
-                if (offsetPots > 20) { offsetPots = 20; }
                 Configuration.OffsetPots = offsetPots;
                 Configuration.Save();
             }
