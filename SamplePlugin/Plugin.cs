@@ -23,6 +23,7 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IFramework Framework { get; private set; } = null!;
     [PluginService] public static IGameGui GameGui { get; private set; } = null!;
     [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
+    [PluginService] public static IPluginLog Log { get; private set; } = null!;
 
     private const string CommandName = "/combatHelper";
     private const string CommandNameShort = "/ch";

@@ -70,7 +70,7 @@ public class MainWindow : Window, IDisposable
                 isStarted = true;
                 startTimer = DateTime.Now;
             }
-            var combatDuration = (DateTime.Now - startTimer).Seconds;
+            var combatDuration = (DateTime.Now - startTimer).Seconds + (DateTime.Now - startTimer).Minutes * 60;
             var offset = InfoManager.Configuration.OffsetPots;
             switch (InfoManager.nbPots)
             {
