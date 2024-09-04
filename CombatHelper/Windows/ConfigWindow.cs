@@ -18,7 +18,7 @@ public class ConfigWindow : Window, IDisposable
     // We give this window a constant ID using ###
     // This allows for labels being dynamic, like "{FPS Counter}fps###XYZ counter window",
     // and the window ID will always be "###XYZ counter window" for ImGui
-    public ConfigWindow() : base("A Wonderful Configuration Window###With a constant ID")
+    public ConfigWindow() : base("Configuration###config window")
     {
         Flags = ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
                 ImGuiWindowFlags.NoScrollWithMouse;
@@ -61,6 +61,8 @@ public class ConfigWindow : Window, IDisposable
                 Configuration.Save();
                 InfoManager.UpdateSplitToggle();
             }
+            DrawCommon.Helper("Show the table module with events of current selected fight.");
+
             configValue = Configuration.ShowHelper;
             if (ImGui.Checkbox("Show Helper", ref configValue))
             {
@@ -68,6 +70,8 @@ public class ConfigWindow : Window, IDisposable
                 Configuration.Save();
                 InfoManager.UpdateSplitToggle();
             }
+            DrawCommon.Helper("Show helper module which contain help for fights or custom presets.");
+
             configValue = Configuration.SplitTimeLineAndHelper;
             if (ImGui.Checkbox("Split Helper & TimeLine", ref configValue))
             {
@@ -75,37 +79,47 @@ public class ConfigWindow : Window, IDisposable
                 Configuration.Save();
                 InfoManager.UpdateSplitToggle();
             }
+            DrawCommon.Helper("Split timeline and help module in 2 windows.");
+
             var movable = Configuration.IsMainWindowMovable;
-            if (ImGui.Checkbox("Movable Main Window", ref movable))
+            if (ImGui.Checkbox("Movable Savage Helper", ref movable))
             {
                 Configuration.IsMainWindowMovable = movable;
                 Configuration.Save();
             }
+            DrawCommon.Helper("Allow the Savage Helper window to move.");
+
             movable = Configuration.IsConfigWindowMovable;
             if (ImGui.Checkbox("Movable Config Window", ref movable))
             {
                 Configuration.IsConfigWindowMovable = movable;
                 Configuration.Save();
             }
+            DrawCommon.Helper("Allow the Configuration window to move.");
+
             movable = Configuration.IsHelperWIndowMovable;
             if (ImGui.Checkbox("Movable Split Helper Window", ref movable))
             {
                 Configuration.IsHelperWIndowMovable = movable;
                 Configuration.Save();
             }
+            DrawCommon.Helper("Allow the Split window to move.");
 
+            ImGui.SetNextItemWidth(120);
             var offsetPots = Configuration.OffsetPots;
             if (ImGui.SliderInt("Offset Pots", ref offsetPots, -25, 10))
             {
                 Configuration.OffsetPots = offsetPots;
                 Configuration.Save();
             }
+            DrawCommon.Helper("How long before the pot timing the sound should be played.\n -15 => 15sec before the timing.");
             ImGui.EndTabItem();
         }
+
         if (ImGui.BeginTabItem("Colors"))
         {
             var raid = Configuration.Raid_Damage;
-            if (ImGui.ColorEdit4("Raid_Damage", ref raid, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
+            if (ImGui.ColorEdit4("Raid Damage", ref raid, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
             {
                 Configuration.Raid_Damage = raid;
                 Configuration.Save();
@@ -114,7 +128,7 @@ public class ConfigWindow : Window, IDisposable
             
 
             var tank = Configuration.Tank_Damage;
-            if (ImGui.ColorEdit4("Tank_Damage", ref tank, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
+            if (ImGui.ColorEdit4("Tank Damage", ref tank, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
             {
                 Configuration.Tank_Damage = tank;
                 Configuration.Save();
@@ -123,7 +137,7 @@ public class ConfigWindow : Window, IDisposable
             
 
             var pos = Configuration.Positioning_Required;
-            if (ImGui.ColorEdit4("Positioning_Required", ref pos, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
+            if (ImGui.ColorEdit4("Positioning Required", ref pos, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
             {
                 Configuration.Positioning_Required = pos;
                 Configuration.Save();
@@ -131,7 +145,7 @@ public class ConfigWindow : Window, IDisposable
             }
 
             var avoid = Configuration.Avoidable_AoE;
-            if (ImGui.ColorEdit4("Avoidable_AoE", ref avoid, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
+            if (ImGui.ColorEdit4("Avoidable AoE", ref avoid, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
             {
                 Configuration.Avoidable_AoE = avoid;
                 Configuration.Save();
@@ -147,7 +161,7 @@ public class ConfigWindow : Window, IDisposable
             }
 
             var target = Configuration.Targeted_AoE;
-            if (ImGui.ColorEdit4("Targeted_AoE", ref target, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
+            if (ImGui.ColorEdit4("Targeted AoE", ref target, ImGuiColorEditFlags.NoAlpha | ImGuiColorEditFlags.NoInputs))
             {
                 Configuration.Targeted_AoE = target;
                 Configuration.Save();
@@ -174,9 +188,11 @@ public class ConfigWindow : Window, IDisposable
                 Configuration.Save();
                 Configuration.LoadColors();
             }
-            
+            DrawCommon.Helper("Reset to default colors.");
+
             ImGui.EndTabItem();
         }
+
         if (ImGui.BeginTabItem("Sound"))
         {
             if (ImGui.Button("Select Sound"))
@@ -198,14 +214,17 @@ public class ConfigWindow : Window, IDisposable
                 Configuration.SetSound();
                 InfoManager.UpdateSound();
             }
+            DrawCommon.Helper("Reset to default sound.");
             if (ImGui.Button("Test Sound"))
             {
                 InfoManager.soundPlayer.Play();
             }
             ImGui.EndTabItem(); 
         }
+        
         if (ImGui.BeginTabItem("Chat Msg"))
         {
+            ImGui.SetNextItemWidth(120);
             if (ImGui.BeginCombo("Chat mode", Configuration.ChatMode.ToString()))
             {
                 if (ImGui.Selectable("None"))
@@ -229,6 +248,7 @@ public class ConfigWindow : Window, IDisposable
                     Configuration.Save();
                 }
             }
+            DrawCommon.Helper("Select Chat mode in which message should be sent for helper module.\nStart with 'Echo' is a nice idea to try stuff.");
             ImGui.EndTabItem();
         }
         ImGui.EndTabBar();

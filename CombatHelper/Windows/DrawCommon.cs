@@ -1,5 +1,7 @@
 using combatHelper.Fights;
 using combatHelper.Utils;
+using Dalamud.Interface.Components;
+using Dalamud.Interface.Utility;
 using ImGuiNET;
 using System;
 using System.Collections.Generic;
@@ -41,6 +43,17 @@ namespace combatHelper.Windows
                 }
                 ImGui.EndMenuBar();
             }
+        }
+
+        public static void Helper(string help)
+        {
+            ImGui.SameLine();
+            ImGuiComponents.HelpMarker(help);
+        }
+
+        public static void IsHovered(string info)
+        {
+            if (ImGui.IsItemHovered()) { ImGui.SetTooltip(info); }
         }
     }
 }

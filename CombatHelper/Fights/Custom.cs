@@ -1,4 +1,7 @@
 using combatHelper.Utils;
+using combatHelper.Windows;
+using Dalamud.Game.Gui;
+using Dalamud.Interface.Components;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
 using ImGuiNET;
 using Lumina.Excel;
@@ -18,8 +21,9 @@ namespace combatHelper.Fights
         private string previewChat = "Select Chat";
         private ChatMode chatModeSelected = ChatMode.None;
         private bool sameLine = false;
-        private byte[] buffer = new byte[128];
-        private byte[] bufferNewComs = new byte[128];
+        //private byte[] buffer = new byte[128];
+        private string newCom = string.Empty;
+        private string nameNewCustom = string.Empty;
         private List<(ChatMode, string, bool, int)> listComs = new List<(ChatMode, string, bool, int)>();
         private List<(ChatMode, string, bool, int)> listComsEdit;
         private int counter = 0;
@@ -44,8 +48,10 @@ namespace combatHelper.Fights
                     ResetListIndices();
                     SaveToConfig();
                 }
+                DrawCommon.IsHovered("Save changes to file.");
                 ImGui.SameLine();
                 if (ImGui.Button("Undo & Quit")) { isInEditMode = false; }
+                DrawCommon.IsHovered("Discard changes.");
                 DrawEdit();
                 DrawResult();
                 return;
@@ -55,6 +61,7 @@ namespace combatHelper.Fights
             if (isListSelected)
             {
                 if (ImGui.Button("Edit")) { isInEditMode = true; listComsEdit = new List<(ChatMode, string, bool, int)>(listComs); }
+                DrawCommon.IsHovered("Enter edit mode.");
                 ImGui.SameLine();
                 if (ImGui.Button("Delete"))
                 {
@@ -63,6 +70,7 @@ namespace combatHelper.Fights
                     listSelected = "Select..";
                     SaveToConfig();
                 }
+                DrawCommon.IsHovered("Delete selected preset.");
                 ImGui.SameLine();
             }
             ImGui.SetNextItemWidth(120f);
@@ -83,20 +91,20 @@ namespace combatHelper.Fights
             ImGui.SameLine();
             if (ImGui.Button("Add New"))
             {
-                var name = Encoding.UTF8.GetString(bufferNewComs);
-                if (!dicListCom.ContainsKey(name))
+                if (!dicListCom.ContainsKey(nameNewCustom))
                 {
-                    listSelected = name;
-                    dicListCom[name] = new List<(ChatMode, string, bool, int)>();
+                    listSelected = nameNewCustom;
+                    dicListCom[nameNewCustom] = new List<(ChatMode, string, bool, int)>();
                     listComs = new List<(ChatMode, string, bool, int)>();
                     isListSelected = true;
-                    bufferNewComs = new byte[128];
+                    nameNewCustom = string.Empty;
                     counter = 0;
                 }
             }
+            DrawCommon.IsHovered("Add new preset mode.");
             ImGui.SameLine();
             ImGui.SetNextItemWidth(150f);
-            ImGui.InputText(" ", bufferNewComs, 128);
+            ImGui.InputTextWithHint("##inputNameAddCustom", "Name for new preset.", ref nameNewCustom, 64);
             if (isListSelected) { DrawResult(); }
         }
 
@@ -142,12 +150,14 @@ namespace combatHelper.Fights
                             listComsEdit.RemoveAt(i);
                             listComsEdit.Insert(i, newItem);
                         }
+                        DrawCommon.IsHovered("Stay on same line.");
                     }
                     ImGui.SameLine();
                     if (ImGui.Button("Del##" + listComsEdit[i].Item4.ToString()))
                     {
                         listComsEdit.RemoveAt(i);
                     }
+                    DrawCommon.IsHovered("Delete command on left.");
                 }
                 return;
             }
@@ -185,16 +195,22 @@ namespace combatHelper.Fights
                 }
                 ImGui.EndCombo();
             }
+            DrawCommon.Helper("Chat Mode to send the command.");
 
-            ImGui.InputText(" ", buffer, 128);
+            //ImGui.InputText(" ", buffer, 128);
+            ImGui.InputTextWithHint("##newComInput", "Enter new command here.", ref newCom, 64);
             
             ImGui.Checkbox("Same Line", ref sameLine);
+            DrawCommon.Helper("Stay on same line ?");
 
             if (ImGui.Button("Add"))
             {
-                listComsEdit.Add((chatModeSelected, Encoding.UTF8.GetString(buffer), sameLine, counter));
+                //listComsEdit.Add((chatModeSelected, Encoding.UTF8.GetString(buffer), sameLine, counter));
+                listComsEdit.Add((chatModeSelected, newCom, sameLine, counter));
                 counter++;
             }
+            DrawCommon.IsHovered("Add the command.");
+
             foreach(var item in listComsEdit)
             {
                 ImGui.Text(item.Item1.ToString());
@@ -207,6 +223,7 @@ namespace combatHelper.Fights
                 {
                     listComsEdit.Remove(item);
                 }
+                DrawCommon.IsHovered("Delete the command.");
             }
         }
     }
