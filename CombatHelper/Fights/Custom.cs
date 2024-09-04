@@ -21,7 +21,6 @@ namespace combatHelper.Fights
         private string previewChat = "Select Chat";
         private ChatMode chatModeSelected = ChatMode.None;
         private bool sameLine = false;
-        //private byte[] buffer = new byte[128];
         private string newCom = string.Empty;
         private string nameNewCustom = string.Empty;
         private List<(ChatMode, string, bool, int)> listComs = new List<(ChatMode, string, bool, int)>();
@@ -205,7 +204,6 @@ namespace combatHelper.Fights
 
             if (ImGui.Button("Add"))
             {
-                //listComsEdit.Add((chatModeSelected, Encoding.UTF8.GetString(buffer), sameLine, counter));
                 listComsEdit.Add((chatModeSelected, newCom, sameLine, counter));
                 counter++;
             }
