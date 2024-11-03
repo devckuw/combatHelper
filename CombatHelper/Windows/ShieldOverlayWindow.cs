@@ -38,8 +38,31 @@ namespace combatHelper.Windows
                 return;
             for (int i = 0; i < nb; i++)
             {
-                var hudPartyMember = agentHUD->PartyMembers.GetPointer(i);
-                actorsStats.Add((hudPartyMember->Object->Character.ShieldValue, hudPartyMember->Object->Character.MaxHealth));
+                byte shield;
+                uint maxHP;
+                try
+                {
+                    var hudPartyMember = agentHUD->PartyMembers.GetPointer(i);
+                    var obj = hudPartyMember->Object;
+                    if (obj != null)
+                    {
+                        var cha = obj->Character;
+                        shield = cha.ShieldValue;
+                        maxHP = cha.MaxHealth;
+                    }
+                    else
+                    {
+                        shield = 0;
+                        maxHP = 1;
+                    }
+                }
+                catch (Exception)
+                {
+                    shield = 0;
+                    maxHP = 1;
+                    throw;
+                }
+                actorsStats.Add((shield, maxHP));
             }
         }
 
