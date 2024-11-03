@@ -24,7 +24,7 @@ namespace combatHelper.Fights
         private string newCom = string.Empty;
         private string nameNewCustom = string.Empty;
         private List<(ChatMode, string, bool, int)> listComs = new List<(ChatMode, string, bool, int)>();
-        private List<(ChatMode, string, bool, int)> listComsEdit;
+        private List<(ChatMode, string, bool, int)> listComsEdit = new List<(ChatMode, string, bool, int)>();
         private int counter = 0;
         private Dictionary<string, List<(ChatMode, string, bool, int)>> dicListCom;
         private string listSelected = "Select..";

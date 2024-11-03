@@ -54,7 +54,16 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.BeginTabItem("General"))
         {
             // can't ref a property, so use a local copy
-            var configValue = Configuration.ShowTimeLine;
+            var configValue = Configuration.ShowShieldOverlay;
+            if (ImGui.Checkbox("Show Shield Overlay", ref configValue))
+            {
+                Configuration.ShowShieldOverlay = configValue;
+                Configuration.Save();
+                InfoManager.plugin.ToggleShieldUI();
+            }
+            DrawCommon.Helper("Show the shield overlay.");
+
+            configValue = Configuration.ShowTimeLine;
             if (ImGui.Checkbox("Show Time Line", ref configValue))
             {
                 Configuration.ShowTimeLine = configValue;
@@ -247,8 +256,52 @@ public class ConfigWindow : Window, IDisposable
                     Configuration.ChatMode = Utils.ChatMode.Alliance;
                     Configuration.Save();
                 }
+                ImGui.EndCombo();
             }
             DrawCommon.Helper("Select Chat mode in which message should be sent for helper module.\nStart with 'Echo' is a nice idea to try stuff.");
+            ImGui.EndTabItem();
+        }
+        if (ImGui.BeginTabItem("Overlay"))
+        {
+            var configValue = Configuration.ConfigShield;
+            if (ImGui.Checkbox("Overlay config mode", ref configValue))
+            {
+                Configuration.ConfigShield = configValue;
+                Configuration.Save();
+            }
+            DrawCommon.Helper("Enter overlay config mode.");
+
+            ImGui.SetNextItemWidth(120);
+            string txtDisplay;
+            if (Configuration.ShieldDisplay == ShieldDisplay.P)
+                txtDisplay = "76%";
+            else
+                txtDisplay = "123.45K";
+            if (ImGui.BeginCombo("Shield display", txtDisplay))
+            {
+                if (ImGui.Selectable("123.45K"))
+                {
+                    Configuration.ShieldDisplay = Utils.ShieldDisplay.K;
+                    Configuration.Save();
+                }
+                if (ImGui.Selectable("76%"))
+                {
+                    Configuration.ShieldDisplay = Utils.ShieldDisplay.P;
+                    Configuration.Save();
+                }
+                ImGui.EndCombo();
+            }
+            DrawCommon.Helper("Change how the shield is displayed.");
+
+            ImGui.SetNextItemWidth(120);
+            var configOffset = Configuration.OffsetShieldDisplay;
+            if (ImGui.SliderInt("Offset Shield", ref configOffset, 15,80))
+            {
+                Configuration.OffsetShieldDisplay = configOffset;
+                Configuration.Save();
+            }
+            DrawCommon.Helper("Change offset between lines in pixel.");
+
             ImGui.EndTabItem();
         }
         ImGui.EndTabBar();

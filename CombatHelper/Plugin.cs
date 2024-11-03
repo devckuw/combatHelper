@@ -34,6 +34,7 @@ public sealed class Plugin : IDalamudPlugin
     private ConfigWindow ConfigWindow { get; init; }
     private MainWindow MainWindow { get; init; }
     private SplitHelperWindow SplitHelperWindow { get; init; }
+    private ShieldOverlayWindow ShieldOverlayWindow { get; init; }
 
     public Plugin()
     {
@@ -60,10 +61,12 @@ public sealed class Plugin : IDalamudPlugin
         ConfigWindow = new ConfigWindow();
         MainWindow = new MainWindow();
         SplitHelperWindow = new SplitHelperWindow();
+        ShieldOverlayWindow = new ShieldOverlayWindow();
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
         WindowSystem.AddWindow(SplitHelperWindow);
+        WindowSystem.AddWindow(ShieldOverlayWindow);
         
         CommandManager.AddHandler(CommandNameShort, new CommandInfo(OnCommand)
         {
@@ -74,7 +77,8 @@ public sealed class Plugin : IDalamudPlugin
             HelpMessage = "Opens the main menu\n" +
             //"/combatHelper kini → cursed sound\n" +
             "/combatHelper resetsound | rs → reset sound\n" +
-            "/combatHelper config | cfg → reset sound\n"
+            "/combatHelper config | cfg → open config\n" +
+            "/combatHelper shield | s → open shield overlay\n"
         });
 
         ChatHelper.Initialize();
@@ -88,6 +92,12 @@ public sealed class Plugin : IDalamudPlugin
         // Adds another button that is doing the same but for the main ui of the plugin
         PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
         InfoManager.UpdateSplitToggle();
+
+        if (Configuration.ShowShieldOverlay)
+        {
+            ToggleShieldUI();
+        }
+
     }
 
     public void Dispose()
@@ -98,6 +108,7 @@ public sealed class Plugin : IDalamudPlugin
         ConfigWindow.Dispose();
         MainWindow.Dispose();
         SplitHelperWindow.Dispose();
+        ShieldOverlayWindow.Dispose();
 
         CommandManager.RemoveHandler(CommandName);
         CommandManager.RemoveHandler(CommandNameShort);
@@ -132,6 +143,11 @@ public sealed class Plugin : IDalamudPlugin
             ToggleConfigUI();
             return;
         }
+        if (firstArg.ToLower() == "s" || firstArg.ToLower() == "shield")
+        {
+            ToggleShieldUI();
+            return;
+        }
     }
 
     private void DrawUI() => WindowSystem.Draw();
@@ -139,4 +155,5 @@ public sealed class Plugin : IDalamudPlugin
     public void ToggleConfigUI() => ConfigWindow.Toggle();
     public void ToggleMainUI() => MainWindow.Toggle();
     public void ToggleSplitHelperUI() => SplitHelperWindow.Toggle();
+    public void ToggleShieldUI() => ShieldOverlayWindow.Toggle();
 }

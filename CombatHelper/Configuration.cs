@@ -5,7 +5,6 @@ using Dalamud.Utility;
 using System;
 using System.IO;
 using System.Numerics;
-using combatHelper.Utils;
 using System.Collections.Generic;
 
 namespace combatHelper;
@@ -19,6 +18,7 @@ public class Configuration : IPluginConfiguration
     public bool IsMainWindowMovable { get; set; } = true;
     public bool IsHelperWIndowMovable { get; set; } = true;
     public bool SplitTimeLineAndHelper { get; set; } = false;
+    public bool ShowShieldOverlay { get; set; } = true;
     public bool ShowTimeLine { get; set; } = true;
     public bool ShowHelper { get; set; } = true;
     public int OffsetPots { get; set; } = -10;
@@ -34,6 +34,10 @@ public class Configuration : IPluginConfiguration
     public Vector4 Mechanics { get; set; } = new Vector4(204f / 255f, 135f / 255f, 254f / 255f, 1);
     // chat msg
     public ChatMode ChatMode { get; set; } = ChatMode.None;
+    // shield overlay
+    public ShieldDisplay ShieldDisplay = ShieldDisplay.K;
+    public int OffsetShieldDisplay = 36;
+    public bool ConfigShield = true;
     //custom
     public Dictionary<string, List<(ChatMode, string, bool, int)>> CustomHelper { get; set; } = new Dictionary<string, List<(ChatMode, string, bool, int)>>();
 
@@ -55,7 +59,7 @@ public class Configuration : IPluginConfiguration
         Color.Mechanics = Mechanics;
     }
 
-    public void SetSound(string name = null, bool requiresAssembly = false)
+    public void SetSound(string name = "", bool requiresAssembly = false)
     {
         if (name.IsNullOrEmpty())
         {

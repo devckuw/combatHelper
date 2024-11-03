@@ -17,7 +17,6 @@ namespace combatHelper.Windows;
 
 public class MainWindow : Window, IDisposable
 {
-    private Plugin Plugin;
     /*private FightState fightState;
     private NbPots nbPots;
     private Fight fight;*/
@@ -50,7 +49,7 @@ public class MainWindow : Window, IDisposable
 
     private void OnUpdate(IFramework framework)
     {
-        var inCombat = Plugin.Condition[ConditionFlag.InCombat];
+        inCombat = Plugin.Condition[ConditionFlag.InCombat];
 
         if (!inCombat)
         {
@@ -81,15 +80,15 @@ public class MainWindow : Window, IDisposable
                     break;
                 case NbPots.Two_Pots_Bard:
                     if (combatDuration >= 2 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 8 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 8 * 60 + offset && !isPotThreeUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_Pots:
                     if (combatDuration >= 5 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 10 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 10 * 60 + offset && !isPotThreeUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_twoPots:
                     if (combatDuration >= 6 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
-                    if (combatDuration >= 12 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
+                    if (combatDuration >= 12 * 60 + offset && !isPotThreeUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
             }
         }

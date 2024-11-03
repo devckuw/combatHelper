@@ -57,6 +57,12 @@ namespace combatHelper.Utils
         Three_twoPots
     }
 
+    public enum ShieldDisplay
+    {
+        K,
+        P
+    }
+
     public static class Color
     {
         public static readonly Vector4 Red = new Vector4(1, 0, 0, 1);
