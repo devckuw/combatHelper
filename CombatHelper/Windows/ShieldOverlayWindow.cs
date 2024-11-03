@@ -97,7 +97,7 @@ namespace combatHelper.Windows
             int offset = InfoManager.Configuration.OffsetShieldDisplay;
             for (int i = 0;i < actorsStats.Count;i++)
             {
-                ImGui.BeginChild($"shield##{i}", new Vector2(100, offset));
+                ImGui.BeginChild($"shield##{i}", new Vector2(45, offset), false, ImGuiWindowFlags.NoInputs);
                 if (InfoManager.Configuration.ShieldDisplay == ShieldDisplay.K)
                 {
                     double shieldAmount = (float)actorsStats[i].Item1 * (float)actorsStats[i].Item2 / 100000;
