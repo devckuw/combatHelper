@@ -18,7 +18,7 @@ public class Configuration : IPluginConfiguration
     public bool IsMainWindowMovable { get; set; } = true;
     public bool IsHelperWIndowMovable { get; set; } = true;
     public bool SplitTimeLineAndHelper { get; set; } = false;
-    public bool ShowShieldOverlay { get; set; } = true;
+    public bool ShowShieldParty { get; set; } = true;
     public bool ShowTimeLine { get; set; } = true;
     public bool ShowHelper { get; set; } = true;
     public int OffsetPots { get; set; } = -10;

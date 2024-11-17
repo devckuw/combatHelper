@@ -9,6 +9,7 @@ using static Lumina.Data.Files.ScdFile;
 using Dalamud.Game;
 using combatHelper.Utils;
 using System.Media;
+using combatHelper.Tweaks;
 
 namespace combatHelper;
 
@@ -34,7 +35,8 @@ public sealed class Plugin : IDalamudPlugin
     private ConfigWindow ConfigWindow { get; init; }
     private MainWindow MainWindow { get; init; }
     private SplitHelperWindow SplitHelperWindow { get; init; }
-    private ShieldOverlayWindow ShieldOverlayWindow { get; init; }
+
+    private ShieldTweaks ShieldTweaks { get; init; }
 
     public Plugin()
     {
@@ -61,12 +63,13 @@ public sealed class Plugin : IDalamudPlugin
         ConfigWindow = new ConfigWindow();
         MainWindow = new MainWindow();
         SplitHelperWindow = new SplitHelperWindow();
-        ShieldOverlayWindow = new ShieldOverlayWindow();
+
+
+        ShieldTweaks = new ShieldTweaks();
 
         WindowSystem.AddWindow(ConfigWindow);
         WindowSystem.AddWindow(MainWindow);
         WindowSystem.AddWindow(SplitHelperWindow);
-        WindowSystem.AddWindow(ShieldOverlayWindow);
         
         CommandManager.AddHandler(CommandNameShort, new CommandInfo(OnCommand)
         {
@@ -90,13 +93,8 @@ public sealed class Plugin : IDalamudPlugin
         PluginInterface.UiBuilder.OpenConfigUi += ToggleConfigUI;
 
         // Adds another button that is doing the same but for the main ui of the plugin
-        PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
+        PluginInterface.UiBuilder.OpenMainUi += UIMain;
         InfoManager.UpdateSplitToggle();
-
-        if (Configuration.ShowShieldOverlay)
-        {
-            ToggleShieldUI();
-        }
 
     }
 
@@ -108,7 +106,8 @@ public sealed class Plugin : IDalamudPlugin
         ConfigWindow.Dispose();
         MainWindow.Dispose();
         SplitHelperWindow.Dispose();
-        ShieldOverlayWindow.Dispose();
+
+        ShieldTweaks.Dispose();
 
         CommandManager.RemoveHandler(CommandName);
         CommandManager.RemoveHandler(CommandNameShort);
@@ -143,17 +142,16 @@ public sealed class Plugin : IDalamudPlugin
             ToggleConfigUI();
             return;
         }
-        if (firstArg.ToLower() == "s" || firstArg.ToLower() == "shield")
-        {
-            ToggleShieldUI();
-            return;
-        }
     }
 
     private void DrawUI() => WindowSystem.Draw();
 
+    public void UIMain() => InfoManager.ProcessToggle();
+
     public void ToggleConfigUI() => ConfigWindow.Toggle();
     public void ToggleMainUI() => MainWindow.Toggle();
     public void ToggleSplitHelperUI() => SplitHelperWindow.Toggle();
-    public void ToggleShieldUI() => ShieldOverlayWindow.Toggle();
+
+    public bool IsMainOpen() { return MainWindow.IsOpen; }
+    public bool IsSplitOpen() { return SplitHelperWindow.IsOpen; }
 }

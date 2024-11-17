@@ -86,54 +86,12 @@ namespace combatHelper.Utils
                 }
                 return;
             }
-            /*
-            if (Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && Configuration.ShowTimeLine)
-            {
-                if (isMainOpen == isHelperOpen)
-                {
-                    return;
-                }
-                if (isMainOpen)
-                { 
-                    plugin.ToggleSplitHelperUI();
-                    isHelperOpen = true;
-                    return; 
-                }
-                plugin.ToggleMainUI();
-                isMainOpen = true;
-                return;
-            }
-            if (!Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && Configuration.ShowTimeLine)
-            {
-                if (isHelperOpen)
-                {
-                    plugin.ToggleSplitHelperUI();
-                    isHelperOpen = false;
-                }
-                return;
-            }
-            if (Configuration.SplitTimeLineAndHelper && Configuration.ShowHelper && !Configuration.ShowTimeLine)
-            {
-                if (isHelperOpen)
-                {
-                    plugin.ToggleSplitHelperUI();
-                    isHelperOpen = false;
-                }
-                return;
-            }
-            if (Configuration.SplitTimeLineAndHelper && !Configuration.ShowHelper && Configuration.ShowTimeLine)
-            {
-                if (isMainOpen)
-                {
-                    plugin.ToggleMainUI();
-                    isMainOpen = false;
-                }
-                return;
-            }*/
         }
 
         public static void ProcessToggle()
         {
+            Plugin.Log.Debug(plugin.IsMainOpen() + " " + plugin.IsSplitOpen());
+            Plugin.Log.Debug(isMainOpen + " " + isHelperOpen);
             if (!Configuration.SplitTimeLineAndHelper)
             {
                 plugin.ToggleMainUI();
@@ -167,8 +125,6 @@ namespace combatHelper.Utils
             }
             if (Configuration.ShowHelper)
             {
-                //plugin.ToggleMainUI();
-                //isMainOpen = !isMainOpen;
                 plugin.ToggleSplitHelperUI();
                 isHelperOpen = !isHelperOpen;
                 return;
@@ -177,8 +133,6 @@ namespace combatHelper.Utils
             {
                 plugin.ToggleMainUI();
                 isMainOpen = !isMainOpen;
-                //plugin.ToggleSplitHelperUI();
-                //isHelperOpen = !isHelperOpen;
                 return;
             }
             plugin.ToggleMainUI();

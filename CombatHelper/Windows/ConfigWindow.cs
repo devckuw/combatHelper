@@ -54,62 +54,61 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.BeginTabItem("General"))
         {
             // can't ref a property, so use a local copy
-            var configValue = Configuration.ShowShieldOverlay;
-            if (ImGui.Checkbox("Show Shield Overlay", ref configValue))
+            var shieldOverlay = Configuration.ShowShieldParty;
+            if (ImGui.Checkbox("Show Shield Overlay", ref shieldOverlay))
             {
-                Configuration.ShowShieldOverlay = configValue;
+                Configuration.ShowShieldParty = shieldOverlay;
                 Configuration.Save();
-                InfoManager.plugin.ToggleShieldUI();
             }
-            DrawCommon.Helper("Show the shield overlay.");
+            DrawCommon.Helper("Show the shield in party list.");
 
-            configValue = Configuration.ShowTimeLine;
-            if (ImGui.Checkbox("Show Time Line", ref configValue))
+            var showTimeLine = Configuration.ShowTimeLine;
+            if (ImGui.Checkbox("Show Time Line", ref showTimeLine))
             {
-                Configuration.ShowTimeLine = configValue;
+                Configuration.ShowTimeLine = showTimeLine;
                 Configuration.Save();
                 InfoManager.UpdateSplitToggle();
             }
             DrawCommon.Helper("Show the table module with events of current selected fight.");
 
-            configValue = Configuration.ShowHelper;
-            if (ImGui.Checkbox("Show Helper", ref configValue))
+            var showHelper = Configuration.ShowHelper;
+            if (ImGui.Checkbox("Show Helper", ref showHelper))
             {
-                Configuration.ShowHelper = configValue;
+                Configuration.ShowHelper = showHelper;
                 Configuration.Save();
                 InfoManager.UpdateSplitToggle();
             }
             DrawCommon.Helper("Show helper module which contain help for fights or custom presets.");
 
-            configValue = Configuration.SplitTimeLineAndHelper;
-            if (ImGui.Checkbox("Split Helper & TimeLine", ref configValue))
+            var split = Configuration.SplitTimeLineAndHelper;
+            if (ImGui.Checkbox("Split Helper & TimeLine", ref split))
             {
-                Configuration.SplitTimeLineAndHelper = configValue;
+                Configuration.SplitTimeLineAndHelper = split;
                 Configuration.Save();
                 InfoManager.UpdateSplitToggle();
             }
             DrawCommon.Helper("Split timeline and help module in 2 windows.");
 
-            var movable = Configuration.IsMainWindowMovable;
-            if (ImGui.Checkbox("Movable Savage Helper", ref movable))
+            var movableMain = Configuration.IsMainWindowMovable;
+            if (ImGui.Checkbox("Movable Savage Helper", ref movableMain))
             {
-                Configuration.IsMainWindowMovable = movable;
+                Configuration.IsMainWindowMovable = movableMain;
                 Configuration.Save();
             }
             DrawCommon.Helper("Allow the Savage Helper window to move.");
 
-            movable = Configuration.IsConfigWindowMovable;
-            if (ImGui.Checkbox("Movable Config Window", ref movable))
+            var movableConf = Configuration.IsConfigWindowMovable;
+            if (ImGui.Checkbox("Movable Config Window", ref movableConf))
             {
-                Configuration.IsConfigWindowMovable = movable;
+                Configuration.IsConfigWindowMovable = movableConf;
                 Configuration.Save();
             }
             DrawCommon.Helper("Allow the Configuration window to move.");
 
-            movable = Configuration.IsHelperWIndowMovable;
-            if (ImGui.Checkbox("Movable Split Helper Window", ref movable))
+            var movableHelper = Configuration.IsHelperWIndowMovable;
+            if (ImGui.Checkbox("Movable Split Helper Window", ref movableHelper))
             {
-                Configuration.IsHelperWIndowMovable = movable;
+                Configuration.IsHelperWIndowMovable = movableHelper;
                 Configuration.Save();
             }
             DrawCommon.Helper("Allow the Split window to move.");
@@ -261,16 +260,9 @@ public class ConfigWindow : Window, IDisposable
             DrawCommon.Helper("Select Chat mode in which message should be sent for helper module.\nStart with 'Echo' is a nice idea to try stuff.");
             ImGui.EndTabItem();
         }
-        if (ImGui.BeginTabItem("Overlay"))
+        if (ImGui.BeginTabItem("Shield"))
         {
-            var configValue = Configuration.ConfigShield;
-            if (ImGui.Checkbox("Overlay config mode", ref configValue))
-            {
-                Configuration.ConfigShield = configValue;
-                Configuration.Save();
-            }
-            DrawCommon.Helper("Enter overlay config mode.");
-
+            
             ImGui.SetNextItemWidth(120);
             string txtDisplay;
             if (Configuration.ShieldDisplay == ShieldDisplay.P)
@@ -292,15 +284,6 @@ public class ConfigWindow : Window, IDisposable
                 ImGui.EndCombo();
             }
             DrawCommon.Helper("Change how the shield is displayed.");
-
-            ImGui.SetNextItemWidth(120);
-            var configOffset = Configuration.OffsetShieldDisplay;
-            if (ImGui.SliderInt("Offset Shield", ref configOffset, 15,80))
-            {
-                Configuration.OffsetShieldDisplay = configOffset;
-                Configuration.Save();
-            }
-            DrawCommon.Helper("Change offset between lines in pixel.");
 
             ImGui.EndTabItem();
         }
