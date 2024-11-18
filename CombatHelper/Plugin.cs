@@ -25,6 +25,8 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IGameGui GameGui { get; private set; } = null!;
     [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
+    [PluginService] public static IAddonLifecycle AddonLifeCycle { get; private set; } = null!;
+    [PluginService] public static IClientState ClientState { get; private set; } = null!;
 
     private const string CommandName = "/combatHelper";
     private const string CommandNameShort = "/ch";
@@ -36,7 +38,7 @@ public sealed class Plugin : IDalamudPlugin
     private MainWindow MainWindow { get; init; }
     private SplitHelperWindow SplitHelperWindow { get; init; }
 
-    private ShieldTweaks ShieldTweaks { get; init; }
+    public ShieldTweaks ShieldTweaks { get; init; }
 
     public Plugin()
     {
@@ -80,8 +82,7 @@ public sealed class Plugin : IDalamudPlugin
             HelpMessage = "Opens the main menu\n" +
             //"/combatHelper kini → cursed sound\n" +
             "/combatHelper resetsound | rs → reset sound\n" +
-            "/combatHelper config | cfg → open config\n" +
-            "/combatHelper shield | s → open shield overlay\n"
+            "/combatHelper config | cfg → open config\n"
         });
 
         ChatHelper.Initialize();

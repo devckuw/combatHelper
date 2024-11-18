@@ -262,7 +262,15 @@ public class ConfigWindow : Window, IDisposable
         }
         if (ImGui.BeginTabItem("Shield"))
         {
-            
+            var removeMana = Configuration.RemoveMana;
+            if (ImGui.Checkbox("Reduce Mana", ref removeMana))
+            {
+                Configuration.RemoveMana = removeMana;
+                Configuration.Save();
+                InfoManager.plugin.ShieldTweaks.ToggleManaPart();
+            }
+            DrawCommon.Helper("Remove last two 0 from the mana, 10000 => 100.");
+
             ImGui.SetNextItemWidth(120);
             string txtDisplay;
             if (Configuration.ShieldDisplay == ShieldDisplay.P)

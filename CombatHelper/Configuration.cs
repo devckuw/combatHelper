@@ -36,8 +36,7 @@ public class Configuration : IPluginConfiguration
     public ChatMode ChatMode { get; set; } = ChatMode.None;
     // shield overlay
     public ShieldDisplay ShieldDisplay = ShieldDisplay.K;
-    public int OffsetShieldDisplay = 36;
-    public bool ConfigShield = true;
+    public bool RemoveMana = false;
     //custom
     public Dictionary<string, List<(ChatMode, string, bool, int)>> CustomHelper { get; set; } = new Dictionary<string, List<(ChatMode, string, bool, int)>>();
 

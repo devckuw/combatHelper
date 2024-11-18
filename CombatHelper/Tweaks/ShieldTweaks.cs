@@ -13,6 +13,8 @@ using static Dalamud.Interface.Utility.Raii.ImRaii;
 using static FFXIVClientStructs.FFXIV.Client.UI.RaptureAtkHistory.Delegates;
 using combatHelper.Utils;
 using ImGuiNET;
+using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
+using Dalamud.Game.Addon.Lifecycle;
 
 namespace combatHelper.Tweaks
 {
@@ -24,21 +26,58 @@ namespace combatHelper.Tweaks
         private bool[] visible = [false, false, false, false, false, false, false, false];
         private List<(byte, uint)> actorsStats;
 
+        private bool isManaRemoved;
+        private bool removeMana = false;
+        private bool revertMana = false;
+
+        private uint currentJobId = 99;
+
         public ShieldTweaks()
         {
             actorsStats = new List<(byte, uint)>();
+            isManaRemoved = InfoManager.Configuration.RemoveMana;
+            removeMana = isManaRemoved;
             Plugin.Framework.Update += OnUpdate;
+            Plugin.ClientState.ClassJobChanged += OnClassJobChanged;
+            Plugin.AddonLifeCycle.RegisterListener(AddonEvent.PostRequestedUpdate, "_PartyList", OnPostRequestedUpdate);
+            if (Plugin.ClientState.LocalPlayer != null)
+            {
+                //Plugin.Log.Debug("localplayersetup : " + Plugin.ClientState.LocalPlayer.ClassJob.RowId.ToString() + " " + Plugin.ClientState.LocalPlayer.ClassJob.Value.Name.ToString());
+                currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
+            }    
+        }
+
+        private void OnPostRequestedUpdate(AddonEvent type, AddonArgs args)
+        {
+            if (isManaRemoved)
+            {
+                RemoveManaPart();
+            }
+        }
+
+        private void OnClassJobChanged(uint classJobId)
+        {
+            /*if (Plugin.ClientState.LocalPlayer != null)
+                Plugin.Log.Debug("localplayer : " + Plugin.ClientState.LocalPlayer.ClassJob.RowId.ToString() + " " + Plugin.ClientState.LocalPlayer.ClassJob.Value.Name.ToString());*/
+            //Plugin.Log.Debug("uint : " + classJobId);
+            currentJobId = classJobId;
         }
 
         public void Dispose()
         {
-            CleanShieldTweaks();
+            Plugin.AddonLifeCycle.UnregisterListener(AddonEvent.PostRequestedUpdate, "_PartyList", OnPostRequestedUpdate);
             Plugin.Framework.Update -= OnUpdate;
+            CleanShieldTweaks();
+            if (isManaRemoved)
+                RevertManaPart();
         }
 
         private void OnUpdate(IFramework framework)
         {
-
+            if (removeMana)
+                RemoveManaPart();
+            if (revertMana)
+                RevertManaPart();
             UpdateVisibility();
             FillActors();
 
@@ -78,13 +117,19 @@ namespace combatHelper.Tweaks
                         newTextNode->AtkResNode.Type = NodeType.Text;
                         newTextNode->AtkResNode.NodeFlags = NodeFlags.AnchorLeft | NodeFlags.AnchorTop;
                         newTextNode->AtkResNode.DrawFlags = 0;
-                        textNode->AtkResNode.SetPositionFloat(133, 65+40*j);
+                        if (isManaRemoved)
+                            textNode->AtkResNode.SetPositionFloat(150, 65 + 40 * j);
+                        else
+                            textNode->AtkResNode.SetPositionFloat(133, 65+40*j);
                         newTextNode->AtkResNode.SetWidth(50);
                         newTextNode->AtkResNode.SetHeight(12);
 
                         newTextNode->LineSpacing = 24;
                         newTextNode->AlignmentFontType = 0x15;
-                        newTextNode->FontSize = 10;
+                        if (isManaRemoved)
+                            newTextNode->FontSize = 12;
+                        else
+                            newTextNode->FontSize = 10;
                         newTextNode->TextFlags = (byte)(TextFlags.Edge);
                         newTextNode->TextFlags2 = 0;
 
@@ -149,6 +194,80 @@ namespace combatHelper.Tweaks
                 if (actorsStats[j].Item1 == 0 || !InfoManager.Configuration.ShowShieldParty)
                     textNode->SetText("");
             }
+        }
+
+        private void UpdatePosShield()
+        {
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            if (partyList == null) return;
+
+            for (var j = 0; j < 8; j++)
+            {
+                AtkTextNode* textNode = null;
+                for (var i = 0; i < partyList->UldManager.NodeListCount; i++)
+                {
+                    if (partyList->UldManager.NodeList[i] == null) continue;
+                    if (partyList->UldManager.NodeList[i]->NodeId == ids[j])
+                    {
+                        textNode = (AtkTextNode*)partyList->UldManager.NodeList[i];
+                        break;
+                    }
+                }
+                if (textNode == null)
+                    continue;
+                if (isManaRemoved)
+                {
+                    textNode->AtkResNode.SetPositionFloat(150, 65 + 40 * j);
+                    textNode->FontSize = 12;
+                    continue;
+                }
+                textNode->AtkResNode.SetPositionFloat(133, 65 + 40 * j);
+                textNode->FontSize = 10;
+            }
+        }
+
+        private void RemoveManaPart()
+        {
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+
+            for (int i=0; i < 8; i++)
+            {
+                partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->SetText("");
+                //partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->ToggleVisibility(false);
+                partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[5]->GetAsAtkTextNode()->SetXShort(4);
+            }
+            removeMana = false;
+            isManaRemoved = true;
+            UpdatePosShield();
+        }
+
+        private void RevertManaPart()
+        {
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (currentJobId < 7 || currentJobId > 19)
+                {
+                    partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->SetText("00");
+                    //partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->ToggleVisibility(true);
+                    partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[5]->GetAsAtkTextNode()->SetXShort(-17);
+                }
+            }
+            revertMana = false;
+            isManaRemoved = false;
+            UpdatePosShield();
+        }
+
+        public void ToggleManaPart()
+        {
+            if (InfoManager.Configuration.RemoveMana)
+            {
+                removeMana = true;
+                return;
+            }
+            revertMana = true;
+
         }
 
         private void UpdateVisibility()
