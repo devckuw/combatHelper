@@ -201,7 +201,7 @@ namespace combatHelper.Tweaks
                 if (!visible[j])
                 {
                     textNode->AtkResNode.ToggleVisibility(false);
-                    return;
+                    continue;
                 }
                 textNode->AtkResNode.ToggleVisibility(true);
 
