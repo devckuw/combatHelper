@@ -27,6 +27,7 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
     [PluginService] public static IAddonLifecycle AddonLifeCycle { get; private set; } = null!;
     [PluginService] public static IClientState ClientState { get; private set; } = null!;
+    [PluginService] public static IGameConfig GameConfig { get; private set; } = null!;
 
     private const string CommandName = "/combatHelper";
     private const string CommandNameShort = "/ch";
@@ -101,6 +102,10 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        PluginInterface.UiBuilder.Draw -= DrawUI;
+        PluginInterface.UiBuilder.OpenConfigUi -= ToggleConfigUI;
+        PluginInterface.UiBuilder.OpenMainUi -= UIMain;
+
         ChatHelper.Instance?.Dispose();
         WindowSystem.RemoveAllWindows();
 

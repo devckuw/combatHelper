@@ -15,6 +15,8 @@ using combatHelper.Utils;
 using ImGuiNET;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Game.Addon.Lifecycle;
+using static FFXIVClientStructs.FFXIV.Client.LayoutEngine.FileLayerGroupLayerFilter;
+using Dalamud.Game.Config;
 
 namespace combatHelper.Tweaks
 {
@@ -32,6 +34,8 @@ namespace combatHelper.Tweaks
 
         private uint currentJobId = 99;
 
+        private short nbBeforeDraw = 2;
+
         public ShieldTweaks()
         {
             actorsStats = new List<(byte, uint)>();
@@ -40,11 +44,25 @@ namespace combatHelper.Tweaks
             Plugin.Framework.Update += OnUpdate;
             Plugin.ClientState.ClassJobChanged += OnClassJobChanged;
             Plugin.AddonLifeCycle.RegisterListener(AddonEvent.PostRequestedUpdate, "_PartyList", OnPostRequestedUpdate);
-            if (Plugin.ClientState.LocalPlayer != null)
+            /*if (Plugin.ClientState.LocalPlayer != null)
             {
                 //Plugin.Log.Debug("localplayersetup : " + Plugin.ClientState.LocalPlayer.ClassJob.RowId.ToString() + " " + Plugin.ClientState.LocalPlayer.ClassJob.Value.Name.ToString());
                 currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
-            }    
+            }*/
+            bool boolParty = false;
+            Plugin.GameConfig.TryGet(UiControlOption.PartyListSoloOff, out boolParty);
+            nbBeforeDraw = (short)(boolParty ? 2 : 1);
+            Plugin.GameConfig.UiControlChanged += OnUiConfigChange;
+        }
+
+        private void OnUiConfigChange(object? sender, ConfigChangeEvent e)
+        {
+            if (e.Option.ToString() == UiControlOption.PartyListSoloOff.ToString())
+            {
+                bool boolParty = false;
+                Plugin.GameConfig.TryGet(UiControlOption.PartyListSoloOff, out boolParty);
+                nbBeforeDraw = (short)(boolParty ? 2 : 1);
+            }
         }
 
         private void OnPostRequestedUpdate(AddonEvent type, AddonArgs args)
@@ -67,6 +85,9 @@ namespace combatHelper.Tweaks
         {
             Plugin.AddonLifeCycle.UnregisterListener(AddonEvent.PostRequestedUpdate, "_PartyList", OnPostRequestedUpdate);
             Plugin.Framework.Update -= OnUpdate;
+            Plugin.GameConfig.UiControlChanged -= OnUiConfigChange;
+            Plugin.ClientState.ClassJobChanged -= OnClassJobChanged;
+            Plugin.AddonLifeCycle.UnregisterListener(AddonEvent.PostRequestedUpdate, "_PartyList", OnPostRequestedUpdate);
             CleanShieldTweaks();
             if (isManaRemoved)
                 RevertManaPart();
@@ -74,6 +95,14 @@ namespace combatHelper.Tweaks
 
         private void OnUpdate(IFramework framework)
         {
+            if (currentJobId == 99)
+            {
+                if (Plugin.ClientState.LocalPlayer != null)
+                {
+                    //Plugin.Log.Debug("localplayersetup : " + Plugin.ClientState.LocalPlayer.ClassJob.RowId.ToString() + " " + Plugin.ClientState.LocalPlayer.ClassJob.Value.Name.ToString());
+                    currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
+                }
+            }
             if (removeMana)
                 RemoveManaPart();
             if (revertMana)
@@ -275,7 +304,7 @@ namespace combatHelper.Tweaks
             var agentHUD = AgentHUD.Instance();
             short nb = agentHUD->PartyMemberCount;
             visible = [false, false, false, false, false, false, false, false];
-            if (nb < 2) return;
+            if (nb < nbBeforeDraw) return;
             for (int i = 0; i < nb; i++)
             {
                 visible[i] = true;
@@ -287,7 +316,7 @@ namespace combatHelper.Tweaks
             actorsStats.Clear();
             var agentHUD = AgentHUD.Instance();
             short nb = agentHUD->PartyMemberCount;
-            if (nb < 2 || nb > 8)
+            if (nb < nbBeforeDraw || nb > 8)
                 return;
             for (int i = 0; i < nb; i++)
             {
