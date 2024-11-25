@@ -39,6 +39,8 @@ public class MainWindow : Window, IDisposable
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
+        TitleBarButtons = DrawCommon.CreateTitleBarButtons();
+
         Plugin.Framework.Update += OnUpdate;
     }
 

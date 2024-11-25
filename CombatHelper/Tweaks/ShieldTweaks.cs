@@ -31,6 +31,8 @@ namespace combatHelper.Tweaks
         private bool isManaRemoved;
         private bool removeMana = false;
         private bool revertMana = false;
+        private bool showShield = false;
+        private bool hideShield = false;
 
         private uint currentJobId = 99;
 
@@ -71,6 +73,7 @@ namespace combatHelper.Tweaks
             {
                 RemoveManaPart();
             }
+            UpdateShieldNodes();
         }
 
         private void OnClassJobChanged(uint classJobId)
@@ -93,20 +96,8 @@ namespace combatHelper.Tweaks
                 RevertManaPart();
         }
 
-        private void OnUpdate(IFramework framework)
+        private void UpdateShieldNodes()
         {
-            if (currentJobId == 99)
-            {
-                if (Plugin.ClientState.LocalPlayer != null)
-                {
-                    //Plugin.Log.Debug("localplayersetup : " + Plugin.ClientState.LocalPlayer.ClassJob.RowId.ToString() + " " + Plugin.ClientState.LocalPlayer.ClassJob.Value.Name.ToString());
-                    currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
-                }
-            }
-            if (removeMana)
-                RemoveManaPart();
-            if (revertMana)
-                RevertManaPart();
             UpdateVisibility();
             FillActors();
 
@@ -149,7 +140,7 @@ namespace combatHelper.Tweaks
                         if (isManaRemoved)
                             textNode->AtkResNode.SetPositionFloat(150, 65 + 40 * j);
                         else
-                            textNode->AtkResNode.SetPositionFloat(133, 65+40*j);
+                            textNode->AtkResNode.SetPositionFloat(133, 65 + 40 * j);
                         newTextNode->AtkResNode.SetWidth(50);
                         newTextNode->AtkResNode.SetHeight(12);
 
@@ -205,9 +196,10 @@ namespace combatHelper.Tweaks
                 }
                 textNode->AtkResNode.ToggleVisibility(true);
 
+                textNode->AtkResNode.SetAlpha(partyList->PartyMembers[j].PartyMemberComponent->OwnerNode->Alpha_2);
+
                 if (InfoManager.Configuration.ShieldDisplay == ShieldDisplay.K && InfoManager.Configuration.ShowShieldParty)
                 {
-                    //Plugin.Log.Debug($"{(float)actorsStats[j].Item1}, {(float)actorsStats[j].Item2}, {(float)actorsStats[j].Item1 * (float)actorsStats[j].Item2 / 100000}");
                     double shieldAmount = (float)actorsStats[j].Item1 * (float)actorsStats[j].Item2 / 100000;
                     if (shieldAmount > 100)
                         shieldAmount = Math.Round(shieldAmount, 0);
@@ -215,7 +207,7 @@ namespace combatHelper.Tweaks
                         shieldAmount = Math.Round(shieldAmount, 1);
                     else
                         shieldAmount = Math.Round(shieldAmount, 2);
-                    //Plugin.Log.Debug(shieldAmount.ToString());
+
                     textNode->SetText($"{shieldAmount}K");
                 }
                 if (InfoManager.Configuration.ShieldDisplay == ShieldDisplay.P && InfoManager.Configuration.ShowShieldParty)
@@ -223,6 +215,25 @@ namespace combatHelper.Tweaks
                 if (actorsStats[j].Item1 == 0 || !InfoManager.Configuration.ShowShieldParty)
                     textNode->SetText("");
             }
+        }
+
+        private void OnUpdate(IFramework framework)
+        {
+            if (currentJobId == 99)
+            {
+                if (Plugin.ClientState.LocalPlayer != null)
+                {
+                    currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
+                }
+            }
+            if (removeMana)
+                RemoveManaPart();
+            if (revertMana)
+                RevertManaPart();
+            if (showShield)
+                ShowShield();
+            if (hideShield)
+                HideShield();
         }
 
         private void UpdatePosShield()
@@ -262,7 +273,6 @@ namespace combatHelper.Tweaks
             for (int i=0; i < 8; i++)
             {
                 partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->SetText("");
-                //partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->ToggleVisibility(false);
                 partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[5]->GetAsAtkTextNode()->SetXShort(4);
             }
             removeMana = false;
@@ -279,13 +289,39 @@ namespace combatHelper.Tweaks
                 if (currentJobId < 7 || currentJobId > 19)
                 {
                     partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->SetText("00");
-                    //partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->ToggleVisibility(true);
                     partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[5]->GetAsAtkTextNode()->SetXShort(-17);
                 }
             }
             revertMana = false;
             isManaRemoved = false;
             UpdatePosShield();
+        }
+
+        public void ShowShield()
+        {
+            showShield = false;
+            UpdateShieldNodes();
+        }
+
+        public void HideShield()
+        {
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            if (partyList == null) return;
+
+            for (var j = 0; j < 8; j++)
+            {
+                for (var i = 0; i < partyList->UldManager.NodeListCount; i++)
+                {
+                    if (partyList->UldManager.NodeList[i] == null) continue;
+                    if (partyList->UldManager.NodeList[i]->NodeId == ids[j])
+                    {
+                        partyList->UldManager.NodeList[i]->ToggleVisibility(false);
+                        break;
+                    }
+                }
+            }
+            hideShield = false;
+            Plugin.Log.Debug("hide");
         }
 
         public void ToggleManaPart()
@@ -297,6 +333,14 @@ namespace combatHelper.Tweaks
             }
             revertMana = true;
 
+        }
+
+        public void ToggleShield(bool show)
+        {
+            if (show)
+                showShield = true;
+            else
+                hideShield = true;
         }
 
         private void UpdateVisibility()

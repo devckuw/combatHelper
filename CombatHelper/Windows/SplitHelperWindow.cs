@@ -13,7 +13,7 @@ namespace combatHelper.Windows
     {
         public SplitHelperWindow() : base("Split##split window", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.MenuBar)
         {
-
+            TitleBarButtons = DrawCommon.CreateTitleBarButtons();
         }
 
         public void Dispose()

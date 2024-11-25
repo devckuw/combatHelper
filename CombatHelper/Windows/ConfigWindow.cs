@@ -29,7 +29,7 @@ public class ConfigWindow : Window, IDisposable
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
         SizeCondition = ImGuiCond.Always;
-
+        TitleBarButtons = DrawCommon.CreateTitleBarButtons();
         Configuration = InfoManager.Configuration;
     }
 
@@ -59,6 +59,7 @@ public class ConfigWindow : Window, IDisposable
             {
                 Configuration.ShowShieldParty = shieldOverlay;
                 Configuration.Save();
+                InfoManager.plugin.ShieldTweaks.ToggleShield(shieldOverlay);
             }
             DrawCommon.Helper("Show the shield in party list.");
 

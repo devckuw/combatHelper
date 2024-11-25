@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Dalamud.Interface.Windowing.Window;
 
 namespace combatHelper.Windows
 {
@@ -36,13 +37,32 @@ namespace combatHelper.Windows
                     if (ImGui.MenuItem("0/6/12")) { InfoManager.nbPots = NbPots.Three_twoPots; }
                     ImGui.EndMenu();
                 }
-                if (ImGui.BeginMenu("Settings"))
-                {
-                    InfoManager.plugin.ToggleConfigUI();
-                    ImGui.EndMenu();
-                }
                 ImGui.EndMenuBar();
             }
+        }
+
+        public static List<TitleBarButton> CreateTitleBarButtons()
+        {
+            List<TitleBarButton> titleBarButtons = new()
+            {
+                new TitleBarButton()
+                {
+                    Icon = Dalamud.Interface.FontAwesomeIcon.Cog,
+                    Click = (msg) =>
+                    {
+                        InfoManager.plugin.ToggleConfigUI();
+                    },
+                    IconOffset = new(2,1),
+                    ShowTooltip = () =>
+                    {
+                        ImGui.BeginTooltip();
+                        ImGui.Text("Open Settings");
+                        ImGui.EndTooltip();
+                    }
+                }
+            };
+
+            return titleBarButtons;
         }
 
         public static void Helper(string help)
