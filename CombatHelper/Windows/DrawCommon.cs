@@ -25,6 +25,7 @@ namespace combatHelper.Windows
                     if (ImGui.MenuItem("M2S")) { InfoManager.fightState = FightState.M2S; InfoManager.fight = new M2S(); }
                     if (ImGui.MenuItem("M3S")) { InfoManager.fightState = FightState.M3S; InfoManager.fight = new M3S(); }
                     if (ImGui.MenuItem("M4S")) { InfoManager.fightState = FightState.M4S; InfoManager.fight = new M4S(); }
+                    if (ImGui.MenuItem("CloudOfDarkness")) { InfoManager.fightState = FightState.CloudOfDarkness; InfoManager.fight = new CloudOfDarkness(); }
                     if (ImGui.MenuItem("Custom")) { InfoManager.fightState = FightState.Custom; InfoManager.fight = new Custom(); }
                     ImGui.EndMenu();
                 }

@@ -45,7 +45,8 @@ namespace combatHelper.Utils
         M2S = 2,
         M3S = 3,
         M4S = 4,
-        Custom = 5
+        CloudOfDarkness = 5,
+        Custom = 6
     }
 
     public enum NbPots
