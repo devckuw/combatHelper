@@ -90,8 +90,8 @@ namespace combatHelper.Utils
 
         public static void ProcessToggle()
         {
-            Plugin.Log.Debug(plugin.IsMainOpen() + " " + plugin.IsSplitOpen());
-            Plugin.Log.Debug(isMainOpen + " " + isHelperOpen);
+            //Plugin.Log.Debug(plugin.IsMainOpen() + " " + plugin.IsSplitOpen());
+            //Plugin.Log.Debug(isMainOpen + " " + isHelperOpen);
             if (!Configuration.SplitTimeLineAndHelper)
             {
                 plugin.ToggleMainUI();

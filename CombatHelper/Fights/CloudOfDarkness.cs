@@ -20,12 +20,21 @@ namespace combatHelper.Fights
         {
             //csv = Path.Combine(InfoManager.Configuration.AssemblyLocation, csv);
             //GenerateLines();
+            TimeManager.Instance.OnFightStart += Reset;
         }
 
         public void GenerateLines()
         {
             lines = DataFrameManager.ProccessDF(csv);
         }
+
+        public void Reset()
+        {
+            hands = String.Empty;
+            saved = String.Empty;
+            isP1 = true;
+        }
+
         public override void DrawHelper()
         {
             if (isP1)

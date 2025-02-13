@@ -41,12 +41,12 @@ public class MainWindow : Window, IDisposable
 
         TitleBarButtons = DrawCommon.CreateTitleBarButtons();
 
-        Plugin.Framework.Update += OnUpdate;
+        //Plugin.Framework.Update += OnUpdate;
     }
 
     public void Dispose()
     {
-        Plugin.Framework.Update -= OnUpdate;
+        //Plugin.Framework.Update -= OnUpdate;
     }
 
     private void OnUpdate(IFramework framework)
@@ -83,6 +83,10 @@ public class MainWindow : Window, IDisposable
                 case NbPots.Two_Pots_Bard:
                     if (combatDuration >= 2 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
                     if (combatDuration >= 8 * 60 + offset && !isPotThreeUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
+                    break;
+                case NbPots.Two_Ten:
+                    if (combatDuration >= 2 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }
+                    if (combatDuration >= 10 * 60 + offset && !isPotThreeUsed) { InfoManager.soundPlayer.Play(); isPotThreeUsed = true; }
                     break;
                 case NbPots.Three_Pots:
                     if (combatDuration >= 5 * 60 + offset && !isPotTwoUsed) { InfoManager.soundPlayer.Play(); isPotTwoUsed = true; }

@@ -10,6 +10,7 @@ using Dalamud.Game;
 using combatHelper.Utils;
 using System.Media;
 using combatHelper.Tweaks;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace combatHelper;
 
@@ -63,6 +64,8 @@ public sealed class Plugin : IDalamudPlugin
         InfoManager.soundPlayer = new SoundPlayer(Configuration.Sound);
         InfoManager.plugin = this;
 
+        TimeManager.Initialize();
+
         ConfigWindow = new ConfigWindow();
         MainWindow = new MainWindow();
         SplitHelperWindow = new SplitHelperWindow();
@@ -112,6 +115,8 @@ public sealed class Plugin : IDalamudPlugin
         ConfigWindow.Dispose();
         MainWindow.Dispose();
         SplitHelperWindow.Dispose();
+
+        TimeManager.Instance?.Dispose();
 
         ShieldTweaks.Dispose();
 

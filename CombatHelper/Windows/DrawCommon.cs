@@ -34,6 +34,7 @@ namespace combatHelper.Windows
                     if (ImGui.MenuItem("None")) { InfoManager.nbPots = NbPots.None; }
                     if (ImGui.MenuItem("0/6")) { InfoManager.nbPots = NbPots.Two_Pots; }
                     if (ImGui.MenuItem("2/8")) { InfoManager.nbPots = NbPots.Two_Pots_Bard; }
+                    if (ImGui.MenuItem("2/10")) { InfoManager.nbPots = NbPots.Two_Ten; }
                     if (ImGui.MenuItem("0/5/10")) { InfoManager.nbPots = NbPots.Three_Pots; }
                     if (ImGui.MenuItem("0/6/12")) { InfoManager.nbPots = NbPots.Three_twoPots; }
                     ImGui.EndMenu();
