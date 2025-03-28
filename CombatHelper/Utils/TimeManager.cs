@@ -54,8 +54,15 @@ namespace combatHelper.Utils
         public delegate void OnFightStartDelegate();
         public delegate void OnFightEndDelegate();
 
-        public OnFightEndDelegate OnFightStart;
+        public OnFightStartDelegate OnFightStart;
         public OnFightEndDelegate OnFightEnd;
+
+        public void ResetEvents()
+        {
+            OnFightStart = null;
+            OnFightEnd = null;
+            Plugin.Log.Debug("reset event");
+        }
 
         private void OnUpdate(IFramework framework)
         {

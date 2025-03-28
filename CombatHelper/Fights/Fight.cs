@@ -44,7 +44,10 @@ namespace combatHelper.Fights
     {
         public List<(int, int, string, List<(string, Vector4)>)> lines = null;
         protected Configuration configuration;
-        public Fight() { }
+        public Fight() 
+        {
+            TimeManager.Instance.ResetEvents();
+        }
 
         public void Draw(int currentTime)
         {

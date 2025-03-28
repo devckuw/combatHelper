@@ -1,65 +1,64 @@
 {
   "version": 1,
   "dependencies": {
-    "net8.0-windows7.0": {
+    "net9.0-windows7.0": {
       "DalamudPackager": {
         "type": "Direct",
-        "requested": "[11.0.0, )",
-        "resolved": "11.0.0",
-        "contentHash": "bjT7XUlhIJSmsE/O76b7weUX+evvGQctbQB8aKXt94o+oPWxHpCepxAGMs7Thow3AzCyqWs7cOpp9/2wcgRRQA=="
+        "requested": "[12.0.0, )",
+        "resolved": "12.0.0",
+        "contentHash": "J5TJLV3f16T/E2H2P17ClWjtfEBPpq3yxvqW46eN36JCm6wR+EaoaYkqG9Rm5sHqs3/nK/vKjWWyvEs/jhKoXw=="
+      },
+      "DotNet.ReproducibleBuilds": {
+        "type": "Direct",
+        "requested": "[1.2.25, )",
+        "resolved": "1.2.25",
+        "contentHash": "xCXiw7BCxHJ8pF6wPepRUddlh2dlQlbr81gXA72hdk4FLHkKXas7EH/n+fk5UCA/YfMqG1Z6XaPiUjDbUNBUzg=="
       },
       "Microsoft.Data.Analysis": {
         "type": "Direct",
-        "requested": "[0.21.1, )",
-        "resolved": "0.21.1",
-        "contentHash": "bcvvIkthkOWqH2HRdGZEfyxbtZOBq6AK8Oa1prdSefDCyQsPWRSCZRRqt1Txr8oGZgfdxERT0+BXRYUEKKApPQ==",
+        "requested": "[0.22.2, )",
+        "resolved": "0.22.2",
+        "contentHash": "03BYnS/6OH5POkTkxaCoz4bqAH4irFQsXtsMOeaxwOCL7JTzXtneyqENSI+DldLKEDMlt6ZvzdktYUf/W3oN6g==",
         "dependencies": {
-          "Apache.Arrow": "11.0.0",
-          "Microsoft.ML.DataView": "3.0.1",
-          "System.Buffers": "4.5.1",
-          "System.Memory": "4.5.5",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "Apache.Arrow": "14.0.2",
+          "Microsoft.ML.DataView": "4.0.2",
+          "System.Numerics.Tensors": "9.0.0"
         }
       },
       "System.Windows.Extensions": {
         "type": "Direct",
-        "requested": "[8.0.0, )",
-        "resolved": "8.0.0",
-        "contentHash": "Obg3a90MkOw9mYKxrardLpY2u0axDMrSmy4JCdq2cYbelM2cUwmUir5Bomvd1yxmPL9h5LVHU1tuKBZpUjfASg=="
+        "requested": "[9.0.3, )",
+        "resolved": "9.0.3",
+        "contentHash": "NprFIDXNtYcozulQxOfF0o3z/kq2XRnnip+fpfcqBhfsIjLfIkuEVvwJkFefn5xN3IKfx8+j2RNOyjHnwZ1ZGw=="
       },
       "Apache.Arrow": {
         "type": "Transitive",
-        "resolved": "11.0.0",
-        "contentHash": "Pc5Mh8JKnJrszFUm1i1cwzCcoudY06TNPVy4VnSPAgfwZWReJkIduANjn6wrIekgpH/o9B9HyyraDPQXNXg8Ww=="
+        "resolved": "14.0.2",
+        "contentHash": "2xvo9q2ag/Ze7TKSMsZfcQFMk3zZKWcduttJXoYnoevZD2bv+lKnOPeleyxONuR1ZwhZ00D86pPM9TWx2GMY2w=="
       },
       "Microsoft.ML.DataView": {
         "type": "Transitive",
-        "resolved": "3.0.1",
-        "contentHash": "mkZt1r6Nx5CAoD3klhC7VMQFzwWMHHjoYpv3X9u+GMvTMbSRaDdiA88HUoOzT7kCeq4/L1nKctmrByhLK28Xjw==",
+        "resolved": "4.0.2",
+        "contentHash": "k8q9UwoCG5WpwnvPS3s46yNU+wkMgAC5F/8OELpPbozcyJw0DZL8WnpnL/mw7E218Ec4SpYz+nxL9P87eAdzmg==",
         "dependencies": {
-          "System.Collections.Immutable": "1.5.0",
-          "System.Memory": "4.5.5"
+          "System.Collections.Immutable": "8.0.0",
+          "System.Memory": "4.6.0"
         }
-      },
-      "System.Buffers": {
-        "type": "Transitive",
-        "resolved": "4.5.1",
-        "contentHash": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg=="
       },
       "System.Collections.Immutable": {
         "type": "Transitive",
-        "resolved": "1.5.0",
-        "contentHash": "EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ=="
+        "resolved": "8.0.0",
+        "contentHash": "AurL6Y5BA1WotzlEvVaIDpqzpIPvYnnldxru8oXJU2yFxFUy3+pNXjXd1ymO+RA0rq0+590Q8gaz2l3Sr7fmqg=="
       },
       "System.Memory": {
         "type": "Transitive",
-        "resolved": "4.5.5",
-        "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
+        "resolved": "4.6.0",
+        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg=="
       },
-      "System.Runtime.CompilerServices.Unsafe": {
+      "System.Numerics.Tensors": {
         "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+        "resolved": "9.0.0",
+        "contentHash": "hyJB4UlpAi19Xr9AXzu2NuagKC4lPfHObNMEAA0HmqFz2rX7wKgzeYzO/jM/eBHDhnUGFFEjk5cOoJaxqg5J4A=="
       }
     }
   }
