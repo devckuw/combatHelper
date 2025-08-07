@@ -4,12 +4,9 @@ Plugin to help in combat for Dalamud.
 
 ## Main Points
 
-* Timeline for fights (m1-4 for now).
+* Preset to replace macro in fights (m1-8).
 * Pot reminder with a sound effect (customizable).
-* Preset of button to send message in chat.
-  * Spread / Stack ..
-  * Customize presets for any use you could find.
-
+* Customizable preset to build infinite possibility for other fight or just normal talk..
 
 
 ## How To Use
