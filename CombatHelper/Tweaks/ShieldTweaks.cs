@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using static Dalamud.Interface.Utility.Raii.ImRaii;
 using static FFXIVClientStructs.FFXIV.Client.UI.RaptureAtkHistory.Delegates;
 using combatHelper.Utils;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Game.Addon.Lifecycle;
 using static FFXIVClientStructs.FFXIV.Client.LayoutEngine.FileLayerGroupLayerFilter;
@@ -101,7 +101,7 @@ namespace combatHelper.Tweaks
             UpdateVisibility();
             FillActors();
 
-            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
             if (partyList == null) return;
 
             for (var j = 0; j < 8; j++)
@@ -150,8 +150,8 @@ namespace combatHelper.Tweaks
                             newTextNode->FontSize = 12;
                         else
                             newTextNode->FontSize = 10;
-                        newTextNode->TextFlags = (byte)(TextFlags.Edge);
-                        newTextNode->TextFlags2 = 0;
+                        newTextNode->TextFlags = TextFlags.Edge;
+                        //newTextNode->TextFlags2 = 0;
 
                         newTextNode->AtkResNode.NodeId = ids[j];
 
@@ -238,7 +238,7 @@ namespace combatHelper.Tweaks
 
         private void UpdatePosShield()
         {
-            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
             if (partyList == null) return;
 
             for (var j = 0; j < 8; j++)
@@ -268,7 +268,7 @@ namespace combatHelper.Tweaks
 
         private void RemoveManaPart()
         {
-            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
 
             for (int i=0; i < 8; i++)
             {
@@ -282,7 +282,7 @@ namespace combatHelper.Tweaks
 
         private void RevertManaPart()
         {
-            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
 
             for (int i = 0; i < 8; i++)
             {
@@ -305,7 +305,7 @@ namespace combatHelper.Tweaks
 
         public void HideShield()
         {
-            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
             if (partyList == null) return;
 
             for (var j = 0; j < 8; j++)
@@ -394,7 +394,12 @@ namespace combatHelper.Tweaks
 
         private void CleanShieldTweaks()
         {
-            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList");
+            /*var partyListAdress = Plugin.GameGui.GetAddonByName("_PartyList");
+            if (partyListAdress.IsNull) { return; }
+
+            var partyList = (AddonPartyList*)partyListAdress.Address;*/
+
+            var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
             if (partyList == null) return;
 
             for (var j=0; j < 8; j++)

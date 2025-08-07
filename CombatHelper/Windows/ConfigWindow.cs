@@ -4,7 +4,7 @@ using System.IO;
 using System.Numerics;
 using Dalamud.Interface.Windowing;
 using Dalamud.Interface.ImGuiFileDialog;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using combatHelper.Utils;
 
 namespace combatHelper.Windows;

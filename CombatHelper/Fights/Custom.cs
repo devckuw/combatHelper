@@ -3,7 +3,7 @@ using combatHelper.Windows;
 using Dalamud.Game.Gui;
 using Dalamud.Interface.Components;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Lumina.Excel;
 using System;
 using System.Collections;

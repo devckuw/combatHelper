@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using combatHelper.Utils;
 using Dalamud.Interface.Windowing;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace combatHelper.Windows
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using combatHelper.Utils;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Microsoft.Data.Analysis;
 
 namespace combatHelper.Fights

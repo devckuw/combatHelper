@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using combatHelper.Utils;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Lumina.Data.Structs;
 using Lumina.Excel.Sheets;
 using Lumina.Models.Models;
