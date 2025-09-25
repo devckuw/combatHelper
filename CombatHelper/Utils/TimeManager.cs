@@ -54,8 +54,8 @@ namespace combatHelper.Utils
         public delegate void OnFightStartDelegate();
         public delegate void OnFightEndDelegate();
 
-        public OnFightStartDelegate OnFightStart;
-        public OnFightEndDelegate OnFightEnd;
+        public OnFightStartDelegate? OnFightStart;
+        public OnFightEndDelegate? OnFightEnd;
 
         public void ResetEvents()
         {

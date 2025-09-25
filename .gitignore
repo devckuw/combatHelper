@@ -19,3 +19,4 @@ obj/
 /SamplePlugin/bin/x64/Release/kini.wav
 /SamplePlugin/bin/x64/Release/combatHelper
 /CombatHelper/bin/x64
+.vscode/

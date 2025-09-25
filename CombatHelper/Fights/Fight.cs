@@ -42,8 +42,8 @@ namespace combatHelper.Fights
 
     public abstract class Fight
     {
-        public List<(int, int, string, List<(string, Vector4)>)> lines = null;
-        protected Configuration configuration;
+        public List<(int, int, string, List<(string, Vector4)>)>? lines = null;
+        //protected Configuration configuration;
         public Fight() 
         {
             TimeManager.Instance.ResetEvents();

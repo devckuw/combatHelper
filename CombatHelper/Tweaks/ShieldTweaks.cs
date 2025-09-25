@@ -269,12 +269,13 @@ namespace combatHelper.Tweaks
         private void RemoveManaPart()
         {
             var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
+            if (partyList == null) return;
 
-            for (int i=0; i < 8; i++)
-            {
-                partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->SetText("");
-                partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[5]->GetAsAtkTextNode()->SetXShort(4);
-            }
+            for (int i = 0; i < 8; i++)
+                {
+                    partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[4]->GetAsAtkTextNode()->SetText("");
+                    partyList->PartyMembers[i].MPGaugeBar->UldManager.NodeList[5]->GetAsAtkTextNode()->SetXShort(4);
+                }
             removeMana = false;
             isManaRemoved = true;
             UpdatePosShield();
@@ -283,6 +284,7 @@ namespace combatHelper.Tweaks
         private void RevertManaPart()
         {
             var partyList = (AddonPartyList*)Plugin.GameGui.GetAddonByName("_PartyList").Address;
+            if (partyList == null) return;
 
             for (int i = 0; i < 8; i++)
             {

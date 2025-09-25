@@ -53,7 +53,7 @@ public sealed class Plugin : IDalamudPlugin
             Configuration.Save();
         }
         else 
-        { 
+        {
             Configuration = isConf as Configuration;
             Configuration.AssemblyLocation = Plugin.PluginInterface.AssemblyLocation.Directory?.FullName!;
             Configuration.Save();
