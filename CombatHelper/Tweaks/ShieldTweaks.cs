@@ -221,9 +221,11 @@ namespace combatHelper.Tweaks
         {
             if (currentJobId == 99)
             {
-                if (Plugin.ClientState.LocalPlayer != null)
+                if (Plugin.PlayerState.IsLoaded)
+                //if (Plugin.ClientState.LocalPlayer != null)
                 {
-                    currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
+                    //currentJobId = Plugin.ClientState.LocalPlayer.ClassJob.RowId;
+                    currentJobId = Plugin.PlayerState.ClassJob.RowId;
                 }
             }
             if (removeMana)
