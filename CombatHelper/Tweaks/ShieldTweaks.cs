@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.Interop;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,7 +91,6 @@ namespace combatHelper.Tweaks
             Plugin.Framework.Update -= OnUpdate;
             Plugin.GameConfig.UiControlChanged -= OnUiConfigChange;
             Plugin.ClientState.ClassJobChanged -= OnClassJobChanged;
-            Plugin.AddonLifeCycle.UnregisterListener(AddonEvent.PostRequestedUpdate, "_PartyList", OnPostRequestedUpdate);
             CleanShieldTweaks();
             if (isManaRemoved)
                 RevertManaPart();
@@ -228,6 +228,11 @@ namespace combatHelper.Tweaks
                     currentJobId = Plugin.PlayerState.ClassJob.RowId;
                 }
             }
+
+            var proxy = InfoProxyPartyMember.Instance();
+            if (proxy == null) return;
+            if (proxy->EntryCount < 1) return;
+
             if (removeMana)
                 RemoveManaPart();
             if (revertMana)

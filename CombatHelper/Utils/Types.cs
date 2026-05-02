@@ -49,6 +49,7 @@ namespace combatHelper.Utils
         M6S = 6,
         M7S = 7,
         M8S = 8,
+        M12S = 12,
         CloudOfDarkness = 9,
         Custom = 10
     }

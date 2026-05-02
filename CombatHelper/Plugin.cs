@@ -90,8 +90,6 @@ public sealed class Plugin : IDalamudPlugin
             "/combatHelper config | cfg → open config\n"
         });
 
-        ChatHelper.Initialize();
-
         PluginInterface.UiBuilder.Draw += DrawUI;
 
         // This adds a button to the plugin installer entry of this plugin which allows
@@ -110,7 +108,6 @@ public sealed class Plugin : IDalamudPlugin
         PluginInterface.UiBuilder.OpenConfigUi -= ToggleConfigUI;
         PluginInterface.UiBuilder.OpenMainUi -= UIMain;
 
-        ChatHelper.Instance?.Dispose();
         WindowSystem.RemoveAllWindows();
 
         ConfigWindow.Dispose();

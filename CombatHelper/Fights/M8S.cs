@@ -17,7 +17,7 @@ namespace combatHelper.Fights
 {
     public class M8S : Fight
     {
-        private string csv = "M7S.csv";
+        private string csv = "M8S.csv";
 
         //p1
         private string savedFang = string.Empty;

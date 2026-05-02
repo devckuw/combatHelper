@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Dalamud.Interface.Windowing.Window;
+using Dalamud.Interface.Windowing;
 
 namespace combatHelper.Windows
 {
@@ -21,10 +22,7 @@ namespace combatHelper.Windows
                 if (ImGui.BeginMenu("Fight"))
                 {
                     if (ImGui.MenuItem("None")) { TimeManager.Instance.ResetEvents(); InfoManager.fightState = FightState.None; }
-                    if (ImGui.MenuItem("M5S")) { InfoManager.fightState = FightState.M5S; InfoManager.fight = new M5S(); }
-                    if (ImGui.MenuItem("M6S")) { InfoManager.fightState = FightState.M6S; InfoManager.fight = new M6S(); }
-                    if (ImGui.MenuItem("M7S")) { InfoManager.fightState = FightState.M7S; InfoManager.fight = new M7S(); }
-                    if (ImGui.MenuItem("M8S")) { InfoManager.fightState = FightState.M8S; InfoManager.fight = new M8S(); }
+                    if (ImGui.MenuItem("M12S")) { InfoManager.fightState = FightState.M2S; InfoManager.fight = new M12S(); }
                     if (ImGui.MenuItem("Custom")) { InfoManager.fightState = FightState.Custom; InfoManager.fight = new Custom(); }
                     if (ImGui.BeginMenu("Old"))
                     {
@@ -32,6 +30,10 @@ namespace combatHelper.Windows
                         if (ImGui.MenuItem("M2S")) { InfoManager.fightState = FightState.M2S; InfoManager.fight = new M2S(); }
                         if (ImGui.MenuItem("M3S")) { InfoManager.fightState = FightState.M3S; InfoManager.fight = new M3S(); }
                         if (ImGui.MenuItem("M4S")) { InfoManager.fightState = FightState.M4S; InfoManager.fight = new M4S(); }
+                        if (ImGui.MenuItem("M5S")) { InfoManager.fightState = FightState.M5S; InfoManager.fight = new M5S(); }
+                        if (ImGui.MenuItem("M6S")) { InfoManager.fightState = FightState.M6S; InfoManager.fight = new M6S(); }
+                        if (ImGui.MenuItem("M7S")) { InfoManager.fightState = FightState.M7S; InfoManager.fight = new M7S(); }
+                        if (ImGui.MenuItem("M8S")) { InfoManager.fightState = FightState.M8S; InfoManager.fight = new M8S(); }
                         if (ImGui.MenuItem("CloudOfDarkness")) { InfoManager.fightState = FightState.CloudOfDarkness; InfoManager.fight = new CloudOfDarkness(); }
                         ImGui.EndMenu();
                     }
